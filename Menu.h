@@ -13,6 +13,7 @@ void Yanjiu_Menu();
 void Main_Menu()
 {
     setbuf(stdout,NULL);
+    system("cls");
     while(1){
         int choice;
         printf("*************************** 菜单 ***************************\n");
@@ -23,12 +24,12 @@ void Main_Menu()
         scanf("%d", &choice);
         switch(choice){
             case 1:
-                Benke_Menu();
                 system("cls");
+                Benke_Menu();
                 break;
             case 2:
-                Yanjiu_Menu();
                 system("cls");
+                Yanjiu_Menu();
                 break;
             case 3:
                 exit(0);
@@ -45,6 +46,7 @@ void Benke_Menu()
 {
     while(1){
         int choice;
+        printf("********************本科生成绩管理系统********************\n");
         printf("_1_进行基本资料数据的维护管理\n");
         printf("_2_进行成绩数据的维护管理\n");
         printf("_3_返回上级\n");
@@ -70,6 +72,7 @@ void Benke_Menu()
 void Yanjiu_Menu(){
     while(1){
         int choice;
+        printf("********************研究生成绩管理系统********************\n");
         printf("_1_进行基本资料数据的维护管理\n");
         printf("_2_进行成绩数据的维护管理\n");
         printf("_3_返回上级\n");
