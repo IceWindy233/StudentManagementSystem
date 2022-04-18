@@ -2,6 +2,10 @@
 #define _STDIO_H_
 #include <stdio.h>
 #endif
+#ifndef _STDLIB_H_
+#define _STDLIB_H_
+#include <stdlib.h>
+#endif
 void Main_Menu();
 void Benke_Menu();
 void Yanjiu_Menu();
@@ -11,11 +15,11 @@ void Main_Menu()
     setbuf(stdout,NULL);
     while(1){
         int choice;
-        printf("*************************** 菜单 ***************************\n");
-        printf("_1_本科生成绩管理系统\n");
-        printf("_2_研究生成绩管理系统\n");
-        printf("_3_退出\n");
-        printf("选择系统:");
+        printf("*************************** 鑿滃崟 ***************************\n");
+        printf("_1_鏈鐢熸垚缁╃鐞嗙郴缁焅n");
+        printf("_2_鐮旂┒鐢熸垚缁╃鐞嗙郴缁焅n");
+        printf("_3_閫�鍑篭n");
+        printf("閫夋嫨绯荤粺:");
         scanf("%d", &choice);
         switch(choice){
             case 1:
@@ -29,7 +33,7 @@ void Main_Menu()
             case 3:
                 exit(0);
             default:
-                printf("输入错误，请重新输入\n");
+                printf("杈撳叆閿欒锛岃閲嶆柊杈撳叆\n");
                 system("pause");
                 system("cls");
                 break;
@@ -41,10 +45,10 @@ void Benke_Menu()
 {
     while(1){
         int choice;
-        printf("_1_进行基本资料数据的维护管理\n");
-        printf("_2_进行成绩数据的维护管理\n");
-        printf("_3_返回上级\n");
-        printf("输入序号:");
+        printf("_1_杩涜鍩烘湰璧勬枡鏁版嵁鐨勭淮鎶ょ鐞哱n");
+        printf("_2_杩涜鎴愮哗鏁版嵁鐨勭淮鎶ょ鐞哱n");
+        printf("_3_杩斿洖涓婄骇\n");
+        printf("杈撳叆搴忓彿:");
         scanf("%d", &choice);
         switch (choice) {
             case 1:
@@ -55,7 +59,7 @@ void Benke_Menu()
                 Main_Menu();
                 break;
             default:
-                printf("输入错误，请重新输入\n");
+                printf("杈撳叆閿欒锛岃閲嶆柊杈撳叆\n");
                 system("pause");
                 system("cls");
                 break;
@@ -66,10 +70,10 @@ void Benke_Menu()
 void Yanjiu_Menu(){
     while(1){
         int choice;
-        printf("_1_进行基本资料数据的维护管理\n");
-        printf("_2_进行成绩数据的维护管理\n");
-        printf("_3_返回上级\n");
-        printf("输入序号:");
+        printf("_1_杩涜鍩烘湰璧勬枡鏁版嵁鐨勭淮鎶ょ鐞哱n");
+        printf("_2_杩涜鎴愮哗鏁版嵁鐨勭淮鎶ょ鐞哱n");
+        printf("_3_杩斿洖涓婄骇\n");
+        printf("杈撳叆搴忓彿:");
         scanf("%d", &choice);
         switch (choice) {
             case 1:
@@ -80,7 +84,7 @@ void Yanjiu_Menu(){
                 Main_Menu();
                 break;
             default:
-                printf("输入错误，请重新输入\n");
+                printf("杈撳叆閿欒锛岃閲嶆柊杈撳叆\n");
                 system("pause");
                 system("cls");
                 break;
