@@ -2,6 +2,10 @@
 #define _STDIO_H_
 #include <stdio.h>
 #endif
+#ifndef _STDLIB_H_
+#define _STDLIB_H_
+#include <stdlib.h>
+#endif
 void Main_Menu();
 void Benke_Menu();
 void Yanjiu_Menu();
