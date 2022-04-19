@@ -6,6 +6,6 @@ int main()
 {
     //system("chcp 65001");
     Main_Menu();
-    printf("hello world");
+    printf("NO HELLO WORLD");
     return 0;
 }
