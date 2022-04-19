@@ -6,6 +6,7 @@ set(CMAKE_C_STANDARD 11)
 include_directories(.)
 
 add_executable(StudentManagementSystem
-        Base.h
         main.c
-        Menu.h)
+        Base.h
+        Menu.h
+        ustudent.h)
