@@ -19,7 +19,7 @@ void Main_Menu()
         printf("*************************** 菜单 ***************************\n");
         printf("_1_本科生成绩管理系统\n");
         printf("_2_研究生成绩管理系统\n");
-        printf("_3_退出\n");
+        printf("_0_退出\n");
         printf("选择系统:");
         scanf("%d", &choice);
         switch(choice){
@@ -31,7 +31,7 @@ void Main_Menu()
                 system("cls");
                 Yanjiu_Menu();
                 break;
-            case 3:
+            case 0:
                 exit(0);
             default:
                 printf("输入错误，请重新输入\n");
@@ -49,7 +49,7 @@ void Benke_Menu()
         printf("********************本科生成绩管理系统********************\n");
         printf("_1_进行基本资料数据的维护管理\n");
         printf("_2_进行成绩数据的维护管理\n");
-        printf("_3_返回上级\n");
+        printf("_0_返回上级\n");
         printf("输入序号:");
         scanf("%d", &choice);
         switch (choice) {
@@ -57,7 +57,7 @@ void Benke_Menu()
                 break;
             case 2:
                 break;
-            case 3:
+            case 0:
                 Main_Menu();
                 break;
             default:
@@ -75,7 +75,7 @@ void Yanjiu_Menu(){
         printf("********************研究生成绩管理系统********************\n");
         printf("_1_进行基本资料数据的维护管理\n");
         printf("_2_进行成绩数据的维护管理\n");
-        printf("_3_返回上级\n");
+        printf("_0_返回上级\n");
         printf("输入序号:");
         scanf("%d", &choice);
         switch (choice) {
@@ -83,7 +83,7 @@ void Yanjiu_Menu(){
                 break;
             case 2:
                 break;
-            case 3:
+            case 0:
                 Main_Menu();
                 break;
             default:
