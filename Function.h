@@ -24,8 +24,8 @@ FILE* fp2=NULL;    //研究生文件指针
 
 //-------函数声明和函数功能说明
 
-void readFromFile();   //加载文件中的全部学生数据到学生链表(分两类学生到两个链表)
-
+void readFromFile();   //程序开始加载文件中的全部学生数据到学生链表(分两类学生到两个链表),放开始程序后一行
+void sayeToFile();   //程序结束将学生链表中的全部学生数据保存到文件,放退出程序前一行
 //-------
 
 
@@ -50,10 +50,24 @@ void readFromFile(){
         Head_1->next=&graduate1;
         Head_1->next=Head_1;
     }
+    Head_1->next=NULL;
     while(fread(&graduate2,sizeof(GRA),1,fp2)==1){
         Head_2->next=&graduate2;
         Head_2->next=Head_2;
     }
+    Head_2->next=NULL;
 }
 
+void sayeToFile(){
+    rewind(fp1);   //使fp1和fp2回到文件开头
+    rewind(fp2);
+    UND*Head_1=Head1;   //Head_1和Head_2暂存头指针,防止头指针丢失
+    GRA*Head_2=Head2;
+    while((fwrite(Head_1->next,sizeof(UND),1,fp1))==1){
+        Head_1->next=Head_1;
+    }
+    while((fwrite(Head_2->next,sizeof(GRA),1,fp2))==1){
+        Head_2->next=Head_2;
+    }
+}
 
