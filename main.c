@@ -1,6 +1,4 @@
-#include <stdio.h>
-#include <Base.h>
-#include <Menu.h>
+#include "Menu.h"
 
 int main()
 {

@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #endif
-
+#include "Function.h"
 void Main_Menu();
 void Benke_Menu();
 void Yanjiu_Menu();
