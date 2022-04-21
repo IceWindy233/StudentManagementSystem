@@ -15,8 +15,8 @@
 #include "Base.h"
 //-------全局变量定义
 
-UND* Head1;   //本科生链表头指针
-GRA* Head2;   //研究生链表头指针
+UND* Head1={NULL};   //本科生链表头指针
+GRA* Head2={NULL};   //研究生链表头指针
 FILE* fp1=NULL;   //本科生文件指针
 FILE* fp2=NULL;   //研究生文件指针
 
@@ -37,7 +37,8 @@ int  numberPeople_1(UND* Head_1);   //计算本科生人数,(实参: 本科生�
 int  numberPeople_2(GRA* Head_2);   //计算研究生人数,(实参: 研究生链表头指针)
 void displayData_1(UND* stu);   //显示本科生数据,(实参: 学生节点指针)
 void displayData_2(GRA* stu);   //显示研究生数据,(实参: 学生节点指针)
-void searchstu(char* num_Name);   //通过名字或学号查询某位学生的信息
+//void searchstu(char* num_Name);   //通过名字或学号查询某位学生的信息(修改中)
+
 //-------
 
 //-------函数定义
@@ -49,11 +50,11 @@ void readFromFile(){
     GRA*Head_2=Head2;
     UND graduate1;    //graduate1和graduate2暂存学生数据
     GRA graduate2;
-    if((fp1=fopen("undergraduate.dat","rb+"))==NULL){
+    if((fp1=fopen("undergraduate.dat","wb+"))==NULL){
         printf("文件打开失败!");
         exit(0);
     }
-    if((fp2=fopen("graduate.dat","rb+"))==NULL){
+    if((fp2=fopen("graduate.dat","wb+"))==NULL){
         printf("文件打开失败!");
         exit(0);
     }
@@ -86,13 +87,21 @@ void sayeToFile(){
 }
 
 UND* scanf_1(){
-    UND*stu=(UND*)malloc(sizeof(UND));
+    UND*stu;
+    if ((stu= (UND *)malloc(sizeof(UND))) == NULL) {
+        printf("不能成功分配储存块!\n");
+        exit(0);
+    }
     scanf("%s%u%s%s%d%d%d",stu->name,&stu->sex,stu->major,stu->banji,&stu->score[0],&stu->score[1],&stu->score[2]);
     return stu;
 }
 
 GRA* scanf_2(){
-    GRA*stu=(GRA*)malloc(sizeof(GRA));
+    GRA*stu;
+    if ((stu= (GRA *)malloc(sizeof(GRA))) == NULL) {
+        printf("不能成功分配储存块!\n");
+        exit(0);
+    }
     scanf("%s%u%s%d%s%s%d%d",stu->name,&stu->sex,stu->major,&stu->Class,stu->reserch,stu->tname,&stu->score[0],&stu->score[1]);
     return stu;
 }

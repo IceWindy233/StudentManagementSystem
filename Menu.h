@@ -9,15 +9,16 @@ void Benke_Menu();
 void Yanjiu_Menu();
 
 void Main_Menu()
-{
-    /*printf("----输入----\n");
+{   setbuf(stdout,NULL);
+
+    /*
+    printf("-----输入----\n");
     readFromFile();
     addNode_1(scanf_1());
-    printf("----输出----\n");
     displayData_1(Head1->next);
     sayeToFile();
     */
-    setbuf(stdout,NULL);
+
     system("cls");
     while(1){
         int choice;
