@@ -10,6 +10,13 @@ void Yanjiu_Menu();
 
 void Main_Menu()
 {
+    /*printf("----输入----\n");
+    readFromFile();
+    addNode_1(scanf_1());
+    printf("----输出----\n");
+    displayData_1(Head1->next);
+    sayeToFile();
+    */
     setbuf(stdout,NULL);
     system("cls");
     while(1){
@@ -108,15 +115,6 @@ void Yanjiu_Menu(){
                 system("cls");
                 break;
             case 2:
-                system("cls");
-                break;
-            case 3:
-                system("cls");
-                break;
-            case 4:
-                system("cls");
-                break;
-            case 5:
                 system("cls");
                 break;
             case 0:
