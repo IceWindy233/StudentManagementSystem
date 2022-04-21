@@ -1,7 +1,3 @@
-//
-// Created by 86134 on 2022/4/19.
-//
-
 #ifndef _MENU_
 #define _MENU_
 #include <stdio.h>
@@ -12,43 +8,43 @@
 #include<math.h>
 #endif
 #include "Base.h"
-//-------È«¾Ö±äÁ¿¶¨Òå
+//-------å…¨å±€å˜é‡å®šä¹‰
 
-UND* Head1;   //±¾¿ÆÉúÁ´±íÍ·Ö¸Õë
-GRA* Head2;   //ÑÐ¾¿ÉúÁ´±íÍ·Ö¸Õë
-FILE* fp1=NULL;    //±¾¿ÆÉúÎÄ¼þÖ¸Õë
-FILE* fp2=NULL;    //ÑÐ¾¿ÉúÎÄ¼þÖ¸Õë
-
-//-------
-
-
-//-------º¯ÊýÉùÃ÷ºÍº¯Êý¹¦ÄÜËµÃ÷
-
-void readFromFile();   //³ÌÐò¿ªÊ¼¼ÓÔØÎÄ¼þÖÐµÄÈ«²¿Ñ§ÉúÊý¾Ýµ½Ñ§ÉúÁ´±í(·ÖÁ½ÀàÑ§Éúµ½Á½¸öÁ´±í),·Å¿ªÊ¼³ÌÐòºóÒ»ÐÐ
-void sayeToFile();   //³ÌÐò½áÊø½«Ñ§ÉúÁ´±íÖÐµÄÈ«²¿Ñ§ÉúÊý¾Ý±£´æµ½ÎÄ¼þ²¢ÍË³öº¯Êý,,·ÅÍË³ö³ÌÐòÇ°Ò»ÐÐ
-UND* scanf_1();   //´Ó¼üÅÌ»ñÈ¡Ò»¸ö±¾¿ÆÉúÊý¾Ýºó,·µ»Ø½ÚµãµØÖ·
-GRA* scanf_2();   //´Ó¼üÅÌ»ñÈ¡Ò»¸öÑÐ¾¿ÉúÊý¾Ýºó,·µ»Ø½ÚµãµØÖ·
-void addNode_1(UND* stu);   //½«Ò»¸ö±¾¿ÆÉú½ÚµãÌí¼Óµ½Á´±íÎ²(Êµ²Î: Ñ§Éú½Úµã),ÇÒ×Ô¶¯¼ÆËãÑ§ºÅ
-void addNode_2(GRA* stu);   //½«Ò»¸öÑÐ¾¿Éú½ÚµãÌí¼Óµ½Á´±íÎ²(Êµ²Î: Ñ§Éú½Úµã),ÇÒ×Ô¶¯¼ÆËãÑ§ºÅ
+UND* Head1;   //æœ¬ç§‘ç”Ÿé“¾è¡¨å¤´æŒ‡é’ˆ
+GRA* Head2;   //ç ”ç©¶ç”Ÿé“¾è¡¨å¤´æŒ‡é’ˆ
+FILE* fp1=NULL;    //æœ¬ç§‘ç”Ÿæ–‡ä»¶æŒ‡é’ˆ
+FILE* fp2=NULL;    //ç ”ç©¶ç”Ÿæ–‡ä»¶æŒ‡é’ˆ
 
 //-------
 
 
-//-------º¯Êý¶¨Òå
+//-------å‡½æ•°å£°æ˜Žå’Œå‡½æ•°åŠŸèƒ½è¯´æ˜Ž
+
+void readFromFile();   //ç¨‹åºå¼€å§‹åŠ è½½æ–‡ä»¶ä¸­çš„å…¨éƒ¨å­¦ç”Ÿæ•°æ®åˆ°å­¦ç”Ÿé“¾è¡¨(åˆ†ä¸¤ç±»å­¦ç”Ÿåˆ°ä¸¤ä¸ªé“¾è¡¨),æ”¾å¼€å§‹ç¨‹åºåŽä¸€è¡Œ
+void sayeToFile();   //ç¨‹åºç»“æŸå°†å­¦ç”Ÿé“¾è¡¨ä¸­çš„å…¨éƒ¨å­¦ç”Ÿæ•°æ®ä¿å­˜åˆ°æ–‡ä»¶å¹¶é€€å‡ºå‡½æ•°,,æ”¾é€€å‡ºç¨‹åºå‰ä¸€è¡Œ
+UND* scanf_1();   //ä»Žé”®ç›˜èŽ·å–ä¸€ä¸ªæœ¬ç§‘ç”Ÿæ•°æ®åŽ,è¿”å›žèŠ‚ç‚¹åœ°å€
+GRA* scanf_2();   //ä»Žé”®ç›˜èŽ·å–ä¸€ä¸ªç ”ç©¶ç”Ÿæ•°æ®åŽ,è¿”å›žèŠ‚ç‚¹åœ°å€
+void addNode_1(UND* stu);   //å°†ä¸€ä¸ªæœ¬ç§‘ç”ŸèŠ‚ç‚¹æ·»åŠ åˆ°é“¾è¡¨å°¾(å®žå‚: å­¦ç”ŸèŠ‚ç‚¹),ä¸”è‡ªåŠ¨è®¡ç®—å­¦å·
+void addNode_2(GRA* stu);   //å°†ä¸€ä¸ªç ”ç©¶ç”ŸèŠ‚ç‚¹æ·»åŠ åˆ°é“¾è¡¨å°¾(å®žå‚: å­¦ç”ŸèŠ‚ç‚¹),ä¸”è‡ªåŠ¨è®¡ç®—å­¦å·
+
+//-------
+
+
+//-------å‡½æ•°å®šä¹‰
 
 void readFromFile(){
     Head1=(UND*)malloc(sizeof(UND));
     Head2=(GRA*)malloc(sizeof(UND));
-    UND*Head_1=Head1;   //Head_1ºÍHead_2ÔÝ´æÍ·Ö¸Õë,·ÀÖ¹Í·Ö¸Õë¶ªÊ§
+    UND*Head_1=Head1;   //Head_1å’ŒHead_2æš‚å­˜å¤´æŒ‡é’ˆ,é˜²æ­¢å¤´æŒ‡é’ˆä¸¢å¤±
     GRA*Head_2=Head2;
-    UND graduate1;    //graduate1ºÍgraduate2ÔÝ´æÑ§ÉúÊý¾Ý
+    UND graduate1;    //graduate1å’Œgraduate2æš‚å­˜å­¦ç”Ÿæ•°æ®
     GRA graduate2;
-    if((fp1=fopen("D:\\c\\StudentManagementSystem\\±¾¿ÆÉú.dat","wb+"))==NULL){
-        printf("ÎÄ¼þ´ò¿ªÊ§°Ü!");
+    if((fp1=fopen("D:\\c\\StudentManagementSystem\\æœ¬ç§‘ç”Ÿ.dat","wb+"))==NULL){
+        printf("æ–‡ä»¶æ‰“å¼€å¤±è´¥!");
         exit(0);
     }
-    if((fp2=fopen("D:\\c\\StudentManagementSystem\\ÑÐ¾¿Éú.dat","wb+"))==NULL){
-        printf("ÎÄ¼þ´ò¿ªÊ§°Ü!");
+    if((fp2=fopen("D:\\c\\StudentManagementSystem\\ç ”ç©¶ç”Ÿ.dat","wb+"))==NULL){
+        printf("æ–‡ä»¶æ‰“å¼€å¤±è´¥!");
         exit(0);
     }
     while(fread(&graduate1,sizeof(UND),1,fp1)==1){
@@ -64,9 +60,9 @@ void readFromFile(){
 }
 
 void sayeToFile(){
-    rewind(fp1);   //Ê¹fp1ºÍfp2»Øµ½ÎÄ¼þ¿ªÍ·
+    rewind(fp1);   //ä½¿fp1å’Œfp2å›žåˆ°æ–‡ä»¶å¼€å¤´
     rewind(fp2);
-    UND*Head_1=Head1;   //Head_1ºÍHead_2ÔÝ´æÍ·Ö¸Õë,·ÀÖ¹Í·Ö¸Õë¶ªÊ§
+    UND*Head_1=Head1;   //Head_1å’ŒHead_2æš‚å­˜å¤´æŒ‡é’ˆ,é˜²æ­¢å¤´æŒ‡é’ˆä¸¢å¤±
     GRA*Head_2=Head2;
     while((fwrite(Head_1->next,sizeof(UND),1,fp1))==1){
         Head_1=Head_1->next;
@@ -92,7 +88,7 @@ GRA* scanf_2(){
 }
 
 void addNode_1(UND* stu){
-    UND*Head_1=Head1;   //Head_1ÔÝ´æÍ·Ö¸Õë,·ÀÖ¹Í·Ö¸Õë¶ªÊ§
+    UND*Head_1=Head1;   //Head_1æš‚å­˜å¤´æŒ‡é’ˆ,é˜²æ­¢å¤´æŒ‡é’ˆä¸¢å¤±
     int count=0;
     if(Head_1->next==NULL){
         stu->num=1;
@@ -109,7 +105,7 @@ void addNode_1(UND* stu){
 }
 
 void addNode_2(GRA* stu){
-    GRA *Head_2=Head2;   //Head_2ÔÝ´æÍ·Ö¸Õë,·ÀÖ¹Í·Ö¸Õë¶ªÊ§
+    GRA *Head_2=Head2;   //Head_2æš‚å­˜å¤´æŒ‡é’ˆ,é˜²æ­¢å¤´æŒ‡é’ˆä¸¢å¤±
     int count=0;
     if(Head_2->next==NULL){
         stu->num=1;

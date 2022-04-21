@@ -110,6 +110,15 @@ void Yanjiu_Menu(){
             case 2:
                 system("cls");
                 break;
+            case 3:
+                system("cls");
+                break;
+            case 4:
+                system("cls");
+                break;
+            case 5:
+                system("cls");
+                break;
             case 0:
                 Main_Menu();
                 break;
