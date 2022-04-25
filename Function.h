@@ -26,8 +26,8 @@ FILE* fp2=NULL;   //研究生文件指针(函数结尾建议rewind(fp2),使fp2�
 
 //-------函数声明和函数功能说明
 
-void readFromFile();   //程序开始加载文件中的全部学生数据到学生链表(分两类学生到两个链表),放程序开始后一行
-void sayeToFile();   //程序结束将学生链表中的全部学生数据保存到文件并退出函数,放退出程序前一行
+void readFromFile();   //程序开始加载文件中的全部学生数据到学生链表(分两类学生到两个链表),---放程序开始后一行(放在定义变量前)---
+void sayeToFile();   //程序结束将学生链表中的全部学生数据保存到文件并退出函数,---放退出程序前一行---
 UND* scanf_1();   //从键盘获取一个本科生数据后,返回节点地址(自带初始化)
 GRA* scanf_2();   //从键盘获取一个研究生数据后,返回节点地址(自带初始化)
 void addNode_1(UND* stu);   //将一个本科生节点添加到链表尾,且自动计算学号,(实参: 学生节点指针)
@@ -36,10 +36,11 @@ void exchangeData_1(UND* stu_1,UND* stu_2);   //交换两名本科生,(实参: �
 void exchangeData_2(GRA* stu_1,GRA* stu_2);   //交换两名研究生,(实参: 需交换的两个学生节点)
 int  numberPeople_1(UND* Head_1);   //计算本科生人数,(实参: 本科生链表头指针)
 int  numberPeople_2(GRA* Head_2);   //计算研究生人数,(实参: 研究生链表头指针)
-void displayData_1(UND* stu);   //显示本科生数据,(实参: 学生节点指针)---(修改中)
-void displayData_2(GRA* stu);   //显示研究生数据,(实参: 学生节点指针)---(修改中)
+void displayData_1(UND stu);   //显示本科生数据,(实参: 学生节点)
+void displayData_2(GRA stu);   //显示研究生数据,(实参: 学生节点)
 void searchstu(char* num_Name);   //通过名字或学号查询(查找到后输出)某位学生的信息,(实参: 姓名字符串的首地址)
 void modifyStudent();   //修改一位学生的基本资料数据(内置菜单)
+
 //-------
 
 
@@ -48,26 +49,34 @@ void modifyStudent();   //修改一位学生的基本资料数据(内置菜单)
 void readFromFile(){
     Head1=(UND*)malloc(sizeof(UND));
     Head2=(GRA*)malloc(sizeof(GRA));
+    Head1->num=0;
+    Head2->num=0;
     UND*Head_1=Head1;   //Head_1和Head_2暂存头指针,防止头指针丢失
     GRA*Head_2=Head2;
-    UND graduate1;    //graduate1和graduate2暂存学生数据
-    GRA graduate2;
-    if((fp1=fopen("undergraduate.dat","wb+"))==NULL){
+    UND* graduate1=(UND*)malloc(sizeof(UND));   //graduate1和graduate2暂存学生数据
+    GRA* graduate2=(GRA*)malloc(sizeof(GRA));
+    if((fp1=fopen("undergraduate.dat","rb+"))==NULL){
         printf("文件打开失败!");
-        exit(0);
+        exit(1);
     }
-    if((fp2=fopen("graduate.dat","wb+"))==NULL){
+    if((fp2=fopen("graduate.dat","rb+"))==NULL){
         printf("文件打开失败!");
-        exit(0);
+        exit(1);
     }
-    while(fread(&graduate1,sizeof(UND),1,fp1)==1){
-        Head_1->next=&graduate1;
-        Head_1=Head_1->next;
+    if(fread(graduate1,sizeof(UND),1,fp1)){
+        do {
+            Head_1->next = graduate1;
+            Head_1 = Head_1->next;
+            graduate1 = (UND *) malloc(sizeof(UND));
+        } while (fread(graduate1, sizeof(UND), 1, fp1));
     }
     Head_1->next=NULL;
-    while(fread(&graduate2,sizeof(GRA),1,fp2)==1){
-        Head_2->next=&graduate2;
-        Head_2=Head_2->next;
+    if(fread(graduate2,sizeof(GRA),1,fp2)){
+        do {
+            Head_2->next = graduate2;
+            Head_2 = Head_2->next;
+            graduate2 = (GRA *) malloc(sizeof(GRA));
+        } while (fread(graduate2, sizeof(GRA), 1, fp2));
     }
     Head_2->next=NULL;
 }
@@ -77,7 +86,10 @@ void sayeToFile(){
     rewind(fp2);
     UND*Head_1=Head1;   //Head_1和Head_2暂存头指针,防止头指针丢失
     GRA*Head_2=Head2;
+    //UND*stu;
     while((fwrite(Head_1->next,sizeof(UND),1,fp1))==1){
+        //stu=Head_1->next;
+        //printf("%d %s %u %s %s %d %d %d %d %d %d\n",stu->num,stu->name,stu->sex,stu->major,stu->banji,stu->score[0],stu->score[1],stu->score[2],stu->score[3],stu->score[4],stu->score[5]);
         Head_1=Head_1->next;
     }
     while((fwrite(Head_2->next,sizeof(GRA),1,fp2))==1){
@@ -96,6 +108,7 @@ UND* scanf_1(){
         printf("不能成功分配储存块!\n");
         exit(0);
     }
+    stu->num=0;
     for (i = 0; i < 6; ++i) {
         stu->score[i]=0;
     }
@@ -111,6 +124,7 @@ GRA* scanf_2(){
         printf("不能成功分配储存块!\n");
         exit(0);
     }
+    stu->num=0;
     for (i = 0; i < 3; ++i) {
         stu->score[i]=0;
     }
@@ -135,19 +149,11 @@ void addNode_1(UND* stu){
         Head_2=Head_2->next;
     }
     if(count==0){
-        if(Head_1->next==NULL&&Head_2->next!=NULL) {
+        if(Head_1->num<=Head_2->num) {
             stu->num = Head_2->num + 1;
         }
-        if(Head_1->next!=NULL&&Head_2->next==NULL){
+        else{
             stu->num = Head_1->num + 1;
-        }
-        if(Head_1->next!=NULL&&Head_2->next!=NULL){
-            if(Head_1->num>Head_2->num){
-                stu->num = Head_1->num + 1;
-            }
-            else{
-                stu->num = Head_2->num + 1;
-            }
         }
     }
     Head_1->next=stu;
@@ -169,19 +175,11 @@ void addNode_2(GRA* stu){
         Head_2=Head_2->next;
     }
     if(count==0){
-        if(Head_1->next==NULL&&Head_2->next!=NULL) {
+        if(Head_1->num<=Head_2->num) {
             stu->num = Head_2->num + 1;
         }
-        if(Head_1->next!=NULL&&Head_2->next==NULL){
+        else{
             stu->num = Head_1->num + 1;
-        }
-        if(Head_1->next!=NULL&&Head_2->next!=NULL){
-            if(Head_1->num>Head_2->num){
-                stu->num = Head_1->num + 1;
-            }
-            else{
-                stu->num = Head_2->num + 1;
-            }
         }
     }
     Head_2->next=stu;
@@ -225,14 +223,32 @@ int numberPeople_2(GRA* Head_2){
 }
 
 
-void displayData_1(UND* stu){
-    printf("%d %s %u %s %s %d %d %d %d %d %d\n",stu->num,stu->name,stu->sex,stu->major,stu->banji,stu->score[0],stu->score[1],stu->score[2],stu->score[3],stu->score[4],stu->score[5]);
+void displayData_1(UND stu) {
+    switch (stu.sex) {
+        case male:
+            printf("%d %s 男 %s %s %d %d %d %d %d %d\n", stu.num, stu.name, stu.major, stu.banji, stu.score[0],
+                   stu.score[1], stu.score[2], stu.score[3], stu.score[4], stu.score[5]);
+            break;
+        case female:
+            printf("%d %s 女 %s %s %d %d %d %d %d %d\n", stu.num, stu.name, stu.major, stu.banji, stu.score[0],
+                   stu.score[1], stu.score[2], stu.score[3], stu.score[4], stu.score[5]);
+            break;
+    }
 }
 
-
-void displayData_2(GRA* stu){
-    printf("%d %s %u %s %d %s %s %d %d %d %d %d\n",stu->num,stu->name,stu->sex,stu->major,stu->Class,stu->reserch,stu->tname,stu->score[0],stu->score[1],stu->score[2],stu->classrank,stu->allrank);
+void displayData_2(GRA stu) {
+    switch (stu.sex) {
+        case male:
+            printf("%d %s 男 %s %d %s %s %d %d %d %d %d\n", stu.num, stu.name, stu.major, stu.Class,
+                   stu.reserch, stu.tname, stu.score[0], stu.score[1], stu.score[2], stu.classrank, stu.allrank);
+            break;
+        case female:
+            printf("%d %s 女 %s %d %s %s %d %d %d %d %d\n", stu.num, stu.name, stu.major, stu.Class,
+                   stu.reserch, stu.tname, stu.score[0], stu.score[1], stu.score[2], stu.classrank, stu.allrank);
+            break;
+    }
 }
+
 
 
 void searchstu(char* num_Name){
@@ -248,7 +264,7 @@ void searchstu(char* num_Name){
         while ( Head_1->next!= NULL){
             if (Head_1->next->num == num1){
                 printf("已查找到学号为%d的学生信息!\n", num1);
-                displayData_1(Head_1->next);
+                displayData_1(*Head_1->next);
                 k=1;
                 break;
             }
@@ -258,7 +274,7 @@ void searchstu(char* num_Name){
             while ( Head_2->next!= NULL){
                 if (Head_2->next->num == num1){
                     printf("已查找到学号为%d的学生信息!\n", num1);
-                    displayData_2(Head_2->next);
+                    displayData_2(*Head_2->next);
                     k=1;
                     break;
                 }
@@ -270,7 +286,7 @@ void searchstu(char* num_Name){
         while (Head_1->next!= NULL){
             if (strcmp(num_Name, Head_1->name) == 0){
                 printf("已查找到姓名为%s的学生信息!\n", num_Name);
-                displayData_1(Head_1->next);
+                displayData_1(*Head_1->next);
                 k=1;
                 h++;
             }
@@ -279,7 +295,7 @@ void searchstu(char* num_Name){
         while (Head_2->next!= NULL){
             if (strcmp(num_Name, Head_2->name) == 0){
                 printf("已查找到姓名为%s的学生信息!\n", num_Name);
-                displayData_2(Head_2->next);
+                displayData_2(*Head_2->next);
                 k=1;
                 h++;
             }

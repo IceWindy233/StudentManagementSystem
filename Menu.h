@@ -7,41 +7,35 @@
 void Main_Menu();
 void Benke_Menu();
 void Yanjiu_Menu();
-
 void Main_Menu()
 {
     setbuf(stdout,NULL);
-
     //--------------测试用--------------
-    /*
-    UND* a,*b;
-    GRA* c,*d;
+    readFromFile();
+    char num_Name[12];
     UND* Head_1=Head1;
+    UND* a,*b,*c;
     GRA* Head_2=Head2;
     printf("-----输入----\n");
-    readFromFile();
     a=scanf_1();
     b=scanf_1();
-    c=scanf_2();
-    d=scanf_2();
+    c=scanf_1();
+    scanf("%s",num_Name);
     addNode_1(a);
     addNode_1(b);
-    addNode_2(c);
-    addNode_2(d);
+    addNode_1(c);
+    addNode_1(b);
     exchangeData_1(a,b);
-    exchangeData_2(c,d);
     printf("1------------\n");
-    displayData_1(Head_1->next);
+    displayData_1(*Head_1->next);
     printf("2------------\n");
     Head_1=Head_1->next;
-    displayData_1(Head_1->next);
+    displayData_1(*Head_1->next);
     printf("3------------\n");
-    displayData_2(Head_2->next);
-    printf("4------------\n");
-    Head_2=Head_2->next;
-    displayData_2(Head_2->next);
+    Head_1=Head_1->next;
+    displayData_1(*Head_1->next);
+    //searchstu(num_Name);
     sayeToFile();
-    */
     //--------------------------------
 
     system("cls");
