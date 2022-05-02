@@ -14,27 +14,37 @@ void Main_Menu()
     readFromFile();
     char num_Name[12];
     UND* Head_1=Head1;
-    UND* a,*b,*c;
+    UND* a,*b,*c,*d;
     GRA* Head_2=Head2;
-    printf("-----输入----\n");
+    /*printf("-----输入----\n");
     a=scanf_1();
     b=scanf_1();
     c=scanf_1();
-    scanf("%s",num_Name);
+    //d=scanf_1();
+    //scanf("%s",num_Name);
     addNode_1(a);
     addNode_1(b);
     addNode_1(c);
-    addNode_1(b);
-    exchangeData_1(a,b);
-    printf("1------------\n");
-    displayData_1(*Head_1->next);
-    printf("2------------\n");
-    Head_1=Head_1->next;
-    displayData_1(*Head_1->next);
-    printf("3------------\n");
-    Head_1=Head_1->next;
-    displayData_1(*Head_1->next);
+    //addNode_1(d);
+    //exchangeData_1(a,b);
+    //printf("------------\n");
+    //Head_1=Head_1->next;
+    //displayData_1(*Head_1->next);
     //searchstu(num_Name);
+    */
+    /*printf("------------\n");
+    while (Head_1->next!=NULL){
+        displayData_1(*Head_1->next);
+        printf("------------\n");
+        Head_1=Head_1->next;
+    }*/
+    //modifyStudent();
+    printf("-----输入----\n");
+    for(int i=0;i<20;i++){
+        a=scanf_1();
+        addNode_1(a);
+    }
+    getPage_1();
     sayeToFile();
     //--------------------------------
 
