@@ -39,11 +39,12 @@ void Main_Menu()
         Head_1=Head_1->next;
     }*/
     //modifyStudent();
-    printf("-----输入----\n");
+    /*printf("-----输入----\n");
     for(int i=0;i<20;i++){
         a=scanf_1();
         addNode_1(a);
-    }
+    }*/
+
     getPage_1();
     sayeToFile();
     //--------------------------------
