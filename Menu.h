@@ -7,6 +7,17 @@
 void Main_Menu();
 void Benke_Menu();
 void Yanjiu_Menu();
+void Benke_baseDataManage_Menu();
+void Yanjiu_baseDataManage_Menu();//基本数据管理菜单
+void Benke_scoreManage_Menu();
+void Yanjiu_scoreManage_Menu();//成绩管理菜单
+void Benke_sort_Menu();
+void Yanjiu_sort_Menu();//成绩排序菜单
+void Benke_statistic_Menu();
+void Yanjiu_statistic_Menu();//数据统计菜单
+void Benke_search_Menu();
+void Yanjiu_search_Menu();//查询菜单
+
 void Main_Menu()
 {
     setbuf(stdout,NULL);
@@ -99,18 +110,23 @@ void Benke_Menu()
         switch (choice) {
             case 1:
                 system("cls");
+                Benke_baseDataManage_Menu();
                 break;
             case 2:
                 system("cls");
+                Benke_scoreManage_Menu();
                 break;
             case 3:
                 system("cls");
+                Benke_sort_Menu();
                 break;
             case 4:
                 system("cls");
+                Benke_statistic_Menu();
                 break;
             case 5:
                 system("cls");
+                Benke_search_Menu();
                 break;
             case 0:
                 Main_Menu();
@@ -144,9 +160,23 @@ void Yanjiu_Menu(){
         switch (choice) {
             case 1:
                 system("cls");
+                Yanjiu_baseDataManage_Menu();
                 break;
             case 2:
                 system("cls");
+                Yanjiu_scoreManage_Menu();
+                break;
+            case 3:
+                system("cls");
+                Yanjiu_sort_Menu();
+                break;
+            case 4:
+                system("cls");
+                Yanjiu_statistic_Menu();
+                break;
+            case 5:
+                system("cls");
+                Yanjiu_search_Menu();
                 break;
             case 0:
                 Main_Menu();
@@ -159,3 +189,4 @@ void Yanjiu_Menu(){
         }
     }
 }
+
