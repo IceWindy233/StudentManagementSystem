@@ -50,7 +50,11 @@ void printften_1(int i);   //显示第i页的本科生,(实参: 页数)
 void printften_2(int i);   //显示第i页的研究生,(实参: 页数)
 void getPage_1();   //可分页显示本科生(内置菜单)
 void getPage_2();   //可分页显示研究生(内置菜单)
-//void searchClass();
+void searchByClass_1(char* banji);   //按班级显示本科生数据
+void searchByClass_2(int class);   //按班级显示研究生数据
+void searchByName(char* name);   //按名字显示本科生和研究生数据
+void searnraiidyClassCourse_1(char* banji,int course);   //按班级和课程查询不及格本科生(course:课程号从零开始)
+void searnraiidyClassCourse_2(int class,int course);   //按班级和课程查询不及格研究生(course:课程号从零开始)
 //-------
 
 
@@ -108,7 +112,7 @@ void sayeToFile(){
         Head_2=Head_2->next;
     }
     //-----测试结束可删除-----
-    rewind(fp1);
+    /*rewind(fp1);
     printf("经本次修改后undergraduate.dat文件内容为:\n");
     fread(&ustu, sizeof(ustu), 1, fp1);
     while (!feof(fp1))
@@ -145,7 +149,7 @@ void sayeToFile(){
         fread(&stu, sizeof(GRA), 1, fp2);
     }
     fclose(fp1);
-    fclose(fp2);
+    fclose(fp2);*/
     exit(0);
 }
 
@@ -854,4 +858,86 @@ void getPage_2(){
         }
         //system("cls");
     }
+}
+
+
+void searchByClass_1(char* banji){
+    UND*Head_1=Head1;
+    int k=0;
+    while(Head_1->next!=NULL){
+        if(strcmp(Head_1->next->banji,banji) == 0){
+            displayData_1(*Head_1->next);
+            k=1;
+        }
+        Head_1=Head_1->next;
+    }
+    if(k==0)printf("无此班级\n");
+}
+
+
+void searchByClass_2(int class){
+    GRA *Head_2=Head2;
+    int k=0;
+    while(Head_2->next!=NULL){
+        if(Head_2->next->Class==class){
+            displayData_2(*Head_2->next);
+            k=1;
+        }
+        Head_2=Head_2->next;
+    }
+    if(k==0)printf("无此班级\n");
+}
+
+
+void searchByName(char* name){
+    UND*Head_1=Head1;
+    GRA*Head_2=Head2;
+    int k=0;
+    while(Head_1->next!=NULL){
+        if(strcmp(Head_1->next->name,name) == 0){
+            displayData_1(*Head_1->next);
+            k=1;
+        }
+        Head_1=Head_1->next;
+    }
+    while(Head_2->next!=NULL){
+        if(strcmp(Head_2->next->name,name) == 0){
+            displayData_2(*Head_2->next);
+            k=1;
+        }
+        Head_2=Head_2->next;
+    }
+    if(k==0)printf("没有名字为%s的学生\n",name);
+}
+
+
+void searnraiidyClassCourse_1(char* banji,int course){
+    UND*Head_1=Head1;
+    int k=0;
+    while(Head_1->next!=NULL){
+        if(strcmp(Head_1->next->banji,banji) == 0){
+            if(Head_1->next->score[course]<60){
+                displayData_1(*Head_1->next);
+                k=1;
+            }
+        }
+        Head_1=Head_1->next;
+    }
+    if(k==0)printf("该班级中的该课程无学生不及格");
+}
+
+
+void searnraiidyClassCourse_2(int class,int course){
+    GRA *Head_2=Head2;
+    int k=0;
+    while(Head_2->next!=NULL){
+        if(Head_2->next->Class==class){
+            if(Head_2->next->score[course]<60){
+                displayData_2(*Head_2->next);
+                k=1;
+            }
+        }
+        Head_2=Head_2->next;
+    }
+    if(k==0)printf("该班级中的该课程无学生不及格");
 }

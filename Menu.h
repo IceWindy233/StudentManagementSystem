@@ -32,6 +32,9 @@ void Main_Menu(){
     UND* Head_1=Head1;
     UND* a,*b,*c,*d;
     GRA* Head_2=Head2;
+    char banji[10];
+    char name[10];
+    int course;
     /*printf("-----输入----\n");
     a=scanf_1();
     b=scanf_1();
@@ -55,12 +58,21 @@ void Main_Menu(){
         Head_1=Head_1->next;
     }*/
     //modifyStudent();
-    printf("-----输入----\n");
+    /*printf("-----输入----\n");
     for(int i=0;i<20;i++){
         a=scanf_1();
         addNode_1(a);
-    }
-    getPage_1();
+    }*/
+    //getPage_1();
+    //printf("-----输入本科生班级----\n");
+    /*scanf("%s",banji);
+    searchByClass_1(banji);*/
+    //printf("-----输入学生名字----\n");
+    /*scanf("%s",name);
+    searchByName(name);*/
+    /*printf("-----输入班级和课程号----\n");
+    scanf("%s%d",banji,&course);
+    searnraiidyClassCourse_1( banji, course);*/
     sayeToFile();
     //--------------------------------
 
