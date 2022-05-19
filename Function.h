@@ -28,6 +28,8 @@ FILE* fp2=NULL;   //研究生文件指针(函数结尾建议rewind(fp2),使fp2�
 
 void readFromFile();   //程序开始加载文件中的全部学生数据到学生链表(分两类学生到两个链表),---放程序开始后一行(放在定义变量前)---
 void sayeToFile();   //程序结束将学生链表中的全部学生数据保存到文件并退出函数,---放退出程序前一行---
+void ReturnsModifications();   //显示修改后的学生链表
+void fileContent();   //显示文件内容,并使文件指针返回开头
 UND* scanf_1();   //从键盘获取一个本科生数据后,返回节点地址(自带初始化)
 GRA* scanf_2();   //从键盘获取一个研究生数据后,返回节点地址(自带初始化)
 void gradesCompute_1(UND* stu);   //计算一个本科生总成绩
@@ -48,13 +50,25 @@ void getstu_1(UND* Head);   //显示以Head为头指针的链表的全部本科�
 void getstu_2(GRA* Head);   //显示以Head为头指针的链表的全部研究生
 void printften_1(int i);   //显示第i页的本科生,(实参: 页数)
 void printften_2(int i);   //显示第i页的研究生,(实参: 页数)
-void getPage_1();   //可分页显示本科生(内置菜单)
-void getPage_2();   //可分页显示研究生(内置菜单)
+void getPage_1();   //可分页显示本科生,(内置菜单)
+void getPage_2();   //可分页显示研究生,(内置菜单)
 void searchByClass_1(char* banji);   //按班级显示本科生数据
 void searchByClass_2(int class);   //按班级显示研究生数据
 void searchByName(char* name);   //按名字显示本科生和研究生数据
-void searnraiidyClassCourse_1(char* banji,int course);   //按班级和课程查询不及格本科生(course:课程号从零开始)
-void searnraiidyClassCourse_2(int class,int course);   //按班级和课程查询不及格研究生(course:课程号从零开始)
+void searnraiidyClassCourse_1(char* banji,int course);   //按班级和课程查询不及格本科生,(course:课程号从零开始)
+void searnraiidyClassCourse_2(int class,int course);   //按班级和课程查询不及格研究生,(course:课程号从零开始)
+void sortAllByld_1();   //按学号id从小到大排序本科生,将被删除学生放到最前面
+void sortAllByld_2();   //按学号id从小到大排序研究生,将被删除学生放到最前面
+void SwapNodes_1(UND* stu1,UND* stu2);   //交换本科生节点
+void SwapNodes_2(GRA* stu1,GRA* stu2);   //交换研究生节点
+void sortAll_1();   //按总成绩从高到低排序本科生
+void sortAll_2();   //按总成绩从高到低排序研究生
+void sortAllAndShow_1();   //按总成绩从高到低排序本科生,并显示
+void sortAllAndShow_2();   //按总成绩从高到低排序研究生,并显示
+UND* returnsClassHead_1(char *banji);   //返回同班级本科生链表头
+GRA* returnsClassHead_2(int class);   //返回同班级研究生链表头
+void sortAllByClass_1(char *banji);   //将某班本科生数据按总成绩从高到低排序并显示
+void sortAllByClass_2(int class);   //将某班研究生数据按总成绩从高到低排序并显示
 //-------
 
 
@@ -111,46 +125,57 @@ void sayeToFile(){
     while((fwrite(Head_2->next,sizeof(GRA),1,fp2))==1){
         Head_2=Head_2->next;
     }
-    //-----测试结束可删除-----
-    /*rewind(fp1);
-    printf("经本次修改后undergraduate.dat文件内容为:\n");
+    fclose(fp1);
+    fclose(fp2);
+    exit(0);
+}
+
+
+void ReturnsModifications(){
+    UND*Head_1=Head1;   //Head_1和Head_2暂存头指针,防止头指针丢失
+    GRA*Head_2=Head2;
+    printf("经本次修改后undergraduate链表内容为:\n");
+    while(Head_1->next!=NULL){
+        if(Head_1->next->num!=-1){
+            displayData_1(*Head_1->next);
+            Head_1=Head_1->next;
+        }
+    }
+    printf("经本次修改后graduate链表内容为:\n");
+    while(Head_2->next!=NULL){
+        if(Head_2->next->num!=-1){
+            displayData_2(*Head_2->next);
+            Head_2=Head_2->next;
+        }
+    }
+}
+
+
+void fileContent(){
+    rewind(fp1);    //使fp1和fp2回到文件开头
+    rewind(fp2);
+    UND ustu;
+    GRA stu;
+    printf("undergraduate.dat内容为:\n");
+    printf("--------------------------------------------------\n");
     fread(&ustu, sizeof(ustu), 1, fp1);
     while (!feof(fp1))
     {
-        switch (ustu.sex)
-        {
-            case male:
-                printf("%d %s 男 %s %s ", ustu.num, ustu.name, ustu.major, ustu.banji);
-                printf("%d %d %d %d %d %d\n", ustu.score[0], ustu.score[1], ustu.score[2], ustu.score[3], ustu.score[4], ustu.score[5]);
-                break;
-            case female:
-                printf("%d %s 女 %s %s ", ustu.num, ustu.name, ustu.major, ustu.banji);
-                printf("%d %d %d %d %d %d\n", ustu.score[0], ustu.score[1], ustu.score[2], ustu.score[3], ustu.score[4], ustu.score[5]);
-                break;
-        }
-        printf("------------\n");
+        displayData_1(ustu);
+        printf("--------------------------------------------------\n");
         fread(&ustu, sizeof(UND), 1, fp1);
     }
-    printf("经本次修改后graduate.dat文件内容为:\n");
+    printf("graduate.dat内容为:\n");
+    printf("--------------------------------------------------\n");
     fread(&stu, sizeof(GRA), 1, fp2);
     while (!feof(fp2))
     {
-        switch (stu.sex) {
-            case male:
-                printf("%d %s 男 %s %d %s %s %d %d %d %d %d\n", stu.num, stu.name, stu.major, stu.Class,
-                       stu.reserch, stu.tname, stu.score[0], stu.score[1], stu.score[2], stu.classrank, stu.allrank);
-                break;
-            case female:
-                printf("%d %s 女 %s %d %s %s %d %d %d %d %d\n", stu.num, stu.name, stu.major, stu.Class,
-                       stu.reserch, stu.tname, stu.score[0], stu.score[1], stu.score[2], stu.classrank, stu.allrank);
-                break;
-        }
-        printf("------------\n");
+        displayData_2(stu);
+        printf("--------------------------------------------------\n");
         fread(&stu, sizeof(GRA), 1, fp2);
     }
-    fclose(fp1);
-    fclose(fp2);*/
-    exit(0);
+    rewind(fp1);    //使fp1和fp2回到文件开头
+    rewind(fp2);
 }
 
 
@@ -294,8 +319,10 @@ void exchangeData_2(GRA* stu_1,GRA* stu_2){
 int numberPeople_1(UND* Head_1){
     int i=0;
     while(Head_1->next!=NULL){
-        i++;
-        Head_1=Head_1->next;
+        if(Head_1->next->num!=-1){
+            i++;
+            Head_1=Head_1->next;
+        }
     }
     return i;
 }
@@ -304,8 +331,10 @@ int numberPeople_1(UND* Head_1){
 int numberPeople_2(GRA* Head_2){
     int i=0;
     while(Head_2->next!=NULL){
-        i++;
-        Head_2=Head_2->next;
+        if(Head_2->next->num!=-1){
+            i++;
+            Head_2=Head_2->next;
+        }
     }
     return i;
 }
@@ -941,3 +970,227 @@ void searnraiidyClassCourse_2(int class,int course){
     }
     if(k==0)printf("该班级中的该课程无学生不及格");
 }
+
+
+void sortAllByld_1(){
+    UND *Head_1=Head1;
+    int count=numberPeople_1(Head_1),i=0,j=0,k=count;
+    for(;i<count-1;i++){
+        for(;j<k-1;j++){
+            if(Head_1->next->num>Head_1->next->next->num) {
+                SwapNodes_1(Head_1->next, Head_1->next->next);
+                Head_1=Head_1->next;
+            }
+        }
+        k--;
+    }
+}
+
+
+void sortAllByld_2(){
+    GRA *Head_2=Head2;
+    int count=numberPeople_2(Head_2),i=0,j=0,k=count;
+    for(;i<count-1;i++){
+        for(;j<k-1;j++){
+            if(Head_2->next->num>Head_2->next->next->num) {
+                SwapNodes_2(Head_2->next, Head_2->next->next);
+                Head_2=Head_2->next;
+            }
+        }
+        k--;
+    }
+}
+
+
+void SwapNodes_1(UND* stu1,UND* stu2){
+    UND temp;
+    UND*next1,*next2;
+    next1=stu1->next;
+    next2=stu2->next;
+    temp=*stu1;
+    *stu1=*stu2;
+    *stu2=temp;
+    stu1->next=next1;
+    stu2->next=next2;
+}
+
+
+void SwapNodes_2(GRA* stu1,GRA* stu2){
+    GRA temp;
+    GRA*next1,*next2;
+    next1=stu1->next;
+    next2=stu2->next;
+    temp=*stu1;
+    *stu1=*stu2;
+    *stu2=temp;
+    stu1->next=next1;
+    stu2->next=next2;
+}
+
+
+void sortAll_1(){
+    UND *Head_1=Head1,*Head__1,*k;
+    int count=numberPeople_1(Head_1),i=0,j;
+    for(;i<count-1;i++)
+    {
+        k=Head_1->next;
+        Head__1=Head_1;
+        for (j=i+1;j<count;j++)
+        {
+            if(Head__1->next->score[3]<Head__1->next->next->score[3])
+            {
+                k=Head__1->next->next;
+            }
+            Head__1=Head__1->next;
+        }
+        if(k!=Head_1->next)
+        {
+            SwapNodes_1(Head_1->next,k);
+        }
+        Head_1=Head_1->next;
+    }
+}
+
+
+void sortAll_2(){
+    GRA *Head_2=Head2,*Head__2,*k;
+    int count=numberPeople_2(Head_2),i=0,j;
+    for(;i<count-1;i++)
+    {
+        k=Head_2->next;
+        Head__2=Head_2;
+        for (j=i+1;j<count;j++)
+        {
+            if(Head__2->next->score[2]<Head__2->next->next->score[2])
+            {
+                k=Head__2->next->next;
+            }
+            Head__2=Head__2->next;
+        }
+        if(k!=Head_2->next)
+        {
+            SwapNodes_2(Head_2->next,k);
+        }
+        Head_2=Head_2->next;
+    }
+}
+
+
+void sortAllAndShow_1(){
+    sortAll_1();
+    UND *Head_1=Head1;
+    while(Head_1->next!=NULL){
+        if(Head_1->next->num!=-1){
+            displayData_1(*Head_1->next);
+            Head_1=Head_1->next;
+        }
+    }
+}
+
+
+void sortAllAndShow_2(){
+    sortAll_2();
+    GRA *Head_2=Head2;
+    while(Head_2->next!=NULL){
+        if(Head_2->next->num!=-1){
+            displayData_2(*Head_2->next);
+            Head_2=Head_2->next;
+        }
+    }
+}
+
+
+UND* returnsClassHead_1(char *banji){
+    UND* Head_1=Head1;
+    UND* Head_2=(UND*) malloc(sizeof (UND));
+    UND* Head_3=Head_2;   //防止Head_2丢失
+    while(Head_1->next!=NULL){
+        if(strcmp(Head_1->next->banji,banji)==0){
+         Head_2->next=(UND*) malloc(sizeof (UND));
+         Head_2->next=Head_1->next;
+         Head_2=Head_2->next;
+        }
+        Head_1=Head_1->next;
+    }
+    Head_2->next=NULL;
+    return Head_3;
+}
+
+
+GRA* returnsClassHead_2(int class){
+    GRA* Head_1=Head2;
+    GRA* Head_2=(GRA *) malloc(sizeof (GRA));
+    GRA* Head_3=Head_2;   //防止Head_2丢失
+    while(Head_1->next!=NULL){
+        if(Head_1->next->Class==class){
+            Head_2->next=(GRA *) malloc(sizeof (GRA));
+            Head_2->next=Head_1->next;
+            Head_2=Head_2->next;
+        }
+        Head_1=Head_1->next;
+    }
+    Head_2->next=NULL;
+    return Head_3;
+}
+
+
+void sortAllByClass_1(char *banji){
+    UND *Head_1=returnsClassHead_1(banji),*Head__1,*Head___3=Head_1,*k;
+    int count=numberPeople_1(Head_1),i=0,j;
+    for(;i<count-1;i++)
+    {
+        k=Head_1->next;
+        Head__1=Head_1;
+        for (j=i+1;j<count;j++)
+        {
+            if(Head__1->next->score[3]<Head__1->next->next->score[3])
+            {
+                k=Head__1->next->next;
+            }
+            Head__1=Head__1->next;
+        }
+        if(k!=Head_1->next)
+        {
+            SwapNodes_1(Head_1->next,k);
+        }
+        Head_1=Head_1->next;
+    }
+    while(Head___3->next!=NULL){
+        if(Head___3->next->num!=-1){
+            displayData_1(*Head___3->next);
+            Head___3=Head___3->next;
+        }
+    }
+}
+
+
+void sortAllByClass_2(int class){
+    GRA *Head_1=returnsClassHead_2(class),*Head__1,*Head___3=Head_1,*k;
+    int count=numberPeople_2(Head_1),i=0,j;
+    for(;i<count-1;i++)
+    {
+        k=Head_1->next;
+        Head__1=Head_1;
+        for (j=i+1;j<count;j++)
+        {
+            if(Head__1->next->score[2]<Head__1->next->next->score[2])
+            {
+                k=Head__1->next->next;
+            }
+            Head__1=Head__1->next;
+        }
+        if(k!=Head_1->next)
+        {
+            SwapNodes_2(Head_1->next,k);
+        }
+        Head_1=Head_1->next;
+    }
+    while(Head___3->next!=NULL){
+        if(Head___3->next->num!=-1){
+            displayData_2(*Head___3->next);
+            Head___3=Head___3->next;
+        }
+    }
+}
+
+

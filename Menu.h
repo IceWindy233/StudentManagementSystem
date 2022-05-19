@@ -35,6 +35,7 @@ void Main_Menu(){
     char banji[10];
     char name[10];
     int course;
+
     /*printf("-----输入----\n");
     a=scanf_1();
     b=scanf_1();
@@ -58,11 +59,11 @@ void Main_Menu(){
         Head_1=Head_1->next;
     }*/
     //modifyStudent();
-    /*printf("-----输入----\n");
-    for(int i=0;i<20;i++){
-        a=scanf_1();
-        addNode_1(a);
-    }*/
+//    printf("-----输入----\n");
+//    for(int i=0;i<3;i++){
+//        a=scanf_1();
+//        addNode_1(a);
+//    }
     //getPage_1();
     //printf("-----输入本科生班级----\n");
     /*scanf("%s",banji);
@@ -73,7 +74,16 @@ void Main_Menu(){
     /*printf("-----输入班级和课程号----\n");
     scanf("%s%d",banji,&course);
     searnraiidyClassCourse_1( banji, course);*/
-    sayeToFile();
+    //sortAllByld();
+    printf("--------1-------\n");
+    ReturnsModifications();
+    //printf("---------------");
+    //SwapNodes_1(Head_1->next,Head_1->next->next);
+    sortAll_1();
+    //sayeToFile();
+    printf("--------2-------\n");
+    ReturnsModifications();
+    //exit(0);
     //--------------------------------
 
     system("cls");

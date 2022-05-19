@@ -9,4 +9,4 @@ add_executable(StudentManagementSystem
         main.c
         Base.h
         Menu.h
-        ustudent.h Function.h)
+        Function.h)
