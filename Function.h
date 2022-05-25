@@ -742,15 +742,19 @@ void getPage_1(){
     }
     else allpage = totalstu / 10;
     scanf("%c",&ch[1]);
-    printf("学号 姓名 性别  专业  班级 高数 C语言 英语 总成绩 班级排名 校级排名\n");
-    printften_1(page);
-    printf("-------------------------------当前为第1页,共%d页--------------------------------\n", allpage);
+
     while (1)
     {
+        printf("学号 姓名 性别  专业  班级 高数 C语言 英语 总成绩 班级排名 校级排名\n");
+        printften_1(page);
+        printf("-------------------------------当前为第1页,共%d页--------------------------------\n", allpage);
         printf("首页请按“a”键 上一页请按“w”键 下一页请按“s”键 尾页请按“d”键 退出请按“0”键\n");
         scanf("%c",&ch[0]);
         scanf("%c",&ch[1]);
-        if (ch[0] == 48) break;
+        if (ch[0] == 48) {
+            system("cls");
+            break;
+        }
         switch (ch[0])
         {
             case 100:
@@ -799,10 +803,13 @@ void getPage_1(){
                 break;
             }
             default:
-                //system("cls");
+                printf("输入错误，请重新输入\n");
+                system("pause");
+                system("cls");
                 break;
         }
-        //system("cls");
+        system("pause");
+        system("cls");
     }
 }
 

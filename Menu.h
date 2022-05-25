@@ -37,23 +37,21 @@ void Main_Menu(){
     char banji[10];
     char name[10];
     int course;
-
-    /*printf("-----输入----\n");
-    a=scanf_1();
-    b=scanf_1();
-    c=scanf_1();
-    //d=scanf_1();
-    //scanf("%s",num_Name);
-    addNode_1(a);
-    addNode_1(b);
-    addNode_1(c);
+//    printf("-----输入----\n");
+//    a=scanf_1();
+//    b=scanf_1();
+//    c=scanf_1();
+//    //d=scanf_1();
+//    //scanf("%s",num_Name);
+//    addNode_1(a);
+//    addNode_1(b);
+//    addNode_1(c);
     //addNode_1(d);
     //exchangeData_1(a,b);
     //printf("------------\n");
     //Head_1=Head_1->next;
     //displayData_1(*Head_1->next);
     //searchstu(num_Name);
-    */
     /*printf("------------\n");
     while (Head_1->next!=NULL){
         displayData_1(*Head_1->next);
@@ -62,7 +60,7 @@ void Main_Menu(){
     }*/
     //modifyStudent();
 //    printf("-----输入----\n");
-//    for(int i=0;i<3;i++){
+//    for(int i=0;i<20;i++){
 //        a=scanf_1();
 //        addNode_1(a);
 //    }
