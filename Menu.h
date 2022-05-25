@@ -2,6 +2,8 @@
 #define _MENU_
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
+
 #endif
 #include "Function.h"
 void Main_Menu();//一级菜单
@@ -24,10 +26,10 @@ void searchMenuPrint();
 void Benke_search_Menu();
 void Yanjiu_search_Menu();//查询菜单
 
+
+
 void Main_Menu(){
-    setbuf(stdout,NULL);
     //--------------测试用--------------
-    readFromFile();
     char num_Name[12];
     UND* Head_1=Head1;
     UND* a,*b,*c,*d;
@@ -88,29 +90,34 @@ void Main_Menu(){
 
     system("cls");
     while(1){
-        int choice;
+        char choice;
         printf("*************************** 菜单 ***************************\n");
         printf("_1_本科生成绩管理系统\n");
         printf("_2_研究生成绩管理系统\n");
         printf("_0_退出\n");
         printf("选择系统:");
-        scanf("%d", &choice);
-        switch(choice){
-            case 1:
-                system("cls");
-                Benke_Menu();
-                break;
-            case 2:
-                system("cls");
-                Yanjiu_Menu();
-                break;
-            case 0:
-                exit(0);
-            default:
-                printf("输入错误，请重新输入\n");
-                system("pause");
-                system("cls");
-                break;
+        scanf("%s",&choice);
+        if(isdigit(choice)){
+            switch(choice){
+                case '1':
+                    system("cls");
+                    Benke_Menu();
+                    break;
+                case '2':
+                    system("cls");
+                    Yanjiu_Menu();
+                    break;
+                case '0':
+                    sayeToFile();
+                default:
+                    printf("输入错误，请重新输入\n");
+                    system("pause");
+                    system("cls");
+            }
+        }else{
+            printf("输入错误，请重新输入\n");
+            system("pause");
+            system("cls");
         }
     }
 }
@@ -132,78 +139,90 @@ void MenuPrint(){
 
 void Benke_Menu(){
     while(1){
-        int choice;
+        char choice;
         printf("********************本科生成绩管理系统********************\n");
         MenuPrint();
-        scanf("%d", &choice);
-        switch (choice) {
-            case 1:
-                system("cls");
-                Benke_baseDataManage_Menu();
-                break;
-            case 2:
-                system("cls");
-                Benke_scoreManage_Menu();
-                break;
-            case 3:
-                system("cls");
-                Benke_sort_Menu();
-                break;
-            case 4:
-                system("cls");
-                Benke_statistic_Menu();
-                break;
-            case 5:
-                system("cls");
-                Benke_search_Menu();
-                break;
-            case 0:
-                Main_Menu();
-                break;
-            default:
-                printf("输入错误，请重新输入\n");
-                system("pause");
-                system("cls");
-                break;
+        scanf("%s", &choice);
+        if (isdigit(choice)) {
+            switch (choice) {
+                case '1':
+                    system("cls");
+                    Benke_baseDataManage_Menu();
+                    break;
+                case '2':
+                    system("cls");
+                    Benke_scoreManage_Menu();
+                    break;
+                case '3':
+                    system("cls");
+                    Benke_sort_Menu();
+                    break;
+                case '4':
+                    system("cls");
+                    Benke_statistic_Menu();
+                    break;
+                case '5':
+                    system("cls");
+                    Benke_search_Menu();
+                    break;
+                case '0':
+                    Main_Menu();
+                    break;
+                default:
+                    printf("输入错误，请重新输入\n");
+                    system("pause");
+                    system("cls");
+                    break;
+            }
+        } else {
+            printf("输入错误，请重新输入\n");
+            system("pause");
+            system("cls");
         }
     }
 }
 
 void Yanjiu_Menu(){
     while(1){
-        int choice;
+        char choice;
         printf("********************研究生成绩管理系统********************\n");
         MenuPrint();
-        scanf("%d", &choice);
-        switch (choice) {
-            case 1:
-                system("cls");
-                Yanjiu_baseDataManage_Menu();
-                break;
-            case 2:
-                system("cls");
-                Yanjiu_scoreManage_Menu();
-                break;
-            case 3:
-                system("cls");
-                Yanjiu_sort_Menu();
-                break;
-            case 4:
-                system("cls");
-                Yanjiu_statistic_Menu();
-                break;
-            case 5:
-                system("cls");
-                Yanjiu_search_Menu();
-                break;
-            case 0:
-                Main_Menu();
-                break;
-            default:
-                printf("输入错误，请重新输入\n");
-                system("pause");
-                system("cls");
-                break;
+        scanf("%s", &choice);
+        if (isdigit(choice)) {
+            switch (choice) {
+                case '1':
+                    system("cls");
+                    Yanjiu_baseDataManage_Menu();
+                    break;
+                case '2':
+                    system("cls");
+                    Yanjiu_scoreManage_Menu();
+                    break;
+                case '3':
+                    system("cls");
+                    Yanjiu_sort_Menu();
+                    break;
+                case '4':
+                    system("cls");
+                    Yanjiu_statistic_Menu();
+                    break;
+                case '5':
+                    system("cls");
+                    Yanjiu_search_Menu();
+                    break;
+                case '0':
+                    Main_Menu();
+                    break;
+                default:
+                    printf("输入错误，请重新输入\n");
+                    system("pause");
+                    system("cls");
+                    break;
+            }
+        } else {
+            printf("输入错误，请重新输入\n");
+            system("pause");
+            system("cls");
         }
     }
 }
@@ -219,64 +238,76 @@ void baseDataMenuPrint(){
 
 void Benke_baseDataManage_Menu(){
     while(1){
-        int choice;
+        char choice;
         printf("********************本科生成绩管理系统********************\n");
         baseDataMenuPrint();
-        scanf("%d", &choice);
-        switch (choice) {
-            case 1:
-                system("cls");
-                break;
-            case 2:
-                system("cls");
-                break;
-            case 3:
-                system("cls");
-                break;
-            case 4:
-                system("cls");
-                break;
-            case 0:
-                system("cls");
-                Benke_Menu();
-                break;
-            default:
-                printf("输入错误，请重新输入\n");
-                system("pause");
-                system("cls");
-                break;
+        scanf("%s", &choice);
+        if (isdigit(choice)) {
+            switch (choice) {
+                case '1':
+                    system("cls");
+                    break;
+                case '2':
+                    system("cls");
+                    break;
+                case '3':
+                    system("cls");
+                    break;
+                case '4':
+                    system("cls");
+                    break;
+                case '0':
+                    system("cls");
+                    Benke_Menu();
+                    break;
+                default:
+                    printf("输入错误，请重新输入\n");
+                    system("pause");
+                    system("cls");
+                    break;
+            }
+        } else {
+            printf("输入错误，请重新输入\n");
+            system("pause");
+            system("cls");
         }
     }
 }
 
 void Yanjiu_baseDataManage_Menu(){
     while(1){
-        int choice;
+        char choice;
         printf("********************研究生成绩管理系统********************\n");
         baseDataMenuPrint();
-        scanf("%d", &choice);
-        switch (choice) {
-            case 1:
-                system("cls");
-                break;
-            case 2:
-                system("cls");
-                break;
-            case 3:
-                system("cls");
-                break;
-            case 4:
-                system("cls");
-                break;
-            case 0:
-                system("cls");
-                Yanjiu_Menu();
-                break;
-            default:
-                printf("输入错误，请重新输入\n");
-                system("pause");
-                system("cls");
-                break;
+        scanf("%s", &choice);
+        if (isdigit(choice)) {
+            switch (choice) {
+                case '1':
+                    system("cls");
+                    break;
+                case '2':
+                    system("cls");
+                    break;
+                case '3':
+                    system("cls");
+                    break;
+                case '4':
+                    system("cls");
+                    break;
+                case '0':
+                    system("cls");
+                    Yanjiu_Menu();
+                    break;
+                default:
+                    printf("输入错误，请重新输入\n");
+                    system("pause");
+                    system("cls");
+                    break;
+            }
+        } else {
+            printf("输入错误，请重新输入\n");
+            system("pause");
+            system("cls");
         }
     }
 }
@@ -292,64 +323,76 @@ void scoreMenuPrint(){
 
 void Benke_scoreManage_Menu(){
     while(1){
-        int choice;
+        char choice;
         printf("********************本科生成绩管理系统********************\n");
         scoreMenuPrint();
-        scanf("%d", &choice);
-        switch (choice) {
-            case 1:
-                system("cls");
-                break;
-            case 2:
-                system("cls");
-                break;
-            case 3:
-                system("cls");
-                break;
-            case 4:
-                system("cls");
-                break;
-            case 0:
-                system("cls");
-                Benke_Menu();
-                break;
-            default:
-                printf("输入错误，请重新输入\n");
-                system("pause");
-                system("cls");
-                break;
+        scanf("%s", &choice);
+        if (isdigit(choice)) {
+            switch (choice) {
+                case '1':
+                    system("cls");
+                    break;
+                case '2':
+                    system("cls");
+                    break;
+                case '3':
+                    system("cls");
+                    break;
+                case '4':
+                    system("cls");
+                    break;
+                case '0':
+                    system("cls");
+                    Benke_Menu();
+                    break;
+                default:
+                    printf("输入错误，请重新输入\n");
+                    system("pause");
+                    system("cls");
+                    break;
+            }
+        } else {
+            printf("输入错误，请重新输入\n");
+            system("pause");
+            system("cls");
         }
     }
 }
 
 void Yanjiu_scoreManage_Menu(){
     while(1){
-        int choice;
+        char choice;
         printf("********************研究生成绩管理系统********************\n");
         scoreMenuPrint();
-        scanf("%d", &choice);
-        switch (choice) {
-            case 1:
-                system("cls");
-                break;
-            case 2:
-                system("cls");
-                break;
-            case 3:
-                system("cls");
-                break;
-            case 4:
-                system("cls");
-                break;
-            case 0:
-                system("cls");
-                Benke_Menu();
-                break;
-            default:
-                printf("输入错误，请重新输入\n");
-                system("pause");
-                system("cls");
-                break;
+        scanf("%s", &choice);
+        if (isdigit(choice)) {
+            switch (choice) {
+                case '1':
+                    system("cls");
+                    break;
+                case '2':
+                    system("cls");
+                    break;
+                case '3':
+                    system("cls");
+                    break;
+                case '4':
+                    system("cls");
+                    break;
+                case '0':
+                    system("cls");
+                    Benke_Menu();
+                    break;
+                default:
+                    printf("输入错误，请重新输入\n");
+                    system("pause");
+                    system("cls");
+                    break;
+            }
+        } else {
+            printf("输入错误，请重新输入\n");
+            system("pause");
+            system("cls");
         }
     }
 }
@@ -363,52 +406,64 @@ void sortMenuPrint(){
 
 void Benke_sort_Menu(){
     while(1){
-        int choice;
+        char choice;
         printf("********************本科生成绩管理系统********************\n");
         sortMenuPrint();
-        scanf("%d", &choice);
-        switch (choice) {
-            case 1:
-                system("cls");
-                break;
-            case 2:
-                system("cls");
-                break;
-            case 0:
-                system("cls");
-                Benke_Menu();
-                break;
-            default:
-                printf("输入错误，请重新输入\n");
-                system("pause");
-                system("cls");
-                break;
+        scanf("%s", &choice);
+        if (isdigit(choice)) {
+            switch (choice) {
+                case '1':
+                    system("cls");
+                    break;
+                case '2':
+                    system("cls");
+                    break;
+                case '0':
+                    system("cls");
+                    Benke_Menu();
+                    break;
+                default:
+                    printf("输入错误，请重新输入\n");
+                    system("pause");
+                    system("cls");
+                    break;
+            }
+        } else {
+            printf("输入错误，请重新输入\n");
+            system("pause");
+            system("cls");
         }
     }
 }
 
 void Yanjiu_sort_Menu(){
     while(1){
-        int choice;
+        char choice;
         printf("********************研究生成绩管理系统********************\n");
         sortMenuPrint();
-        scanf("%d", &choice);
-        switch (choice) {
-            case 1:
-                system("cls");
-                break;
-            case 2:
-                system("cls");
-                break;
-            case 0:
-                system("cls");
-                Benke_Menu();
-                break;
-            default:
-                printf("输入错误，请重新输入\n");
-                system("pause");
-                system("cls");
-                break;
+        scanf("%s", &choice);
+        if (isdigit(choice)) {
+            switch (choice) {
+                case '1':
+                    system("cls");
+                    break;
+                case '2':
+                    system("cls");
+                    break;
+                case '0':
+                    system("cls");
+                    Benke_Menu();
+                    break;
+                default:
+                    printf("输入错误，请重新输入\n");
+                    system("pause");
+                    system("cls");
+                    break;
+            }
+        } else {
+            printf("输入错误，请重新输入\n");
+            system("pause");
+            system("cls");
         }
     }
 }
@@ -422,52 +477,64 @@ void statisticsMenuPrint(){
 
 void Benke_statistic_Menu(){
     while(1){
-        int choice;
+        char choice;
         printf("********************本科生成绩管理系统********************\n");
         statisticsMenuPrint();
         scanf("%d", &choice);
-        switch (choice) {
-            case 1:
-                system("cls");
-                break;
-            case 2:
-                system("cls");
-                break;
-            case 0:
-                system("cls");
-                Benke_Menu();
-                break;
-            default:
-                printf("输入错误，请重新输入\n");
-                system("pause");
-                system("cls");
-                break;
+        if (isdigit(choice)) {
+            switch (choice) {
+                case '1':
+                    system("cls");
+                    break;
+                case '2':
+                    system("cls");
+                    break;
+                case '0':
+                    system("cls");
+                    Benke_Menu();
+                    break;
+                default:
+                    printf("输入错误，请重新输入\n");
+                    system("pause");
+                    system("cls");
+                    break;
+            }
+        } else {
+            printf("输入错误，请重新输入\n");
+            system("pause");
+            system("cls");
         }
     }
 }
 
 void Yanjiu_statistic_Menu(){
     while(1){
-        int choice;
+        char choice;
         printf("********************研究生成绩管理系统********************\n");
         statisticsMenuPrint();
-        scanf("%d", &choice);
-        switch (choice) {
-            case 1:
-                system("cls");
-                break;
-            case 2:
-                system("cls");
-                break;
-            case 0:
-                system("cls");
-                Benke_Menu();
-                break;
-            default:
-                printf("输入错误，请重新输入\n");
-                system("pause");
-                system("cls");
-                break;
+        scanf("%s", &choice);
+        if (isdigit(choice)) {
+            switch (choice) {
+                case '1':
+                    system("cls");
+                    break;
+                case '2':
+                    system("cls");
+                    break;
+                case '0':
+                    system("cls");
+                    Benke_Menu();
+                    break;
+                default:
+                    printf("输入错误，请重新输入\n");
+                    system("pause");
+                    system("cls");
+                    break;
+            }
+        } else {
+            printf("输入错误，请重新输入\n");
+            system("pause");
+            system("cls");
         }
     }
 }
@@ -483,64 +550,78 @@ void searchMenuPrint(){
 
 void Benke_search_Menu(){
     while(1){
-        int choice;
+        char choice;
         printf("********************本科生成绩管理系统********************\n");
         searchMenuPrint();
-        scanf("%d", &choice);
-        switch (choice) {
-            case 1:
-                system("cls");
-                break;
-            case 2:
-                system("cls");
-                break;
-            case 3:
-                system("cls");
-                break;
-            case 4:
-                system("cls");
-                break;
-            case 0:
-                system("cls");
-                Benke_Menu();
-                break;
-            default:
-                printf("输入错误，请重新输入\n");
-                system("pause");
-                system("cls");
-                break;
+        scanf("%s", &choice);
+        if (isdigit(choice)) {
+            switch (choice) {
+                case '1':
+                    system("cls");
+                    getPage_1();
+                    break;
+                case '2':
+                    system("cls");
+                    break;
+                case '3':
+                    system("cls");
+                    break;
+                case '4':
+                    system("cls");
+                    break;
+                case '0':
+                    system("cls");
+                    Benke_Menu();
+                    break;
+                default:
+                    printf("输入错误，请重新输入\n");
+                    system("pause");
+                    system("cls");
+                    break;
+            }
+        } else {
+            printf("输入错误，请重新输入\n");
+            system("pause");
+            system("cls");
         }
     }
 }
 
 void Yanjiu_search_Menu(){
     while(1){
-        int choice;
+        char choice;
         printf("********************研究生成绩管理系统********************\n");
         searchMenuPrint();
-        scanf("%d", &choice);
-        switch (choice) {
-            case 1:
-                system("cls");
-                break;
-            case 2:
-                system("cls");
-                break;
-            case 3:
-                system("cls");
-                break;
-            case 4:
-                system("cls");
-                break;
-            case 0:
-                system("cls");
-                Benke_Menu();
-                break;
-            default:
-                printf("输入错误，请重新输入\n");
-                system("pause");
-                system("cls");
-                break;
+        scanf("%s", &choice);
+        if (isdigit(choice)) {
+            switch (choice) {
+                case '1':
+                    system("cls");
+                    getPage_2();
+                    break;
+                case '2':
+                    system("cls");
+                    break;
+                case '3':
+                    system("cls");
+                    break;
+                case '4':
+                    system("cls");
+                    break;
+                case '0':
+                    system("cls");
+                    Benke_Menu();
+                    break;
+                default:
+                    printf("输入错误，请重新输入\n");
+                    system("pause");
+                    system("cls");
+                    break;
+            }
+        } else {
+            printf("输入错误，请重新输入\n");
+            system("pause");
+            system("cls");
         }
     }
 }
