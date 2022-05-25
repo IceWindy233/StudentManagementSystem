@@ -14,81 +14,83 @@
 #endif
 #include "Base.h"
 #include <conio.h>
-//-------å…¨å±€å˜é‡å®šä¹‰
+//-------È«¾Ö±äÁ¿¶¨Òå
 
-UND* Head1={NULL};   //æœ¬ç§‘ç”Ÿé“¾è¡¨å¤´æŒ‡é’ˆ(ä¸è¦ä¿®æ”¹,ä»¥ UND* Head_1=Head1 çš„å½¢å¼è°ƒç”¨)
-GRA* Head2={NULL};   //ç ”ç©¶ç”Ÿé“¾è¡¨å¤´æŒ‡é’ˆ(ä¸è¦ä¿®æ”¹,ä»¥ UND* Head_2=Head2 çš„å½¢å¼è°ƒç”¨)
-FILE* fp1=NULL;   //æœ¬ç§‘ç”Ÿæ–‡ä»¶æŒ‡é’ˆ(å‡½æ•°ç»“å°¾å»ºè®®rewind(fp1),ä½¿fp1å›žåˆ°æ–‡ä»¶å¼€å¤´)
-FILE* fp2=NULL;   //ç ”ç©¶ç”Ÿæ–‡ä»¶æŒ‡é’ˆ(å‡½æ•°ç»“å°¾å»ºè®®rewind(fp2),ä½¿fp2å›žåˆ°æ–‡ä»¶å¼€å¤´)
+UND* Head1={NULL};   //±¾¿ÆÉúÁ´±íÍ·Ö¸Õë(²»ÒªÐÞ¸Ä,ÒÔ UND* Head_1=Head1 µÄÐÎÊ½µ÷ÓÃ)
+GRA* Head2={NULL};   //ÑÐ¾¿ÉúÁ´±íÍ·Ö¸Õë(²»ÒªÐÞ¸Ä,ÒÔ UND* Head_2=Head2 µÄÐÎÊ½µ÷ÓÃ)
+FILE* fp1=NULL;   //±¾¿ÆÉúÎÄ¼þÖ¸Õë(º¯Êý½áÎ²½¨Òérewind(fp1),Ê¹fp1»Øµ½ÎÄ¼þ¿ªÍ·)
+FILE* fp2=NULL;   //ÑÐ¾¿ÉúÎÄ¼þÖ¸Õë(º¯Êý½áÎ²½¨Òérewind(fp2),Ê¹fp2»Øµ½ÎÄ¼þ¿ªÍ·)
 
 //-------
 
 
-//-------å‡½æ•°å£°æ˜Žå’Œå‡½æ•°åŠŸèƒ½è¯´æ˜Ž
+//-------º¯ÊýÉùÃ÷ºÍº¯Êý¹¦ÄÜËµÃ÷
 
-void readFromFile();   //ç¨‹åºå¼€å§‹åŠ è½½æ–‡ä»¶ä¸­çš„å…¨éƒ¨å­¦ç”Ÿæ•°æ®åˆ°å­¦ç”Ÿé“¾è¡¨(åˆ†ä¸¤ç±»å­¦ç”Ÿåˆ°ä¸¤ä¸ªé“¾è¡¨),---æ”¾ç¨‹åºå¼€å§‹åŽä¸€è¡Œ(æ”¾åœ¨å®šä¹‰å˜é‡å‰)---
-void sayeToFile();   //ç¨‹åºç»“æŸå°†å­¦ç”Ÿé“¾è¡¨ä¸­çš„å…¨éƒ¨å­¦ç”Ÿæ•°æ®ä¿å­˜åˆ°æ–‡ä»¶å¹¶é€€å‡ºå‡½æ•°,---æ”¾é€€å‡ºç¨‹åºå‰ä¸€è¡Œ---
-void ReturnsModifications();   //æ˜¾ç¤ºä¿®æ”¹åŽçš„å­¦ç”Ÿé“¾è¡¨
-void fileContent();   //æ˜¾ç¤ºæ–‡ä»¶å†…å®¹,å¹¶ä½¿æ–‡ä»¶æŒ‡é’ˆè¿”å›žå¼€å¤´
-UND* scanf_1();   //ä»Žé”®ç›˜èŽ·å–ä¸€ä¸ªæœ¬ç§‘ç”Ÿæ•°æ®åŽ,è¿”å›žèŠ‚ç‚¹åœ°å€(è‡ªå¸¦åˆå§‹åŒ–)
-GRA* scanf_2();   //ä»Žé”®ç›˜èŽ·å–ä¸€ä¸ªç ”ç©¶ç”Ÿæ•°æ®åŽ,è¿”å›žèŠ‚ç‚¹åœ°å€(è‡ªå¸¦åˆå§‹åŒ–)
-void gradesCompute_1(UND* stu);   //è®¡ç®—ä¸€ä¸ªæœ¬ç§‘ç”Ÿæ€»æˆç»©
-void gradesCompute_2(GRA* stu);   //è®¡ç®—ä¸€ä¸ªç ”ç©¶ç”Ÿæ€»æˆç»©
-void addNode_1(UND* stu);   //å°†ä¸€ä¸ªæœ¬ç§‘ç”ŸèŠ‚ç‚¹æ·»åŠ åˆ°é“¾è¡¨å°¾,ä¸”è‡ªåŠ¨è®¡ç®—å­¦å·,(å®žå‚: å­¦ç”ŸèŠ‚ç‚¹æŒ‡é’ˆ)
-void addNode_2(GRA* stu);   //å°†ä¸€ä¸ªç ”ç©¶ç”ŸèŠ‚ç‚¹æ·»åŠ åˆ°é“¾è¡¨å°¾,ä¸”è‡ªåŠ¨è®¡ç®—å­¦å·,(å®žå‚: å­¦ç”ŸèŠ‚ç‚¹æŒ‡é’ˆ)
-void exchangeData_1(UND* stu_1,UND* stu_2);   //äº¤æ¢ä¸¤åæœ¬ç§‘ç”Ÿ,(å®žå‚: éœ€äº¤æ¢çš„ä¸¤ä¸ªå­¦ç”ŸèŠ‚ç‚¹)
-void exchangeData_2(GRA* stu_1,GRA* stu_2);   //äº¤æ¢ä¸¤åç ”ç©¶ç”Ÿ,(å®žå‚: éœ€äº¤æ¢çš„ä¸¤ä¸ªå­¦ç”ŸèŠ‚ç‚¹)
-int  numberPeople_1(UND* Head_1);   //è®¡ç®—æœ¬ç§‘ç”Ÿäººæ•°,(å®žå‚: æœ¬ç§‘ç”Ÿé“¾è¡¨å¤´æŒ‡é’ˆ)
-int  numberPeople_2(GRA* Head_2);   //è®¡ç®—ç ”ç©¶ç”Ÿäººæ•°,(å®žå‚: ç ”ç©¶ç”Ÿé“¾è¡¨å¤´æŒ‡é’ˆ)
-void displayData_1(UND stu);   //æ˜¾ç¤ºæœ¬ç§‘ç”Ÿæ•°æ®,(å®žå‚: å­¦ç”ŸèŠ‚ç‚¹)
-void displayData_2(GRA stu);   //æ˜¾ç¤ºç ”ç©¶ç”Ÿæ•°æ®,(å®žå‚: å­¦ç”ŸèŠ‚ç‚¹)
-void searchstu(char* num_Name);   //é€šè¿‡åå­—æˆ–å­¦å·æŸ¥è¯¢,(æŸ¥æ‰¾åˆ°åŽè¾“å‡º)æŸä½å­¦ç”Ÿçš„ä¿¡æ¯,(å®žå‚: å§“åå­—ç¬¦ä¸²çš„é¦–åœ°å€)
-void modifyStudent();   //æ ¹æ®å­¦å·ä¿®æ”¹ä¸€ä½å­¦ç”Ÿçš„åŸºæœ¬èµ„æ–™æ•°æ®,(é€‰é¡¹å†…ç½®èœå•)
-void modifyScore();   //æ ¹æ®å­¦å·ä¿®æ”¹ä¸€ä½å­¦ç”Ÿçš„åŸºæœ¬æˆç»©æ•°æ®,(é€‰é¡¹å†…ç½®èœå•)
-void deleteStudentByild(int num1);   //æ ¹æ®å­¦å·åˆ é™¤ä¸€ä½å­¦ç”Ÿçš„åŸºæœ¬æˆç»©æ•°æ®
-void getstu_1(UND* Head);   //æ˜¾ç¤ºä»¥Headä¸ºå¤´æŒ‡é’ˆçš„é“¾è¡¨çš„å…¨éƒ¨æœ¬ç§‘ç”Ÿ
-void getstu_2(GRA* Head);   //æ˜¾ç¤ºä»¥Headä¸ºå¤´æŒ‡é’ˆçš„é“¾è¡¨çš„å…¨éƒ¨ç ”ç©¶ç”Ÿ
-void printften_1(int i);   //æ˜¾ç¤ºç¬¬ié¡µçš„æœ¬ç§‘ç”Ÿ,(å®žå‚: é¡µæ•°)
-void printften_2(int i);   //æ˜¾ç¤ºç¬¬ié¡µçš„ç ”ç©¶ç”Ÿ,(å®žå‚: é¡µæ•°)
-void getPage_1();   //å¯åˆ†é¡µæ˜¾ç¤ºæœ¬ç§‘ç”Ÿ,(å†…ç½®èœå•)
-void getPage_2();   //å¯åˆ†é¡µæ˜¾ç¤ºç ”ç©¶ç”Ÿ,(å†…ç½®èœå•)
-void searchByClass_1(char* banji);   //æŒ‰ç­çº§æ˜¾ç¤ºæœ¬ç§‘ç”Ÿæ•°æ®
-void searchByClass_2(int class);   //æŒ‰ç­çº§æ˜¾ç¤ºç ”ç©¶ç”Ÿæ•°æ®
-void searchByName(char* name);   //æŒ‰åå­—æ˜¾ç¤ºæœ¬ç§‘ç”Ÿå’Œç ”ç©¶ç”Ÿæ•°æ®
-void searnraiidyClassCourse_1(char* banji,int course);   //æŒ‰ç­çº§å’Œè¯¾ç¨‹æŸ¥è¯¢ä¸åŠæ ¼æœ¬ç§‘ç”Ÿ,(course:è¯¾ç¨‹å·ä»Žé›¶å¼€å§‹)
-void searnraiidyClassCourse_2(int class,int course);   //æŒ‰ç­çº§å’Œè¯¾ç¨‹æŸ¥è¯¢ä¸åŠæ ¼ç ”ç©¶ç”Ÿ,(course:è¯¾ç¨‹å·ä»Žé›¶å¼€å§‹)
-void sortAllByld_1();   //æŒ‰å­¦å·idä»Žå°åˆ°å¤§æŽ’åºæœ¬ç§‘ç”Ÿ,å°†è¢«åˆ é™¤å­¦ç”Ÿæ”¾åˆ°æœ€å‰é¢
-void sortAllByld_2();   //æŒ‰å­¦å·idä»Žå°åˆ°å¤§æŽ’åºç ”ç©¶ç”Ÿ,å°†è¢«åˆ é™¤å­¦ç”Ÿæ”¾åˆ°æœ€å‰é¢
-void SwapNodes_1(UND* stu1,UND* stu2);   //äº¤æ¢æœ¬ç§‘ç”ŸèŠ‚ç‚¹
-void SwapNodes_2(GRA* stu1,GRA* stu2);   //äº¤æ¢ç ”ç©¶ç”ŸèŠ‚ç‚¹
-void sortAll_1();   //æŒ‰æ€»æˆç»©ä»Žé«˜åˆ°ä½ŽæŽ’åºæœ¬ç§‘ç”Ÿ
-void sortAll_2();   //æŒ‰æ€»æˆç»©ä»Žé«˜åˆ°ä½ŽæŽ’åºç ”ç©¶ç”Ÿ
-void sortAllAndShow_1();   //æŒ‰æ€»æˆç»©ä»Žé«˜åˆ°ä½ŽæŽ’åºæœ¬ç§‘ç”Ÿ,å¹¶æ˜¾ç¤º
-void sortAllAndShow_2();   //æŒ‰æ€»æˆç»©ä»Žé«˜åˆ°ä½ŽæŽ’åºç ”ç©¶ç”Ÿ,å¹¶æ˜¾ç¤º
-UND* returnsClassHead_1(char *banji);   //è¿”å›žåŒç­çº§æœ¬ç§‘ç”Ÿé“¾è¡¨å¤´
-GRA* returnsClassHead_2(int class);   //è¿”å›žåŒç­çº§ç ”ç©¶ç”Ÿé“¾è¡¨å¤´
-void sortAllByClass_1(char *banji);   //å°†æŸç­æœ¬ç§‘ç”Ÿæ•°æ®æŒ‰æ€»æˆç»©ä»Žé«˜åˆ°ä½ŽæŽ’åºå¹¶æ˜¾ç¤º
-void sortAllByClass_2(int class);   //å°†æŸç­ç ”ç©¶ç”Ÿæ•°æ®æŒ‰æ€»æˆç»©ä»Žé«˜åˆ°ä½ŽæŽ’åºå¹¶æ˜¾ç¤º
+void readFromFile();   //³ÌÐò¿ªÊ¼¼ÓÔØÎÄ¼þÖÐµÄÈ«²¿Ñ§ÉúÊý¾Ýµ½Ñ§ÉúÁ´±í(·ÖÁ½ÀàÑ§Éúµ½Á½¸öÁ´±í),---·Å³ÌÐò¿ªÊ¼ºóÒ»ÐÐ(·ÅÔÚ¶¨Òå±äÁ¿Ç°)---
+void sayeToFile();   //³ÌÐò½áÊø½«Ñ§ÉúÁ´±íÖÐµÄÈ«²¿Ñ§ÉúÊý¾Ý±£´æµ½ÎÄ¼þ²¢ÍË³öº¯Êý,---·ÅÍË³ö³ÌÐòÇ°Ò»ÐÐ---
+void ReturnsModifications();   //ÏÔÊ¾ÐÞ¸ÄºóµÄÑ§ÉúÁ´±í
+void fileContent();   //ÏÔÊ¾ÎÄ¼þÄÚÈÝ,²¢Ê¹ÎÄ¼þÖ¸Õë·µ»Ø¿ªÍ·
+UND* scanf_1();   //´Ó¼üÅÌ»ñÈ¡Ò»¸ö±¾¿ÆÉúÊý¾Ýºó,·µ»Ø½ÚµãµØÖ·(×Ô´ø³õÊ¼»¯)
+GRA* scanf_2();   //´Ó¼üÅÌ»ñÈ¡Ò»¸öÑÐ¾¿ÉúÊý¾Ýºó,·µ»Ø½ÚµãµØÖ·(×Ô´ø³õÊ¼»¯)
+void gradesCompute_1(UND* stu);   //¼ÆËãÒ»¸ö±¾¿ÆÉú×Ü³É¼¨
+void gradesCompute_2(GRA* stu);   //¼ÆËãÒ»¸öÑÐ¾¿Éú×Ü³É¼¨
+void addNode_1(UND* stu);   //½«Ò»¸ö±¾¿ÆÉú½ÚµãÌí¼Óµ½Á´±íÎ²,ÇÒ×Ô¶¯¼ÆËãÑ§ºÅ,(Êµ²Î: Ñ§Éú½ÚµãÖ¸Õë)
+void addNode_2(GRA* stu);   //½«Ò»¸öÑÐ¾¿Éú½ÚµãÌí¼Óµ½Á´±íÎ²,ÇÒ×Ô¶¯¼ÆËãÑ§ºÅ,(Êµ²Î: Ñ§Éú½ÚµãÖ¸Õë)
+void exchangeData_1(UND* stu_1,UND* stu_2);   //½»»»Á½Ãû±¾¿ÆÉú,(Êµ²Î: Ðè½»»»µÄÁ½¸öÑ§Éú½Úµã)
+void exchangeData_2(GRA* stu_1,GRA* stu_2);   //½»»»Á½ÃûÑÐ¾¿Éú,(Êµ²Î: Ðè½»»»µÄÁ½¸öÑ§Éú½Úµã)
+int  numberPeople_1(UND* Head_1);   //¼ÆËã±¾¿ÆÉúÈËÊý,(Êµ²Î: ±¾¿ÆÉúÁ´±íÍ·Ö¸Õë)
+int  numberPeople_2(GRA* Head_2);   //¼ÆËãÑÐ¾¿ÉúÈËÊý,(Êµ²Î: ÑÐ¾¿ÉúÁ´±íÍ·Ö¸Õë)
+void displayData_1(UND stu);   //ÏÔÊ¾±¾¿ÆÉúÊý¾Ý,(Êµ²Î: Ñ§Éú½Úµã)
+void displayData_2(GRA stu);   //ÏÔÊ¾ÑÐ¾¿ÉúÊý¾Ý,(Êµ²Î: Ñ§Éú½Úµã)
+void searchstu(char* num_Name);   //Í¨¹ýÃû×Ö»òÑ§ºÅ²éÑ¯,(²éÕÒµ½ºóÊä³ö)Ä³Î»Ñ§ÉúµÄÐÅÏ¢,(Êµ²Î: ÐÕÃû×Ö·û´®µÄÊ×µØÖ·)
+void modifyStudent();   //¸ù¾ÝÑ§ºÅÐÞ¸ÄÒ»Î»Ñ§ÉúµÄ»ù±¾×ÊÁÏÊý¾Ý,(Ñ¡ÏîÄÚÖÃ²Ëµ¥)
+void modifyScore();   //¸ù¾ÝÑ§ºÅÐÞ¸ÄÒ»Î»Ñ§ÉúµÄ»ù±¾³É¼¨Êý¾Ý,(Ñ¡ÏîÄÚÖÃ²Ëµ¥)
+void deleteStudentByild(int num1);   //¸ù¾ÝÑ§ºÅÉ¾³ýÒ»Î»Ñ§ÉúµÄ»ù±¾³É¼¨Êý¾Ý
+void getstu_1(UND* Head);   //ÏÔÊ¾ÒÔHeadÎªÍ·Ö¸ÕëµÄÁ´±íµÄÈ«²¿±¾¿ÆÉú
+void getstu_2(GRA* Head);   //ÏÔÊ¾ÒÔHeadÎªÍ·Ö¸ÕëµÄÁ´±íµÄÈ«²¿ÑÐ¾¿Éú
+void printften_1(int i);   //ÏÔÊ¾µÚiÒ³µÄ±¾¿ÆÉú,(Êµ²Î: Ò³Êý)
+void printften_2(int i);   //ÏÔÊ¾µÚiÒ³µÄÑÐ¾¿Éú,(Êµ²Î: Ò³Êý)
+void getPage_1();   //¿É·ÖÒ³ÏÔÊ¾±¾¿ÆÉú,(ÄÚÖÃ²Ëµ¥)
+void getPage_2();   //¿É·ÖÒ³ÏÔÊ¾ÑÐ¾¿Éú,(ÄÚÖÃ²Ëµ¥)
+void infoPrint_1();
+void infoPrint_2();
+void searchByClass_1(char* banji);   //°´°à¼¶ÏÔÊ¾±¾¿ÆÉúÊý¾Ý
+void searchByClass_2(int class);   //°´°à¼¶ÏÔÊ¾ÑÐ¾¿ÉúÊý¾Ý
+void searchByName(char* name);   //°´Ãû×ÖÏÔÊ¾±¾¿ÆÉúºÍÑÐ¾¿ÉúÊý¾Ý
+void searnraiidyClassCourse_1(char* banji,int course);   //°´°à¼¶ºÍ¿Î³Ì²éÑ¯²»¼°¸ñ±¾¿ÆÉú,(course:¿Î³ÌºÅ´ÓÁã¿ªÊ¼)
+void searnraiidyClassCourse_2(int class,int course);   //°´°à¼¶ºÍ¿Î³Ì²éÑ¯²»¼°¸ñÑÐ¾¿Éú,(course:¿Î³ÌºÅ´ÓÁã¿ªÊ¼)
+void sortAllByld_1();   //°´Ñ§ºÅid´ÓÐ¡µ½´óÅÅÐò±¾¿ÆÉú,½«±»É¾³ýÑ§Éú·Åµ½×îÇ°Ãæ
+void sortAllByld_2();   //°´Ñ§ºÅid´ÓÐ¡µ½´óÅÅÐòÑÐ¾¿Éú,½«±»É¾³ýÑ§Éú·Åµ½×îÇ°Ãæ
+void SwapNodes_1(UND* stu1,UND* stu2);   //½»»»±¾¿ÆÉú½Úµã
+void SwapNodes_2(GRA* stu1,GRA* stu2);   //½»»»ÑÐ¾¿Éú½Úµã
+void sortAll_1();   //°´×Ü³É¼¨´Ó¸ßµ½µÍÅÅÐò±¾¿ÆÉú
+void sortAll_2();   //°´×Ü³É¼¨´Ó¸ßµ½µÍÅÅÐòÑÐ¾¿Éú
+void sortAllAndShow_1();   //°´×Ü³É¼¨´Ó¸ßµ½µÍÅÅÐò±¾¿ÆÉú,²¢ÏÔÊ¾
+void sortAllAndShow_2();   //°´×Ü³É¼¨´Ó¸ßµ½µÍÅÅÐòÑÐ¾¿Éú,²¢ÏÔÊ¾
+UND* returnsClassHead_1(char *banji);   //·µ»ØÍ¬°à¼¶±¾¿ÆÉúÁ´±íÍ·
+GRA* returnsClassHead_2(int class);   //·µ»ØÍ¬°à¼¶ÑÐ¾¿ÉúÁ´±íÍ·
+void sortAllByClass_1(char *banji);   //½«Ä³°à±¾¿ÆÉúÊý¾Ý°´×Ü³É¼¨´Ó¸ßµ½µÍÅÅÐò²¢ÏÔÊ¾
+void sortAllByClass_2(int class);   //½«Ä³°àÑÐ¾¿ÉúÊý¾Ý°´×Ü³É¼¨´Ó¸ßµ½µÍÅÅÐò²¢ÏÔÊ¾
 //-------
 
 
-//-------å‡½æ•°å®šä¹‰
+//-------º¯Êý¶¨Òå
 
 void readFromFile(){
     Head1=(UND*)malloc(sizeof(UND));
     Head2=(GRA*)malloc(sizeof(GRA));
     Head1->num=0;
     Head2->num=0;
-    UND*Head_1=Head1;   //Head_1å’ŒHead_2æš‚å­˜å¤´æŒ‡é’ˆ,é˜²æ­¢å¤´æŒ‡é’ˆä¸¢å¤±
+    UND*Head_1=Head1;   //Head_1ºÍHead_2ÔÝ´æÍ·Ö¸Õë,·ÀÖ¹Í·Ö¸Õë¶ªÊ§
     GRA*Head_2=Head2;
-    UND* graduate1=(UND*)malloc(sizeof(UND));   //graduate1å’Œgraduate2æš‚å­˜å­¦ç”Ÿæ•°æ®
+    UND* graduate1=(UND*)malloc(sizeof(UND));   //graduate1ºÍgraduate2ÔÝ´æÑ§ÉúÊý¾Ý
     GRA* graduate2=(GRA*)malloc(sizeof(GRA));
     if((fp1=fopen("undergraduate.dat","rb+"))==NULL){
-        printf("æ–‡ä»¶æ‰“å¼€å¤±è´¥!");
+        printf("ÎÄ¼þ´ò¿ªÊ§°Ü!");
         exit(1);
     }
     if((fp2=fopen("graduate.dat","rb+"))==NULL){
-        printf("æ–‡ä»¶æ‰“å¼€å¤±è´¥!");
+        printf("ÎÄ¼þ´ò¿ªÊ§°Ü!");
         exit(1);
     }
     if(fread(graduate1,sizeof(UND),1,fp1)){
@@ -111,9 +113,9 @@ void readFromFile(){
 
 
 void sayeToFile(){
-    rewind(fp1);    //ä½¿fp1å’Œfp2å›žåˆ°æ–‡ä»¶å¼€å¤´
+    rewind(fp1);    //Ê¹fp1ºÍfp2»Øµ½ÎÄ¼þ¿ªÍ·
     rewind(fp2);
-    UND*Head_1=Head1;   //Head_1å’ŒHead_2æš‚å­˜å¤´æŒ‡é’ˆ,é˜²æ­¢å¤´æŒ‡é’ˆä¸¢å¤±
+    UND*Head_1=Head1;   //Head_1ºÍHead_2ÔÝ´æÍ·Ö¸Õë,·ÀÖ¹Í·Ö¸Õë¶ªÊ§
     GRA*Head_2=Head2;
     UND ustu;
     GRA stu;
@@ -132,16 +134,16 @@ void sayeToFile(){
 
 
 void ReturnsModifications(){
-    UND*Head_1=Head1;   //Head_1å’ŒHead_2æš‚å­˜å¤´æŒ‡é’ˆ,é˜²æ­¢å¤´æŒ‡é’ˆä¸¢å¤±
+    UND*Head_1=Head1;   //Head_1ºÍHead_2ÔÝ´æÍ·Ö¸Õë,·ÀÖ¹Í·Ö¸Õë¶ªÊ§
     GRA*Head_2=Head2;
-    printf("ç»æœ¬æ¬¡ä¿®æ”¹åŽundergraduateé“¾è¡¨å†…å®¹ä¸º:\n");
+    printf("¾­±¾´ÎÐÞ¸ÄºóundergraduateÁ´±íÄÚÈÝÎª:\n");
     while(Head_1->next!=NULL){
         if(Head_1->next->num!=-1){
             displayData_1(*Head_1->next);
             Head_1=Head_1->next;
         }
     }
-    printf("ç»æœ¬æ¬¡ä¿®æ”¹åŽgraduateé“¾è¡¨å†…å®¹ä¸º:\n");
+    printf("¾­±¾´ÎÐÞ¸ÄºógraduateÁ´±íÄÚÈÝÎª:\n");
     while(Head_2->next!=NULL){
         if(Head_2->next->num!=-1){
             displayData_2(*Head_2->next);
@@ -152,11 +154,11 @@ void ReturnsModifications(){
 
 
 void fileContent(){
-    rewind(fp1);    //ä½¿fp1å’Œfp2å›žåˆ°æ–‡ä»¶å¼€å¤´
+    rewind(fp1);    //Ê¹fp1ºÍfp2»Øµ½ÎÄ¼þ¿ªÍ·
     rewind(fp2);
     UND ustu;
     GRA stu;
-    printf("undergraduate.datå†…å®¹ä¸º:\n");
+    printf("undergraduate.datÄÚÈÝÎª:\n");
     printf("--------------------------------------------------\n");
     fread(&ustu, sizeof(ustu), 1, fp1);
     while (!feof(fp1))
@@ -165,7 +167,7 @@ void fileContent(){
         printf("--------------------------------------------------\n");
         fread(&ustu, sizeof(UND), 1, fp1);
     }
-    printf("graduate.datå†…å®¹ä¸º:\n");
+    printf("graduate.datÄÚÈÝÎª:\n");
     printf("--------------------------------------------------\n");
     fread(&stu, sizeof(GRA), 1, fp2);
     while (!feof(fp2))
@@ -174,7 +176,7 @@ void fileContent(){
         printf("--------------------------------------------------\n");
         fread(&stu, sizeof(GRA), 1, fp2);
     }
-    rewind(fp1);    //ä½¿fp1å’Œfp2å›žåˆ°æ–‡ä»¶å¼€å¤´
+    rewind(fp1);    //Ê¹fp1ºÍfp2»Øµ½ÎÄ¼þ¿ªÍ·
     rewind(fp2);
 }
 
@@ -183,7 +185,7 @@ UND* scanf_1(){
     UND*stu;
     int i;
     if ((stu= (UND *)malloc(sizeof(UND))) == NULL) {
-        printf("ä¸èƒ½æˆåŠŸåˆ†é…å‚¨å­˜å—!\n");
+        printf("²»ÄÜ³É¹¦·ÖÅä´¢´æ¿é!\n");
         exit(0);
     }
     stu->num=0;
@@ -199,7 +201,7 @@ GRA* scanf_2(){
     GRA*stu;
     int i;
     if ((stu= (GRA *)malloc(sizeof(GRA))) == NULL) {
-        printf("ä¸èƒ½æˆåŠŸåˆ†é…å‚¨å­˜å—!\n");
+        printf("²»ÄÜ³É¹¦·ÖÅä´¢´æ¿é!\n");
         exit(0);
     }
     stu->num=0;
@@ -224,7 +226,7 @@ void gradesCompute_2(GRA * stu){
 
 
 void addNode_1(UND* stu){
-    UND*Head_1=Head1;   //Head_1æš‚å­˜å¤´æŒ‡é’ˆ,é˜²æ­¢å¤´æŒ‡é’ˆä¸¢å¤±
+    UND*Head_1=Head1;   //Head_1ÔÝ´æÍ·Ö¸Õë,·ÀÖ¹Í·Ö¸Õë¶ªÊ§
     GRA*Head_2=Head2;
     int count=0;
     int num1=0;
@@ -263,7 +265,7 @@ void addNode_1(UND* stu){
 
 void addNode_2(GRA* stu){
     UND* Head_1=Head1;
-    GRA* Head_2=Head2;   //Head_2æš‚å­˜å¤´æŒ‡é’ˆ,é˜²æ­¢å¤´æŒ‡é’ˆä¸¢å¤±
+    GRA* Head_2=Head2;   //Head_2ÔÝ´æÍ·Ö¸Õë,·ÀÖ¹Í·Ö¸Õë¶ªÊ§
     int count=0;
     int num1=0;
     int num2=0;
@@ -344,12 +346,12 @@ void displayData_1(UND stu) {
     if(stu.num!=-1){
         switch (stu.sex) {
             case male:
-                printf("%-3d %-3s  ç”·   %-3s  %-3s  %-3d  %-3d  %-3d %-3d    %-3d    %-3d\n", stu.num, stu.name, stu.major,
+                printf("%-4d %-4s   ÄÐ  %-3s  %-3s  %-3d  %-4d  %-4d %-4d    %-3d    %-3d\n", stu.num, stu.name, stu.major,
                        stu.banji, stu.score[0],
                        stu.score[1], stu.score[2], stu.score[3], stu.score[4], stu.score[5]);
                 break;
             case female:
-                printf("%-3d %-3s  å¥³   %-3s  %-3s  %-3d  %-3d  %-3d %-3d    %-3d    %-3d\n", stu.num, stu.name, stu.major,
+                printf("%-4d %-4s   Å®  %-3s  %-3s  %-3d  %-4d  %-4d %-4d    %-3d    %-3d\n", stu.num, stu.name, stu.major,
                        stu.banji, stu.score[0],
                        stu.score[1], stu.score[2], stu.score[3], stu.score[4], stu.score[5]);
                 break;
@@ -361,12 +363,12 @@ void displayData_2(GRA stu) {
     if(stu.num!=-1) {
         switch (stu.sex) {
             case male:
-                printf("%-3d %-3s  ç”·   %-3s  %-3d  %-3s  %-3s  %-3d  %-3d  %-3d   %-3d   %-3d\n", stu.num, stu.name, stu.major,
+                printf("%-4d  %-4s  ÄÐ   %-3s  %-3d  %-12s  %-5s  %-7d  %-7d  %-4d   %-6d   %-3d\n", stu.num, stu.name, stu.major,
                        stu.Class,
                        stu.reserch, stu.tname, stu.score[0], stu.score[1], stu.score[2], stu.classrank, stu.allrank);
                 break;
             case female:
-                printf("%-3d %-3s  å¥³   %-3s  %-3d  %-3s  %-3s  %-3d  %-3d  %-3d   %-3d   %-3d\n", stu.num, stu.name, stu.major,
+                printf("%-4d  %-4s  Å®   %-3s  %-3d  %-12s  %-5s  %-7d  %-7d  %-4d   %-6d   %-3d\n", stu.num, stu.name, stu.major,
                        stu.Class,
                        stu.reserch, stu.tname, stu.score[0], stu.score[1], stu.score[2], stu.classrank, stu.allrank);
                 break;
@@ -381,14 +383,14 @@ void searchstu(char* num_Name){
     GRA* Head_2=Head2;
     int num1=0;
     int i,j,k=0,h=0;
-    if ('0' <= num_Name[0] && num_Name[0] <= '9'){    //åˆ¤æ–­num_Nameæ˜¯å¦æ˜¯å­¦å·
-        for(i=0;i<strlen(num_Name);i++){     //å¾—åˆ°intç±»åž‹çš„å­¦å·
+    if ('0' <= num_Name[0] && num_Name[0] <= '9'){    //ÅÐ¶Ïnum_NameÊÇ·ñÊÇÑ§ºÅ
+        for(i=0;i<strlen(num_Name);i++){     //µÃµ½intÀàÐÍµÄÑ§ºÅ
             j=num_Name[i]-'0';
             num1=10*num1+j;
         }
         while ( Head_1->next!= NULL){
             if (Head_1->next->num == num1){
-                printf("å·²æŸ¥æ‰¾åˆ°å­¦å·ä¸º%dçš„å­¦ç”Ÿä¿¡æ¯!\n", num1);
+                printf("ÒÑ²éÕÒµ½Ñ§ºÅÎª%dµÄÑ§ÉúÐÅÏ¢!\n", num1);
                 displayData_1(*Head_1->next);
                 k=1;
                 break;
@@ -398,7 +400,7 @@ void searchstu(char* num_Name){
         if(k==0){
             while ( Head_2->next!= NULL){
                 if (Head_2->next->num == num1){
-                    printf("å·²æŸ¥æ‰¾åˆ°å­¦å·ä¸º%dçš„å­¦ç”Ÿä¿¡æ¯!\n", num1);
+                    printf("ÒÑ²éÕÒµ½Ñ§ºÅÎª%dµÄÑ§ÉúÐÅÏ¢!\n", num1);
                     displayData_2(*Head_2->next);
                     k=1;
                     break;
@@ -410,7 +412,7 @@ void searchstu(char* num_Name){
     else{
         while (Head_1->next!= NULL){
             if (strcmp(num_Name, Head_1->next->name) == 0){
-                printf("å·²æŸ¥æ‰¾åˆ°å§“åä¸º%sçš„å­¦ç”Ÿä¿¡æ¯!\n", num_Name);
+                printf("ÒÑ²éÕÒµ½ÐÕÃûÎª%sµÄÑ§ÉúÐÅÏ¢!\n", num_Name);
                 displayData_1(*Head_1->next);
                 k=1;
                 h++;
@@ -419,7 +421,7 @@ void searchstu(char* num_Name){
         }
         while (Head_2->next!= NULL){
             if (strcmp(num_Name, Head_2->next->name) == 0){
-                printf("å·²æŸ¥æ‰¾åˆ°å§“åä¸º%sçš„å­¦ç”Ÿä¿¡æ¯!\n", num_Name);
+                printf("ÒÑ²éÕÒµ½ÐÕÃûÎª%sµÄÑ§ÉúÐÅÏ¢!\n", num_Name);
                 displayData_2(*Head_2->next);
                 k=1;
                 h++;
@@ -427,11 +429,11 @@ void searchstu(char* num_Name){
             Head_2=Head_2->next;
         }
         if(h>1){
-            printf("å…±æŸ¥æ‰¾åˆ°å§“åä¸º%sçš„å­¦ç”Ÿä¿¡æ¯%dç»„\n",num_Name,h);
+            printf("¹²²éÕÒµ½ÐÕÃûÎª%sµÄÑ§ÉúÐÅÏ¢%d×é\n",num_Name,h);
         }
     }
     if (k == 0){
-        printf("æŸ¥æ— æ­¤å­¦ç”Ÿ!\n");
+        printf("²éÎÞ´ËÑ§Éú!\n");
     }
 }
 
@@ -444,11 +446,11 @@ void modifyStudent(){
     int num1=0;
     int k=0;
     int i=0;
-    printf("è¯·è¾“å…¥éœ€ä¿®æ”¹å­¦ç”Ÿçš„å­¦å·:\n");
+    printf("ÇëÊäÈëÐèÐÞ¸ÄÑ§ÉúµÄÑ§ºÅ:\n");
     scanf("%d",&num1);
     while ( Head__1->next!= NULL){
         if (Head__1->next->num == num1){
-            printf("å·²æŸ¥æ‰¾åˆ°å­¦å·ä¸º%dçš„å­¦ç”Ÿä¿¡æ¯!\n", num1);
+            printf("ÒÑ²éÕÒµ½Ñ§ºÅÎª%dµÄÑ§ÉúÐÅÏ¢!\n", num1);
             displayData_1(*Head__1->next);
             k=1;
             break;
@@ -458,7 +460,7 @@ void modifyStudent(){
     if(k==0){
         while ( Head__2->next!= NULL){
             if (Head__2->next->num == num1){
-                printf("å·²æŸ¥æ‰¾åˆ°å­¦å·ä¸º%dçš„å­¦ç”Ÿä¿¡æ¯!\n", num1);
+                printf("ÒÑ²éÕÒµ½Ñ§ºÅÎª%dµÄÑ§ÉúÐÅÏ¢!\n", num1);
                 displayData_2(*Head__2->next);
                 k=1;
                 break;
@@ -468,23 +470,23 @@ void modifyStudent(){
     }
     while ( Head_1->next!= NULL){
         if (Head_1->next->num == num1){
-            printf("è¯·è¾“å…¥éœ€ä¿®æ”¹çš„æ•°æ®çš„ç¼–å·(-1-å§“å -2-æ€§åˆ« -3-ä¸“ä¸š -4-ç­çº§ -0-é€€å‡º):\n");
+            printf("ÇëÊäÈëÐèÐÞ¸ÄµÄÊý¾ÝµÄ±àºÅ(-1-ÐÕÃû -2-ÐÔ±ð -3-×¨Òµ -4-°à¼¶ -0-ÍË³ö):\n");
             scanf("%d",&i);
             switch(i){
                 case 1:
-                    printf("è¾“å…¥ä¿®æ”¹æ•°æ®(å§“å):\n");
+                    printf("ÊäÈëÐÞ¸ÄÊý¾Ý(ÐÕÃû):\n");
                     scanf("%s",Head_1->next->name);
                     break;
                 case 2:
-                    printf("è¾“å…¥ä¿®æ”¹æ•°æ®(æ€§åˆ« -0-ç”· -1-å¥³):\n");
+                    printf("ÊäÈëÐÞ¸ÄÊý¾Ý(ÐÔ±ð -0-ÄÐ -1-Å®):\n");
                     scanf("%u",&Head_1->next->sex);
                     break;
                 case 3:
-                    printf("è¾“å…¥ä¿®æ”¹æ•°æ®(ä¸“ä¸š):\n");
+                    printf("ÊäÈëÐÞ¸ÄÊý¾Ý(×¨Òµ):\n");
                     scanf("%s",Head_1->next->major);
                     break;
                 case 4:
-                    printf("è¾“å…¥ä¿®æ”¹æ•°æ®(ç­çº§ xxxç­):\n");
+                    printf("ÊäÈëÐÞ¸ÄÊý¾Ý(°à¼¶ xxx°à):\n");
                     scanf("%s",Head_1->next->banji);
                     break;
                 case 0:
@@ -499,31 +501,31 @@ void modifyStudent(){
     if(k==0){
         while ( Head_2->next!= NULL){
             if (Head_2->next->num == num1){
-                printf("è¯·è¾“å…¥éœ€ä¿®æ”¹çš„æ•°æ®çš„ç¼–å·(-1-å§“å -2-æ€§åˆ« -3-ä¸“ä¸š -4-ç­çº§ -5-ç ”ç©¶æ–¹å‘ -6-å¯¼å¸ˆåå­— -0-é€€å‡º):\n");
+                printf("ÇëÊäÈëÐèÐÞ¸ÄµÄÊý¾ÝµÄ±àºÅ(-1-ÐÕÃû -2-ÐÔ±ð -3-×¨Òµ -4-°à¼¶ -5-ÑÐ¾¿·½Ïò -6-µ¼Ê¦Ãû×Ö -0-ÍË³ö):\n");
                 scanf("%d",&i);
                 switch(i) {
                     case 1:
-                        printf("è¾“å…¥ä¿®æ”¹æ•°æ®(å§“å):\n");
+                        printf("ÊäÈëÐÞ¸ÄÊý¾Ý(ÐÕÃû):\n");
                         scanf("%s",Head_2->next->name);
                         break;
                     case 2:
-                        printf("è¾“å…¥ä¿®æ”¹æ•°æ®(æ€§åˆ« -0-ç”· -1-å¥³):\n");
+                        printf("ÊäÈëÐÞ¸ÄÊý¾Ý(ÐÔ±ð -0-ÄÐ -1-Å®):\n");
                         scanf("%u",&Head_2->next->sex);
                         break;
                     case 3:
-                        printf("è¾“å…¥ä¿®æ”¹æ•°æ®(ä¸“ä¸š):\n");
+                        printf("ÊäÈëÐÞ¸ÄÊý¾Ý(×¨Òµ):\n");
                         scanf("%s",Head_2->next->major);
                         break;
                     case 4:
-                        printf("è¾“å…¥ä¿®æ”¹æ•°æ®(ç­çº§ ä¸ºçº¯æ•°å­—):\n");
+                        printf("ÊäÈëÐÞ¸ÄÊý¾Ý(°à¼¶ Îª´¿Êý×Ö):\n");
                         scanf("%d",&Head_2->next->Class);
                         break;
                     case 5:
-                        printf("è¾“å…¥ä¿®æ”¹æ•°æ®(ç ”ç©¶æ–¹å‘):\n");
+                        printf("ÊäÈëÐÞ¸ÄÊý¾Ý(ÑÐ¾¿·½Ïò):\n");
                         scanf("%s",Head_2->next->reserch);
                         break;
                     case 6:
-                        printf("è¾“å…¥ä¿®æ”¹æ•°æ®(å¯¼å¸ˆåå­—):\n");
+                        printf("ÊäÈëÐÞ¸ÄÊý¾Ý(µ¼Ê¦Ãû×Ö):\n");
                         scanf("%s",Head_2->next->tname);
                         break;
                     case 0:
@@ -537,7 +539,7 @@ void modifyStudent(){
         }
     }
     if (k == 0){
-        printf("æŸ¥æ— æ­¤å­¦ç”Ÿ!\n");
+        printf("²éÎÞ´ËÑ§Éú!\n");
     }
 }
 
@@ -550,11 +552,11 @@ void modifyScore(){
     int num1=0;
     int k=0;
     int i=0;
-    printf("è¯·è¾“å…¥éœ€ä¿®æ”¹å­¦ç”Ÿçš„å­¦å·:\n");
+    printf("ÇëÊäÈëÐèÐÞ¸ÄÑ§ÉúµÄÑ§ºÅ:\n");
     scanf("%d",&num1);
     while ( Head_1->next!= NULL){
         if (Head_1->next->num == num1){
-            printf("å·²æŸ¥æ‰¾åˆ°å­¦å·ä¸º%dçš„å­¦ç”Ÿä¿¡æ¯!\n", num1);
+            printf("ÒÑ²éÕÒµ½Ñ§ºÅÎª%dµÄÑ§ÉúÐÅÏ¢!\n", num1);
             displayData_1(*Head_1->next);
             k=1;
             break;
@@ -564,7 +566,7 @@ void modifyScore(){
     if(k==0){
         while ( Head_2->next!= NULL){
             if (Head_2->next->num == num1){
-                printf("å·²æŸ¥æ‰¾åˆ°å­¦å·ä¸º%dçš„å­¦ç”Ÿä¿¡æ¯!\n", num1);
+                printf("ÒÑ²éÕÒµ½Ñ§ºÅÎª%dµÄÑ§ÉúÐÅÏ¢!\n", num1);
                 displayData_2(*Head_2->next);
                 k=1;
                 break;
@@ -574,23 +576,23 @@ void modifyScore(){
     }
     while ( Head__1->next!= NULL){
         if (Head__1->next->num == num1){
-            printf("è¯·è¾“å…¥éœ€ä¿®æ”¹çš„æ•°æ®çš„ç¼–å·(-1-é«˜æ•°æˆç»© -2-cè¯­è¨€æˆç»© -3-è‹±è¯­æˆç»© -4-é«˜æ•°æˆç»©å’Œcè¯­è¨€æˆç»©å’Œè‹±è¯­æˆç»© -0-é€€å‡º):\n");
+            printf("ÇëÊäÈëÐèÐÞ¸ÄµÄÊý¾ÝµÄ±àºÅ(-1-¸ßÊý³É¼¨ -2-cÓïÑÔ³É¼¨ -3-Ó¢Óï³É¼¨ -4-¸ßÊý³É¼¨ºÍcÓïÑÔ³É¼¨ºÍÓ¢Óï³É¼¨ -0-ÍË³ö):\n");
             scanf("%d",&i);
             switch(i){
                 case 1:
-                    printf("è¾“å…¥ä¿®æ”¹æ•°æ®(é«˜æ•°æˆç»©):\n");
+                    printf("ÊäÈëÐÞ¸ÄÊý¾Ý(¸ßÊý³É¼¨):\n");
                     scanf("%d",&Head__1->next->score[0]);
                     break;
                 case 2:
-                    printf("è¾“å…¥ä¿®æ”¹æ•°æ®(cè¯­è¨€æˆç»©):\n");
+                    printf("ÊäÈëÐÞ¸ÄÊý¾Ý(cÓïÑÔ³É¼¨):\n");
                     scanf("%d",&Head__1->next->score[1]);
                     break;
                 case 3:
-                    printf("è¾“å…¥ä¿®æ”¹æ•°æ®(è‹±è¯­æˆç»©):\n");
+                    printf("ÊäÈëÐÞ¸ÄÊý¾Ý(Ó¢Óï³É¼¨):\n");
                     scanf("%d",&Head__1->next->score[2]);
                     break;
                 case 4:
-                    printf("è¾“å…¥ä¿®æ”¹æ•°æ®(è‹±è¯­æˆç»©):\n");
+                    printf("ÊäÈëÐÞ¸ÄÊý¾Ý(Ó¢Óï³É¼¨):\n");
                     scanf("%d%d%d",&Head__1->next->score[0],&Head__1->next->score[1],&Head__1->next->score[2]);
                     break;
                 case 0:
@@ -606,19 +608,19 @@ void modifyScore(){
     if(k==0){
         while ( Head__2->next!= NULL){
             if (Head__2->next->num == num1){
-                printf("è¯·è¾“å…¥éœ€ä¿®æ”¹çš„æ•°æ®çš„ç¼–å·(-1-ç»¼åˆæˆç»© -2-è®ºæ–‡æˆç»© -3-ç»¼åˆæˆç»©å’Œè®ºæ–‡æˆç»© -0-é€€å‡º):\n");
+                printf("ÇëÊäÈëÐèÐÞ¸ÄµÄÊý¾ÝµÄ±àºÅ(-1-×ÛºÏ³É¼¨ -2-ÂÛÎÄ³É¼¨ -3-×ÛºÏ³É¼¨ºÍÂÛÎÄ³É¼¨ -0-ÍË³ö):\n");
                 scanf("%d",&i);
                 switch(i) {
                     case 1:
-                        printf("è¾“å…¥ä¿®æ”¹æ•°æ®(ç»¼åˆæˆç»©):\n");
+                        printf("ÊäÈëÐÞ¸ÄÊý¾Ý(×ÛºÏ³É¼¨):\n");
                         scanf("%d",&Head__2->next->score[0]);
                         break;
                     case 2:
-                        printf("è¾“å…¥ä¿®æ”¹æ•°æ®(è®ºæ–‡æˆç»©):\n");
+                        printf("ÊäÈëÐÞ¸ÄÊý¾Ý(ÂÛÎÄ³É¼¨):\n");
                         scanf("%d",&Head__2->next->score[1]);
                         break;
                     case 3:
-                        printf("è¾“å…¥ä¿®æ”¹æ•°æ®(ç»¼åˆæˆç»©å’Œè®ºæ–‡æˆç»©):\n");
+                        printf("ÊäÈëÐÞ¸ÄÊý¾Ý(×ÛºÏ³É¼¨ºÍÂÛÎÄ³É¼¨):\n");
                         scanf("%d%d",&Head__2->next->score[0],&Head__2->next->score[1]);
                         break;
                     case 0:
@@ -633,7 +635,7 @@ void modifyScore(){
         gradesCompute_2(Head__2->next);
     }
     if (k == 0){
-        printf("æŸ¥æ— æ­¤å­¦ç”Ÿ!\n");
+        printf("²éÎÞ´ËÑ§Éú!\n");
     }
 }
 
@@ -645,7 +647,7 @@ void deleteStudentByild(int num1){
     while ( Head_1->next!= NULL){
         if (Head_1->next->num == num1){
             Head_1->next->num=-1;
-            printf("å·²åˆ é™¤å­¦å·ä¸º%dçš„å­¦ç”Ÿ!\n", num1);
+            printf("ÒÑÉ¾³ýÑ§ºÅÎª%dµÄÑ§Éú!\n", num1);
             k=1;
             break;
         }
@@ -655,7 +657,7 @@ void deleteStudentByild(int num1){
         while ( Head_2->next!= NULL){
             if (Head_2->next->num == num1){
                 Head_2->next->num=-1;
-                printf("å·²åˆ é™¤å­¦å·ä¸º%dçš„å­¦ç”Ÿ!\n", num1);
+                printf("ÒÑÉ¾³ýÑ§ºÅÎª%dµÄÑ§Éú!\n", num1);
                 k=1;
                 break;
             }
@@ -663,7 +665,7 @@ void deleteStudentByild(int num1){
         }
     }
     if (k == 0){
-        printf("æŸ¥æ— æ­¤å­¦ç”Ÿ!\n");
+        printf("²éÎÞ´ËÑ§Éú!\n");
     }
 }
 void getstu_1(UND* Head){
@@ -725,10 +727,10 @@ void printften_2(int i)
 
 
 void getPage_1(){
-    int totalstu = 0;   //äººæ•°
+    int totalstu = 0;   //ÈËÊý
     char ch[2];
-    int allpage;   //æ€»é¡µæ•°
-    int page = 1;  //å½“å‰é¡µæ•°
+    int allpage;   //×ÜÒ³Êý
+    int page = 1;  //µ±Ç°Ò³Êý
     UND * cnt;
     cnt = Head1;
     while (cnt->next!= NULL)
@@ -742,13 +744,12 @@ void getPage_1(){
     }
     else allpage = totalstu / 10;
     scanf("%c",&ch[1]);
-
+    infoPrint_1();
+    printften_1(page);
     while (1)
     {
-        printf("å­¦å· å§“å æ€§åˆ«  ä¸“ä¸š  ç­çº§ é«˜æ•° Cè¯­è¨€ è‹±è¯­ æ€»æˆç»© ç­çº§æŽ’å æ ¡çº§æŽ’å\n");
-        printften_1(page);
-        printf("-------------------------------å½“å‰ä¸ºç¬¬1é¡µ,å…±%dé¡µ--------------------------------\n", allpage);
-        printf("é¦–é¡µè¯·æŒ‰â€œaâ€é”® ä¸Šä¸€é¡µè¯·æŒ‰â€œwâ€é”® ä¸‹ä¸€é¡µè¯·æŒ‰â€œsâ€é”® å°¾é¡µè¯·æŒ‰â€œdâ€é”® é€€å‡ºè¯·æŒ‰â€œ0â€é”®\n");
+        printf("-------------------------------µ±Ç°ÎªµÚ1Ò³,¹²%dÒ³--------------------------------\n", allpage);
+        printf("Ê×Ò³Çë°´¡°a¡±¼ü ÉÏÒ»Ò³Çë°´¡°w¡±¼ü ÏÂÒ»Ò³Çë°´¡°s¡±¼ü Î²Ò³Çë°´¡°d¡±¼ü ÍË³öÇë°´¡°0¡±¼ü\n");
         scanf("%c",&ch[0]);
         scanf("%c",&ch[1]);
         if (ch[0] == 48) {
@@ -760,50 +761,50 @@ void getPage_1(){
             case 100:
             {
                 page=allpage;
-                printf("\nå­¦å· å§“å æ€§åˆ«  ä¸“ä¸š  ç­çº§ é«˜æ•° Cè¯­è¨€ è‹±è¯­ æ€»æˆç»© ç­çº§æŽ’å æ ¡çº§æŽ’å\n");
+                infoPrint_1();
                 printften_1(page);
-                printf("-------------------------------å½“å‰ä¸ºç¬¬%dé¡µ,å…±%dé¡µ--------------------------------\n",page, allpage);
+                printf("-------------------------------µ±Ç°ÎªµÚ%dÒ³,¹²%dÒ³--------------------------------\n",page, allpage);
                 break;
             }
             case 115:
             {
                 if(page==allpage)
                 {
-                    printf("å·²æ˜¯å°¾é¡µ\n");
+                    printf("ÒÑÊÇÎ²Ò³\n");
                     break;
                 }
                 page++;
-                printf("\nå­¦å· å§“å æ€§åˆ«  ä¸“ä¸š  ç­çº§ é«˜æ•° Cè¯­è¨€ è‹±è¯­ æ€»æˆç»© ç­çº§æŽ’å æ ¡çº§æŽ’å\n");
+                infoPrint_1();
                 printften_1(page);
-                printf("-------------------------------å½“å‰ä¸ºç¬¬%dé¡µ,å…±%dé¡µ--------------------------------\n",page, allpage);
+                printf("-------------------------------µ±Ç°ÎªµÚ%dÒ³,¹²%dÒ³--------------------------------\n",page, allpage);
                 break;
             }
             case 119:
             {
-                if(page==1)printf("å·²æ˜¯é¦–é¡µ\n");
+                if(page==1)printf("ÒÑÊÇÊ×Ò³\n");
                 else
                 {
                     page--;
-                    printf("\nå­¦å· å§“å æ€§åˆ«  ä¸“ä¸š  ç­çº§ é«˜æ•° Cè¯­è¨€ è‹±è¯­ æ€»æˆç»© ç­çº§æŽ’å æ ¡çº§æŽ’å\n");
+                    infoPrint_1();
                     printften_1(page);
-                    printf("-------------------------------å½“å‰ä¸ºç¬¬1é¡µ,å…±%dé¡µ--------------------------------\n", allpage);
+                    printf("-------------------------------µ±Ç°ÎªµÚ1Ò³,¹²%dÒ³--------------------------------\n", allpage);
                 }
                 break;
             }
             case 97:
             {
-                if(page==1)printf("å·²æ˜¯é¦–é¡µ\n");
+                if(page==1)printf("ÒÑÊÇÊ×Ò³\n");
                 else
                 {
                     page=1;
-                    printf("\nå­¦å· å§“å æ€§åˆ«  ä¸“ä¸š  ç­çº§ é«˜æ•° Cè¯­è¨€ è‹±è¯­ æ€»æˆç»© ç­çº§æŽ’å æ ¡çº§æŽ’å\n");
+                    infoPrint_1();
                     printften_1(page);
-                    printf("-------------------------------å½“å‰ä¸ºç¬¬%dé¡µ,å…±%dé¡µ--------------------------------\n", page,allpage);
+                    printf("-------------------------------µ±Ç°ÎªµÚ%dÒ³,¹²%dÒ³--------------------------------\n", page,allpage);
                 }
                 break;
             }
             default:
-                printf("è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥\n");
+                printf("ÊäÈë´íÎó£¬ÇëÖØÐÂÊäÈë\n");
                 system("pause");
                 system("cls");
                 break;
@@ -815,10 +816,10 @@ void getPage_1(){
 
 
 void getPage_2(){
-    int totalstu = 0;   //äººæ•°
+    int totalstu = 0;   //ÈËÊý
     char ch[2];
-    int allpage;   //æ€»é¡µæ•°
-    int page = 1;  //å½“å‰é¡µæ•°
+    int allpage;   //×ÜÒ³Êý
+    int page = 1;  //µ±Ç°Ò³Êý
     GRA * cnt;
     cnt = Head2;
     while (cnt->next!= NULL)
@@ -832,12 +833,12 @@ void getPage_2(){
     }
     else allpage = totalstu / 10;
     scanf("%c",&ch[1]);
-    printf("å­¦å· å§“å æ€§åˆ«  ä¸“ä¸š  ç­çº§ ç ”ç©¶æ–¹å‘ å¯¼å¸ˆåå­— ç»¼åˆæˆç»© è®ºæ–‡æˆç»© æ€»æˆç»© ç­çº§æŽ’å æ ¡çº§æŽ’å\n");
+    infoPrint_2();
     printften_2(page);
-    printf("-------------------------------å½“å‰ä¸ºç¬¬%dé¡µ,å…±%dé¡µ--------------------------------\n",page,allpage);
+    printf("-------------------------------µ±Ç°ÎªµÚ%dÒ³,¹²%dÒ³--------------------------------\n",page,allpage);
     while (1)
     {
-        printf("é¦–é¡µè¯·æŒ‰â€œaâ€é”® ä¸Šä¸€é¡µè¯·æŒ‰â€œwâ€é”® ä¸‹ä¸€é¡µè¯·æŒ‰â€œsâ€é”® å°¾é¡µè¯·æŒ‰â€œdâ€é”® é€€å‡ºè¯·æŒ‰â€œ0â€é”®\n");
+        printf("Ê×Ò³Çë°´¡°a¡±¼ü ÉÏÒ»Ò³Çë°´¡°w¡±¼ü ÏÂÒ»Ò³Çë°´¡°s¡±¼ü Î²Ò³Çë°´¡°d¡±¼ü ÍË³öÇë°´¡°0¡±¼ü\n");
         scanf("%c",&ch[0]);
         scanf("%c",&ch[1]);
         if (ch[0] == '0') break;
@@ -846,45 +847,45 @@ void getPage_2(){
             case 'd':
             {
                 page=allpage;
-                printf("\nå­¦å· å§“å æ€§åˆ«  ä¸“ä¸š  ç­çº§ ç ”ç©¶æ–¹å‘ å¯¼å¸ˆåå­— ç»¼åˆæˆç»© è®ºæ–‡æˆç»© æ€»æˆç»© ç­çº§æŽ’å æ ¡çº§æŽ’å\n");;
+                infoPrint_2();
                 printften_2(page);
-                printf("-------------------------------------å½“å‰ä¸ºç¬¬%dé¡µ,å…±%dé¡µ--------------------------------------\n",page, allpage);
+                printf("-------------------------------------µ±Ç°ÎªµÚ%dÒ³,¹²%dÒ³--------------------------------------\n",page, allpage);
                 break;
             }
             case 's':
             {
                 if(page==allpage)
                 {
-                    printf("å·²æ˜¯å°¾é¡µ\n");
+                    printf("ÒÑÊÇÎ²Ò³\n");
                     break;
                 }
                 page++;
-                printf("\nå­¦å· å§“å æ€§åˆ«  ä¸“ä¸š  ç­çº§ ç ”ç©¶æ–¹å‘ å¯¼å¸ˆåå­— ç»¼åˆæˆç»© è®ºæ–‡æˆç»© æ€»æˆç»© ç­çº§æŽ’å æ ¡çº§æŽ’å\n");
+                infoPrint_2();
                 printften_2(page);
-                printf("-------------------------------------å½“å‰ä¸ºç¬¬%dé¡µ,å…±%dé¡µ--------------------------------------\n",page, allpage);
+                printf("-------------------------------------µ±Ç°ÎªµÚ%dÒ³,¹²%dÒ³--------------------------------------\n",page, allpage);
                 break;
             }
             case 'w':
             {
-                if(page==1)printf("å·²æ˜¯é¦–é¡µ\n");
+                if(page==1)printf("ÒÑÊÇÊ×Ò³\n");
                 else
                 {
                     page--;
-                    printf("\nå­¦å· å§“å æ€§åˆ«  ä¸“ä¸š  ç­çº§ ç ”ç©¶æ–¹å‘ å¯¼å¸ˆåå­— ç»¼åˆæˆç»© è®ºæ–‡æˆç»© æ€»æˆç»© ç­çº§æŽ’å æ ¡çº§æŽ’å\n");
+                    infoPrint_2();
                     printften_2(page);
-                    printf("-------------------------------------å½“å‰ä¸ºç¬¬%dé¡µ,å…±%dé¡µ--------------------------------------\n",page,allpage);
+                    printf("-------------------------------------µ±Ç°ÎªµÚ%dÒ³,¹²%dÒ³--------------------------------------\n",page,allpage);
                 }
                 break;
             }
             case 'a':
             {
-                if(page==1)printf("å·²æ˜¯é¦–é¡µ\n");
+                if(page==1)printf("ÒÑÊÇÊ×Ò³\n");
                 else
                 {
                     page=1;
-                    printf("\nå­¦å· å§“å æ€§åˆ«  ä¸“ä¸š  ç­çº§ ç ”ç©¶æ–¹å‘ å¯¼å¸ˆåå­— ç»¼åˆæˆç»© è®ºæ–‡æˆç»© æ€»æˆç»© ç­çº§æŽ’å æ ¡çº§æŽ’å\n");
+                    infoPrint_2();
                     printften_2(page);
-                    printf("-------------------------------------å½“å‰ä¸ºç¬¬%dé¡µ,å…±%dé¡µ--------------------------------------\n", page,allpage);
+                    printf("-------------------------------------µ±Ç°ÎªµÚ%dÒ³,¹²%dÒ³--------------------------------------\n", page,allpage);
                 }
                 break;
             }
@@ -894,6 +895,16 @@ void getPage_2(){
         }
         //system("cls");
     }
+}
+
+
+void infoPrint_1(){
+    printf("\nÑ§ºÅ ÐÕÃû ÐÔ±ð  ×¨Òµ  °à¼¶ ¸ßÊý CÓïÑÔ Ó¢Óï ×Ü³É¼¨ °à¼¶ÅÅÃû Ð£¼¶ÅÅÃû\n");
+}
+
+
+void infoPrint_2(){
+    printf("Ñ§ºÅ  ÐÕÃû ÐÔ±ð  ×¨Òµ  °à¼¶ ÑÐ¾¿·½Ïò    µ¼Ê¦Ãû×Ö ×ÛºÏ³É¼¨ ÂÛÎÄ³É¼¨ ×Ü³É¼¨ °à¼¶ÅÅÃû Ð£¼¶ÅÅÃû\n");
 }
 
 
@@ -907,7 +918,7 @@ void searchByClass_1(char* banji){
         }
         Head_1=Head_1->next;
     }
-    if(k==0)printf("æ— æ­¤ç­çº§\n");
+    if(k==0)printf("ÎÞ´Ë°à¼¶\n");
 }
 
 
@@ -921,7 +932,7 @@ void searchByClass_2(int class){
         }
         Head_2=Head_2->next;
     }
-    if(k==0)printf("æ— æ­¤ç­çº§\n");
+    if(k==0)printf("ÎÞ´Ë°à¼¶\n");
 }
 
 
@@ -943,7 +954,7 @@ void searchByName(char* name){
         }
         Head_2=Head_2->next;
     }
-    if(k==0)printf("æ²¡æœ‰åå­—ä¸º%sçš„å­¦ç”Ÿ\n",name);
+    if(k==0)printf("Ã»ÓÐÃû×ÖÎª%sµÄÑ§Éú\n",name);
 }
 
 
@@ -959,7 +970,7 @@ void searnraiidyClassCourse_1(char* banji,int course){
         }
         Head_1=Head_1->next;
     }
-    if(k==0)printf("è¯¥ç­çº§ä¸­çš„è¯¥è¯¾ç¨‹æ— å­¦ç”Ÿä¸åŠæ ¼");
+    if(k==0)printf("¸Ã°à¼¶ÖÐµÄ¸Ã¿Î³ÌÎÞÑ§Éú²»¼°¸ñ");
 }
 
 
@@ -975,7 +986,7 @@ void searnraiidyClassCourse_2(int class,int course){
         }
         Head_2=Head_2->next;
     }
-    if(k==0)printf("è¯¥ç­çº§ä¸­çš„è¯¥è¯¾ç¨‹æ— å­¦ç”Ÿä¸åŠæ ¼");
+    if(k==0)printf("¸Ã°à¼¶ÖÐµÄ¸Ã¿Î³ÌÎÞÑ§Éú²»¼°¸ñ");
 }
 
 
@@ -1110,7 +1121,7 @@ void sortAllAndShow_2(){
 UND* returnsClassHead_1(char *banji){
     UND* Head_1=Head1;
     UND* Head_2=(UND*) malloc(sizeof (UND));
-    UND* Head_3=Head_2;   //é˜²æ­¢Head_2ä¸¢å¤±
+    UND* Head_3=Head_2;   //·ÀÖ¹Head_2¶ªÊ§
     while(Head_1->next!=NULL){
         if(strcmp(Head_1->next->banji,banji)==0){
          Head_2->next=(UND*) malloc(sizeof (UND));
@@ -1127,7 +1138,7 @@ UND* returnsClassHead_1(char *banji){
 GRA* returnsClassHead_2(int class){
     GRA* Head_1=Head2;
     GRA* Head_2=(GRA *) malloc(sizeof (GRA));
-    GRA* Head_3=Head_2;   //é˜²æ­¢Head_2ä¸¢å¤±
+    GRA* Head_3=Head_2;   //·ÀÖ¹Head_2¶ªÊ§
     while(Head_1->next!=NULL){
         if(Head_1->next->Class==class){
             Head_2->next=(GRA *) malloc(sizeof (GRA));

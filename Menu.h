@@ -6,38 +6,39 @@
 
 #endif
 #include "Function.h"
-void Main_Menu();//ä¸€çº§èœå•
+void Main_Menu();//Ò»¼¶²Ëµ¥
 void MenuPrint();
 void Benke_Menu();
-void Yanjiu_Menu();//äºŒçº§èœå•
+void Yanjiu_Menu();//¶þ¼¶²Ëµ¥
 void baseDataMenuPrint();
 void Benke_baseDataManage_Menu();
-void Yanjiu_baseDataManage_Menu();//åŸºæœ¬æ•°æ®ç®¡ç†èœå•
+void Yanjiu_baseDataManage_Menu();//»ù±¾Êý¾Ý¹ÜÀí²Ëµ¥
 void scoreMenuPrint();
 void Benke_scoreManage_Menu();
-void Yanjiu_scoreManage_Menu();//æˆç»©ç®¡ç†èœå•
+void Yanjiu_scoreManage_Menu();//³É¼¨¹ÜÀí²Ëµ¥
 void sortMenuPrint();
 void Benke_sort_Menu();
-void Yanjiu_sort_Menu();//æˆç»©æŽ’åºèœå•
+void Yanjiu_sort_Menu();//³É¼¨ÅÅÐò²Ëµ¥
 void statisticsMenuPrint();
 void Benke_statistic_Menu();
-void Yanjiu_statistic_Menu();//æ•°æ®ç»Ÿè®¡èœå•
+void Yanjiu_statistic_Menu();//Êý¾ÝÍ³¼Æ²Ëµ¥
 void searchMenuPrint();
 void Benke_search_Menu();
-void Yanjiu_search_Menu();//æŸ¥è¯¢èœå•
+void Yanjiu_search_Menu();//²éÑ¯²Ëµ¥
 
 
 
 void Main_Menu(){
-    //--------------æµ‹è¯•ç”¨--------------
+    //--------------²âÊÔÓÃ--------------
     char num_Name[12];
     UND* Head_1=Head1;
     UND* a,*b,*c,*d;
+    GRA* k;
     GRA* Head_2=Head2;
     char banji[10];
     char name[10];
     int course;
-//    printf("-----è¾“å…¥----\n");
+//    printf("-----ÊäÈë----\n");
 //    a=scanf_1();
 //    b=scanf_1();
 //    c=scanf_1();
@@ -59,19 +60,19 @@ void Main_Menu(){
         Head_1=Head_1->next;
     }*/
     //modifyStudent();
-//    printf("-----è¾“å…¥----\n");
-//    for(int i=0;i<20;i++){
-//        a=scanf_1();
-//        addNode_1(a);
-//    }
-    //getPage_1();
-    //printf("-----è¾“å…¥æœ¬ç§‘ç”Ÿç­çº§----\n");
+    printf("-----ÊäÈë----\n");
+    for(int i=0;i<20;i++){
+        k=scanf_2();
+        addNode_2(k);
+    }
+    getPage_2();
+    //printf("-----ÊäÈë±¾¿ÆÉú°à¼¶----\n");
     /*scanf("%s",banji);
     searchByClass_1(banji);*/
-    //printf("-----è¾“å…¥å­¦ç”Ÿåå­—----\n");
+    //printf("-----ÊäÈëÑ§ÉúÃû×Ö----\n");
     /*scanf("%s",name);
     searchByName(name);*/
-    /*printf("-----è¾“å…¥ç­çº§å’Œè¯¾ç¨‹å·----\n");
+    /*printf("-----ÊäÈë°à¼¶ºÍ¿Î³ÌºÅ----\n");
     scanf("%s%d",banji,&course);
     searnraiidyClassCourse_1( banji, course);*/
     //sortAllByld();
@@ -89,11 +90,11 @@ void Main_Menu(){
     system("cls");
     while(1){
         char choice;
-        printf("*************************** èœå• ***************************\n");
-        printf("_1_æœ¬ç§‘ç”Ÿæˆç»©ç®¡ç†ç³»ç»Ÿ\n");
-        printf("_2_ç ”ç©¶ç”Ÿæˆç»©ç®¡ç†ç³»ç»Ÿ\n");
-        printf("_0_é€€å‡º\n");
-        printf("é€‰æ‹©ç³»ç»Ÿ:");
+        printf("*************************** ²Ëµ¥ ***************************\n");
+        printf("_1_±¾¿ÆÉú³É¼¨¹ÜÀíÏµÍ³\n");
+        printf("_2_ÑÐ¾¿Éú³É¼¨¹ÜÀíÏµÍ³\n");
+        printf("_0_ÍË³ö\n");
+        printf("Ñ¡ÔñÏµÍ³:");
         scanf("%s",&choice);
         if(isdigit(choice)){
             switch(choice){
@@ -108,12 +109,12 @@ void Main_Menu(){
                 case '0':
                     sayeToFile();
                 default:
-                    printf("è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥\n");
+                    printf("ÊäÈë´íÎó£¬ÇëÖØÐÂÊäÈë\n");
                     system("pause");
                     system("cls");
             }
         }else{
-            printf("è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥\n");
+            printf("ÊäÈë´íÎó£¬ÇëÖØÐÂÊäÈë\n");
             system("pause");
             system("cls");
         }
@@ -121,24 +122,24 @@ void Main_Menu(){
 }
 
 void MenuPrint(){
-    printf("_1_è¿›è¡ŒåŸºæœ¬èµ„æ–™æ•°æ®ç»´æŠ¤ç®¡ç†\n");
-    //å¢žåŠ å­¦ç”ŸåŸºæœ¬èµ„æ–™ï¼Œåˆ é™¤å­¦ç”ŸåŸºæœ¬èµ„æ–™ï¼Œä¿®æ”¹å­¦ç”ŸåŸºæœ¬èµ„æ–™ï¼ŒæŸ¥è¯¢åŸºæœ¬èµ„æ–™
-    printf("_2_è¿›è¡Œæˆç»©æ•°æ®ç®¡ç†\n");
-    //å¢žåŠ å­¦ç”Ÿæˆç»©ï¼Œåˆ é™¤å­¦ç”Ÿæˆç»©ï¼Œä¿®æ”¹å­¦ç”Ÿæˆç»©ï¼ŒæŸ¥è¯¢å­¦ç”Ÿæˆç»©
-    printf("_3_è¿›è¡Œæˆç»©æŽ’åº\n");
-    //å…¨æ ¡æœ¬ç§‘ç”ŸæŒ‰æ€»æˆç»©é«˜åˆ°ä½ŽæŽ’åæ˜¾ç¤ºï¼ŒæŸä¸ªç­çº§æœ¬ç§‘ç”ŸæŒ‰æ€»æˆç»©é«˜åˆ°ä½ŽæŽ’åæ˜¾ç¤º
-    printf("_4_æ•°æ®ç»Ÿè®¡\n");
-    //ç»Ÿè®¡å¹¶æ˜¾ç¤ºæŸé—¨è¯¾æ¯ä¸ªç­çš„å¹³å‡æˆç»©, æŸä¸ªç­ä¸­ç»Ÿè®¡å¹¶æ˜¾ç¤ºæŸé—¨è¯¾ç¨‹ä¸åŒç­‰çº§å­¦ç”Ÿçš„äººæ•°
-    printf("_5_æŸ¥è¯¢\n");
-    //æŠ¥è¡¨è¾“å‡ºå…¨éƒ¨å­¦ç”Ÿä¿¡æ¯ï¼ŒæŠ¥è¡¨è¾“å‡ºç­çº§å…¨éƒ¨å­¦ç”Ÿä¿¡æ¯ï¼ŒæŸ¥è¯¢å­¦ç”Ÿä¿¡æ¯ï¼ŒæŸ¥è¯¢æŸç­æŸé—¨ç§‘ç›®ä¸åŠæ ¼å­¦ç”Ÿä¿¡æ¯
-    printf("_0_è¿”å›žä¸Šçº§\n");
-    printf("è¾“å…¥åºå·:");
+    printf("_1_½øÐÐ»ù±¾×ÊÁÏÊý¾ÝÎ¬»¤¹ÜÀí\n");
+    //Ôö¼ÓÑ§Éú»ù±¾×ÊÁÏ£¬É¾³ýÑ§Éú»ù±¾×ÊÁÏ£¬ÐÞ¸ÄÑ§Éú»ù±¾×ÊÁÏ£¬²éÑ¯»ù±¾×ÊÁÏ
+    printf("_2_½øÐÐ³É¼¨Êý¾Ý¹ÜÀí\n");
+    //Ôö¼ÓÑ§Éú³É¼¨£¬É¾³ýÑ§Éú³É¼¨£¬ÐÞ¸ÄÑ§Éú³É¼¨£¬²éÑ¯Ñ§Éú³É¼¨
+    printf("_3_½øÐÐ³É¼¨ÅÅÐò\n");
+    //È«Ð£±¾¿ÆÉú°´×Ü³É¼¨¸ßµ½µÍÅÅÃûÏÔÊ¾£¬Ä³¸ö°à¼¶±¾¿ÆÉú°´×Ü³É¼¨¸ßµ½µÍÅÅÃûÏÔÊ¾
+    printf("_4_Êý¾ÝÍ³¼Æ\n");
+    //Í³¼Æ²¢ÏÔÊ¾Ä³ÃÅ¿ÎÃ¿¸ö°àµÄÆ½¾ù³É¼¨, Ä³¸ö°àÖÐÍ³¼Æ²¢ÏÔÊ¾Ä³ÃÅ¿Î³Ì²»Í¬µÈ¼¶Ñ§ÉúµÄÈËÊý
+    printf("_5_²éÑ¯\n");
+    //±¨±íÊä³öÈ«²¿Ñ§ÉúÐÅÏ¢£¬±¨±íÊä³ö°à¼¶È«²¿Ñ§ÉúÐÅÏ¢£¬²éÑ¯Ñ§ÉúÐÅÏ¢£¬²éÑ¯Ä³°àÄ³ÃÅ¿ÆÄ¿²»¼°¸ñÑ§ÉúÐÅÏ¢
+    printf("_0_·µ»ØÉÏ¼¶\n");
+    printf("ÊäÈëÐòºÅ:");
 }
 
 void Benke_Menu(){
     while(1){
         char choice;
-        printf("********************æœ¬ç§‘ç”Ÿæˆç»©ç®¡ç†ç³»ç»Ÿ********************\n");
+        printf("********************±¾¿ÆÉú³É¼¨¹ÜÀíÏµÍ³********************\n");
         MenuPrint();
         scanf("%s", &choice);
         if (isdigit(choice)) {
@@ -167,13 +168,13 @@ void Benke_Menu(){
                     Main_Menu();
                     break;
                 default:
-                    printf("è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥\n");
+                    printf("ÊäÈë´íÎó£¬ÇëÖØÐÂÊäÈë\n");
                     system("pause");
                     system("cls");
                     break;
             }
         } else {
-            printf("è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥\n");
+            printf("ÊäÈë´íÎó£¬ÇëÖØÐÂÊäÈë\n");
             system("pause");
             system("cls");
         }
@@ -183,7 +184,7 @@ void Benke_Menu(){
 void Yanjiu_Menu(){
     while(1){
         char choice;
-        printf("********************ç ”ç©¶ç”Ÿæˆç»©ç®¡ç†ç³»ç»Ÿ********************\n");
+        printf("********************ÑÐ¾¿Éú³É¼¨¹ÜÀíÏµÍ³********************\n");
         MenuPrint();
         scanf("%s", &choice);
         if (isdigit(choice)) {
@@ -212,13 +213,13 @@ void Yanjiu_Menu(){
                     Main_Menu();
                     break;
                 default:
-                    printf("è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥\n");
+                    printf("ÊäÈë´íÎó£¬ÇëÖØÐÂÊäÈë\n");
                     system("pause");
                     system("cls");
                     break;
             }
         } else {
-            printf("è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥\n");
+            printf("ÊäÈë´íÎó£¬ÇëÖØÐÂÊäÈë\n");
             system("pause");
             system("cls");
         }
@@ -226,18 +227,18 @@ void Yanjiu_Menu(){
 }
 
 void baseDataMenuPrint(){
-    printf("_1_å¢žåŠ å­¦ç”ŸåŸºæœ¬èµ„æ–™\n");
-    printf("_2_åˆ é™¤å­¦ç”ŸåŸºæœ¬èµ„æ–™\n");
-    printf("_3_ä¿®æ”¹å­¦ç”ŸåŸºæœ¬èµ„æ–™\n");
-    printf("_4_æŸ¥è¯¢åŸºæœ¬èµ„æ–™\n");
-    printf("_0_è¿”å›žä¸Šçº§\n");
-    printf("è¾“å…¥åºå·ï¼š");
+    printf("_1_Ôö¼ÓÑ§Éú»ù±¾×ÊÁÏ\n");
+    printf("_2_É¾³ýÑ§Éú»ù±¾×ÊÁÏ\n");
+    printf("_3_ÐÞ¸ÄÑ§Éú»ù±¾×ÊÁÏ\n");
+    printf("_4_²éÑ¯»ù±¾×ÊÁÏ\n");
+    printf("_0_·µ»ØÉÏ¼¶\n");
+    printf("ÊäÈëÐòºÅ£º");
 }
 
 void Benke_baseDataManage_Menu(){
     while(1){
         char choice;
-        printf("********************æœ¬ç§‘ç”Ÿæˆç»©ç®¡ç†ç³»ç»Ÿ********************\n");
+        printf("********************±¾¿ÆÉú³É¼¨¹ÜÀíÏµÍ³********************\n");
         baseDataMenuPrint();
         scanf("%s", &choice);
         if (isdigit(choice)) {
@@ -259,13 +260,13 @@ void Benke_baseDataManage_Menu(){
                     Benke_Menu();
                     break;
                 default:
-                    printf("è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥\n");
+                    printf("ÊäÈë´íÎó£¬ÇëÖØÐÂÊäÈë\n");
                     system("pause");
                     system("cls");
                     break;
             }
         } else {
-            printf("è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥\n");
+            printf("ÊäÈë´íÎó£¬ÇëÖØÐÂÊäÈë\n");
             system("pause");
             system("cls");
         }
@@ -275,7 +276,7 @@ void Benke_baseDataManage_Menu(){
 void Yanjiu_baseDataManage_Menu(){
     while(1){
         char choice;
-        printf("********************ç ”ç©¶ç”Ÿæˆç»©ç®¡ç†ç³»ç»Ÿ********************\n");
+        printf("********************ÑÐ¾¿Éú³É¼¨¹ÜÀíÏµÍ³********************\n");
         baseDataMenuPrint();
         scanf("%s", &choice);
         if (isdigit(choice)) {
@@ -297,13 +298,13 @@ void Yanjiu_baseDataManage_Menu(){
                     Yanjiu_Menu();
                     break;
                 default:
-                    printf("è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥\n");
+                    printf("ÊäÈë´íÎó£¬ÇëÖØÐÂÊäÈë\n");
                     system("pause");
                     system("cls");
                     break;
             }
         } else {
-            printf("è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥\n");
+            printf("ÊäÈë´íÎó£¬ÇëÖØÐÂÊäÈë\n");
             system("pause");
             system("cls");
         }
@@ -311,18 +312,18 @@ void Yanjiu_baseDataManage_Menu(){
 }
 
 void scoreMenuPrint(){
-    printf("_1_å¢žåŠ å­¦ç”Ÿæˆç»©\n");
-    printf("_2_åˆ é™¤å­¦ç”Ÿæˆç»©\n");
-    printf("_3_ä¿®æ”¹å­¦ç”Ÿæˆç»©\n");
-    printf("_4_æŸ¥è¯¢å­¦ç”Ÿæˆç»©\n");
-    printf("_0_è¿”å›žä¸Šçº§\n");
-    printf("è¾“å…¥åºå·ï¼š");
+    printf("_1_Ôö¼ÓÑ§Éú³É¼¨\n");
+    printf("_2_É¾³ýÑ§Éú³É¼¨\n");
+    printf("_3_ÐÞ¸ÄÑ§Éú³É¼¨\n");
+    printf("_4_²éÑ¯Ñ§Éú³É¼¨\n");
+    printf("_0_·µ»ØÉÏ¼¶\n");
+    printf("ÊäÈëÐòºÅ£º");
 }
 
 void Benke_scoreManage_Menu(){
     while(1){
         char choice;
-        printf("********************æœ¬ç§‘ç”Ÿæˆç»©ç®¡ç†ç³»ç»Ÿ********************\n");
+        printf("********************±¾¿ÆÉú³É¼¨¹ÜÀíÏµÍ³********************\n");
         scoreMenuPrint();
         scanf("%s", &choice);
         if (isdigit(choice)) {
@@ -344,13 +345,13 @@ void Benke_scoreManage_Menu(){
                     Benke_Menu();
                     break;
                 default:
-                    printf("è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥\n");
+                    printf("ÊäÈë´íÎó£¬ÇëÖØÐÂÊäÈë\n");
                     system("pause");
                     system("cls");
                     break;
             }
         } else {
-            printf("è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥\n");
+            printf("ÊäÈë´íÎó£¬ÇëÖØÐÂÊäÈë\n");
             system("pause");
             system("cls");
         }
@@ -360,7 +361,7 @@ void Benke_scoreManage_Menu(){
 void Yanjiu_scoreManage_Menu(){
     while(1){
         char choice;
-        printf("********************ç ”ç©¶ç”Ÿæˆç»©ç®¡ç†ç³»ç»Ÿ********************\n");
+        printf("********************ÑÐ¾¿Éú³É¼¨¹ÜÀíÏµÍ³********************\n");
         scoreMenuPrint();
         scanf("%s", &choice);
         if (isdigit(choice)) {
@@ -382,13 +383,13 @@ void Yanjiu_scoreManage_Menu(){
                     Benke_Menu();
                     break;
                 default:
-                    printf("è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥\n");
+                    printf("ÊäÈë´íÎó£¬ÇëÖØÐÂÊäÈë\n");
                     system("pause");
                     system("cls");
                     break;
             }
         } else {
-            printf("è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥\n");
+            printf("ÊäÈë´íÎó£¬ÇëÖØÐÂÊäÈë\n");
             system("pause");
             system("cls");
         }
@@ -396,16 +397,16 @@ void Yanjiu_scoreManage_Menu(){
 }
 
 void sortMenuPrint(){
-    printf("_1_å…¨æ ¡æŒ‰æ€»æˆç»©é«˜åˆ°ä½ŽæŽ’åæ˜¾ç¤º\n");
-    printf("_2_ç­çº§æŒ‰æ€»æˆç»©é«˜åˆ°ä½ŽæŽ’åæ˜¾ç¤º\n");
-    printf("_0_è¿”å›žä¸Šçº§\n");
-    printf("è¾“å…¥åºå·ï¼š");
+    printf("_1_È«Ð£°´×Ü³É¼¨¸ßµ½µÍÅÅÃûÏÔÊ¾\n");
+    printf("_2_°à¼¶°´×Ü³É¼¨¸ßµ½µÍÅÅÃûÏÔÊ¾\n");
+    printf("_0_·µ»ØÉÏ¼¶\n");
+    printf("ÊäÈëÐòºÅ£º");
 }
 
 void Benke_sort_Menu(){
     while(1){
         char choice;
-        printf("********************æœ¬ç§‘ç”Ÿæˆç»©ç®¡ç†ç³»ç»Ÿ********************\n");
+        printf("********************±¾¿ÆÉú³É¼¨¹ÜÀíÏµÍ³********************\n");
         sortMenuPrint();
         scanf("%s", &choice);
         if (isdigit(choice)) {
@@ -421,13 +422,13 @@ void Benke_sort_Menu(){
                     Benke_Menu();
                     break;
                 default:
-                    printf("è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥\n");
+                    printf("ÊäÈë´íÎó£¬ÇëÖØÐÂÊäÈë\n");
                     system("pause");
                     system("cls");
                     break;
             }
         } else {
-            printf("è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥\n");
+            printf("ÊäÈë´íÎó£¬ÇëÖØÐÂÊäÈë\n");
             system("pause");
             system("cls");
         }
@@ -437,7 +438,7 @@ void Benke_sort_Menu(){
 void Yanjiu_sort_Menu(){
     while(1){
         char choice;
-        printf("********************ç ”ç©¶ç”Ÿæˆç»©ç®¡ç†ç³»ç»Ÿ********************\n");
+        printf("********************ÑÐ¾¿Éú³É¼¨¹ÜÀíÏµÍ³********************\n");
         sortMenuPrint();
         scanf("%s", &choice);
         if (isdigit(choice)) {
@@ -453,13 +454,13 @@ void Yanjiu_sort_Menu(){
                     Benke_Menu();
                     break;
                 default:
-                    printf("è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥\n");
+                    printf("ÊäÈë´íÎó£¬ÇëÖØÐÂÊäÈë\n");
                     system("pause");
                     system("cls");
                     break;
             }
         } else {
-            printf("è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥\n");
+            printf("ÊäÈë´íÎó£¬ÇëÖØÐÂÊäÈë\n");
             system("pause");
             system("cls");
         }
@@ -467,16 +468,16 @@ void Yanjiu_sort_Menu(){
 }
 
 void statisticsMenuPrint(){
-    printf("_1_ç»Ÿè®¡æŸé—¨è¯¾æ¯ä¸ªç­çš„å¹³å‡æˆç»©\n");
-    printf("_2_ç»Ÿè®¡æŸä¸ªç­å†…æŸé—¨è¯¾ç¨‹ä¸åŒç­‰çº§å­¦ç”Ÿçš„äººæ•°\n");
-    printf("_0_è¿”å›žä¸Šçº§\n");
-    printf("è¾“å…¥åºå·ï¼š");
+    printf("_1_Í³¼ÆÄ³ÃÅ¿ÎÃ¿¸ö°àµÄÆ½¾ù³É¼¨\n");
+    printf("_2_Í³¼ÆÄ³¸ö°àÄÚÄ³ÃÅ¿Î³Ì²»Í¬µÈ¼¶Ñ§ÉúµÄÈËÊý\n");
+    printf("_0_·µ»ØÉÏ¼¶\n");
+    printf("ÊäÈëÐòºÅ£º");
 }
 
 void Benke_statistic_Menu(){
     while(1){
         char choice;
-        printf("********************æœ¬ç§‘ç”Ÿæˆç»©ç®¡ç†ç³»ç»Ÿ********************\n");
+        printf("********************±¾¿ÆÉú³É¼¨¹ÜÀíÏµÍ³********************\n");
         statisticsMenuPrint();
         scanf("%d", &choice);
         if (isdigit(choice)) {
@@ -492,13 +493,13 @@ void Benke_statistic_Menu(){
                     Benke_Menu();
                     break;
                 default:
-                    printf("è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥\n");
+                    printf("ÊäÈë´íÎó£¬ÇëÖØÐÂÊäÈë\n");
                     system("pause");
                     system("cls");
                     break;
             }
         } else {
-            printf("è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥\n");
+            printf("ÊäÈë´íÎó£¬ÇëÖØÐÂÊäÈë\n");
             system("pause");
             system("cls");
         }
@@ -508,7 +509,7 @@ void Benke_statistic_Menu(){
 void Yanjiu_statistic_Menu(){
     while(1){
         char choice;
-        printf("********************ç ”ç©¶ç”Ÿæˆç»©ç®¡ç†ç³»ç»Ÿ********************\n");
+        printf("********************ÑÐ¾¿Éú³É¼¨¹ÜÀíÏµÍ³********************\n");
         statisticsMenuPrint();
         scanf("%s", &choice);
         if (isdigit(choice)) {
@@ -524,13 +525,13 @@ void Yanjiu_statistic_Menu(){
                     Benke_Menu();
                     break;
                 default:
-                    printf("è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥\n");
+                    printf("ÊäÈë´íÎó£¬ÇëÖØÐÂÊäÈë\n");
                     system("pause");
                     system("cls");
                     break;
             }
         } else {
-            printf("è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥\n");
+            printf("ÊäÈë´íÎó£¬ÇëÖØÐÂÊäÈë\n");
             system("pause");
             system("cls");
         }
@@ -538,18 +539,18 @@ void Yanjiu_statistic_Menu(){
 }
 
 void searchMenuPrint(){
-    printf("_1_æŸ¥è¯¢å…¨éƒ¨å­¦ç”Ÿä¿¡æ¯\n");
-    printf("_2_æŸ¥è¯¢æŸä¸ªç­çº§çš„å…¨éƒ¨å­¦ç”Ÿä¿¡æ¯\n");
-    printf("_3_æŸ¥è¯¢æŸä¸ªå­¦ç”Ÿä¿¡æ¯\n");
-    printf("_4_æŸ¥è¯¢æŸç­æŸç§‘ç›®ä¸åŠæ ¼å­¦ç”Ÿä¿¡æ¯\n");
-    printf("_0_è¿”å›žä¸Šçº§\n");
-    printf("è¾“å…¥åºå·ï¼š");
+    printf("_1_²éÑ¯È«²¿Ñ§ÉúÐÅÏ¢\n");
+    printf("_2_²éÑ¯Ä³¸ö°à¼¶µÄÈ«²¿Ñ§ÉúÐÅÏ¢\n");
+    printf("_3_²éÑ¯Ä³¸öÑ§ÉúÐÅÏ¢\n");
+    printf("_4_²éÑ¯Ä³°àÄ³¿ÆÄ¿²»¼°¸ñÑ§ÉúÐÅÏ¢\n");
+    printf("_0_·µ»ØÉÏ¼¶\n");
+    printf("ÊäÈëÐòºÅ£º");
 }
 
 void Benke_search_Menu(){
     while(1){
         char choice;
-        printf("********************æœ¬ç§‘ç”Ÿæˆç»©ç®¡ç†ç³»ç»Ÿ********************\n");
+        printf("********************±¾¿ÆÉú³É¼¨¹ÜÀíÏµÍ³********************\n");
         searchMenuPrint();
         scanf("%s", &choice);
         if (isdigit(choice)) {
@@ -572,13 +573,13 @@ void Benke_search_Menu(){
                     Benke_Menu();
                     break;
                 default:
-                    printf("è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥\n");
+                    printf("ÊäÈë´íÎó£¬ÇëÖØÐÂÊäÈë\n");
                     system("pause");
                     system("cls");
                     break;
             }
         } else {
-            printf("è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥\n");
+            printf("ÊäÈë´íÎó£¬ÇëÖØÐÂÊäÈë\n");
             system("pause");
             system("cls");
         }
@@ -588,7 +589,7 @@ void Benke_search_Menu(){
 void Yanjiu_search_Menu(){
     while(1){
         char choice;
-        printf("********************ç ”ç©¶ç”Ÿæˆç»©ç®¡ç†ç³»ç»Ÿ********************\n");
+        printf("********************ÑÐ¾¿Éú³É¼¨¹ÜÀíÏµÍ³********************\n");
         searchMenuPrint();
         scanf("%s", &choice);
         if (isdigit(choice)) {
@@ -611,13 +612,13 @@ void Yanjiu_search_Menu(){
                     Benke_Menu();
                     break;
                 default:
-                    printf("è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥\n");
+                    printf("ÊäÈë´íÎó£¬ÇëÖØÐÂÊäÈë\n");
                     system("pause");
                     system("cls");
                     break;
             }
         } else {
-            printf("è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥\n");
+            printf("ÊäÈë´íÎó£¬ÇëÖØÐÂÊäÈë\n");
             system("pause");
             system("cls");
         }
