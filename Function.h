@@ -346,12 +346,12 @@ void displayData_1(UND stu) {
     if(stu.num!=-1){
         switch (stu.sex) {
             case male:
-                printf("%-4d %-4s   男  %-3s  %-3s  %-3d  %-4d  %-4d %-4d    %-3d    %-3d\n", stu.num, stu.name, stu.major,
+                printf("%-4d %-4s   男  %-3s  %-9s  %-3d  %-4d  %-4d %-3d    %-5d    %-3d\n", stu.num, stu.name, stu.major,
                        stu.banji, stu.score[0],
                        stu.score[1], stu.score[2], stu.score[3], stu.score[4], stu.score[5]);
                 break;
             case female:
-                printf("%-4d %-4s   女  %-3s  %-3s  %-3d  %-4d  %-4d %-4d    %-3d    %-3d\n", stu.num, stu.name, stu.major,
+                printf("%-4d %-4s   女  %-3s  %-9s  %-3d  %-4d  %-4d %-3d    %-5d    %-3d\n", stu.num, stu.name, stu.major,
                        stu.banji, stu.score[0],
                        stu.score[1], stu.score[2], stu.score[3], stu.score[4], stu.score[5]);
                 break;
@@ -868,7 +868,7 @@ void getPage_2(){
 
 
 void infoPrint_1(){
-    printf("\n学号 姓名 性别  专业  班级   高数 C语言 英语 总成绩 班级排名 校级排名\n");
+    printf("\n学号 姓名 性别  专业  班级       高数 C语言 英语 总成绩 班级排名 校级排名\n");
 }
 
 

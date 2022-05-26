@@ -7,7 +7,7 @@ typedef struct undergraduate
     char name[15];//姓名
     enum Sex sex;//性别
     char major[30];//专业
-    char banji[5];//班级
+    char banji[10];//班级
     /*成绩*/
     int score[12];//高数成绩、C语言成绩、英语成绩、总成绩、班级排名、校级排名
     struct undergraduate *next;

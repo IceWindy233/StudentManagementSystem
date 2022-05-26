@@ -61,11 +61,11 @@ void Main_Menu(){
     }*/
     //modifyStudent();
 //    printf("-----输入----\n");
-//    for(int i=0;i<20;i++){
-//        k=scanf_2();
-//        addNode_2(k);
-//    }
-//    getPage_2();
+    for(int i=0;i<20;i++){
+        a=scanf_1();
+        addNode_1(a);
+    }
+    getPage_1();
     //printf("-----输入本科生班级----\n");
     /*scanf("%s",banji);
     searchByClass_1(banji);*/
