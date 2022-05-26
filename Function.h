@@ -748,7 +748,7 @@ void getPage_1(){
         infoPrint_1();
         printften_1(page);
         printf("-------------------------------当前为第%d页,共%d页--------------------------------\n",page,allpage);
-        printf("首页请按“a”键 上一页请按“w”键 下一页请按“s”键 尾页请按“d”键 退出请按“0”键\n");
+        printf("首页请按“a”键 上一页请按“w”键 下一页请按“s”键 尾页请按“d”键 退出请按“0”键：");
         scanf("%c",&choice[0]);
         scanf("%c",&choice[1]);
         switch (choice[1]){
@@ -818,7 +818,7 @@ void getPage_2(){
         infoPrint_2();
         printften_2(page);
         printf("-------------------------------当前为第%d页,共%d页--------------------------------\n",page,allpage);
-        printf("首页请按“a”键 上一页请按“w”键 下一页请按“s”键 尾页请按“d”键 退出请按“0”键\n");
+        printf("首页请按“a”键 上一页请按“w”键 下一页请按“s”键 尾页请按“d”键 退出请按“0”键：");
         scanf("%c",&choice[0]);
         scanf("%c",&choice[1]);
         switch (choice[1]){
