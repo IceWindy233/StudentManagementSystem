@@ -55,7 +55,7 @@ void getPage_2();   //可分页显示研究生,(内置菜单)
 void infoPrint_1();
 void infoPrint_2();
 void searchByClass_1(char* banji);   //按班级显示本科生数据
-void searchByClass_2(int class,char*reserch);   //按班级和研究方向显示研究生数据
+void searchByClass_2(char*major, int class);   //按班级和研究方向显示研究生数据
 void searchByName(char* name);   //按名字显示本科生和研究生数据
 void searnraiidyClassCourse_1(char* banji,int course);   //按班级和课程查询不及格本科生,(course:课程号从零开始)
 void searnraiidyClassCourse_2(int class,int course);   //按班级和课程查询不及格研究生,(course:课程号从零开始)
@@ -727,6 +727,7 @@ void printften_2(int i)
 
 
 void getPage_1(){
+    sortAllByld_1(); //按照学号排序
     int totalstu = 0;   //人数
     char choice[2];
     int allpage;   //总页数
@@ -745,6 +746,7 @@ void getPage_1(){
     else allpage = totalstu / 10;
     while (1){
         system("cls");
+        printf("********************************本科生成绩管理系统*********************************\n");
         infoPrint_1();
         printften_1(page);
         printf("-------------------------------当前为第%d页,共%d页--------------------------------\n",page,allpage);
@@ -797,6 +799,7 @@ void getPage_1(){
 }
 
 void getPage_2(){
+    sortAllByld_2(); //按照学号排序
     int totalstu = 0;   //人数
     char choice[2];
     int allpage;   //总页数
@@ -815,6 +818,7 @@ void getPage_2(){
     else allpage = totalstu / 10;
     while (1){
         system("cls");
+        printf("********************************研究生成绩管理系统*********************************\n");
         infoPrint_2();
         printften_2(page);
         printf("-------------------------------当前为第%d页,共%d页--------------------------------\n",page,allpage);
@@ -891,11 +895,11 @@ void searchByClass_1(char* banji){
 }
 
 
-void searchByClass_2(int class,char*reserch){
+void searchByClass_2(char*major, int class){
     GRA *Head_2=Head2;
     int k=0;
     while(Head_2->next!=NULL){
-        if(Head_2->next->Class==class&&strcmp(Head_2->next->reserch,reserch)==0){
+        if(Head_2->next->Class==class&& strcmp(Head_2->next->major, major) == 0){
             displayData_2(*Head_2->next);
             k=1;
         }

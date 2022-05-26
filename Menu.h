@@ -6,33 +6,37 @@
 
 #endif
 #include "Function.h"
-//一级菜单
+//一二级菜单
 void Main_Menu();
-//二级菜单
 void MenuPrint();
 void Benke_Menu();
 void Yanjiu_Menu();
-//三级菜单
+//基本数据管理菜单
 void baseDataMenuPrint();
 void Benke_baseDataManage_Menu();
-void Yanjiu_baseDataManage_Menu();//基本数据管理菜单
+void Yanjiu_baseDataManage_Menu();
+//成绩管理菜单
 void scoreMenuPrint();
 void Benke_scoreManage_Menu();
-void Yanjiu_scoreManage_Menu();//成绩管理菜单
-void sortMenuPrint();
-void Benke_sort_Menu();
-void Yanjiu_sort_Menu();//成绩排序菜单
-void statisticsMenuPrint();
-void Benke_statistic_Menu();
-void Yanjiu_statistic_Menu();//数据统计菜单
-void searchMenuPrint();
-void Benke_search_Menu();
-void Yanjiu_search_Menu();//查询菜单
-//四级菜单
-void Benke_search_class_Menu();
-
-
-
+void Yanjiu_scoreManage_Menu();
+//成绩排序菜单
+void sortMenuPrint();//避免重复菜单打印代码
+void Benke_sort_Menu();//本科成绩排序菜单
+void Yanjiu_sort_Menu();//研究生成绩排序菜单
+//数据统计菜单
+void statisticsMenuPrint();//避免重复菜单打印代码
+void Benke_statistic_Menu();//本科生数据统计菜单
+void Yanjiu_statistic_Menu();//研究生数据统计菜单
+//查询菜单
+void searchMenuPrint();//避免重复菜单打印代码
+void Benke_search_Menu();//本科生查询菜单
+void Benke_search_class_Menu();//查询某个班级的全部学生信息
+void Benke_search_name_Menu();//查询某个学生信息
+void Benke_search_fail_Menu();//查询某班某科目不及格学生信息
+void Yanjiu_search_Menu();//研究生查询菜单
+void Yanjiu_search_class_Menu();//查询某个班级的全部学生信息
+void Yanjiu_search_name_Menu();//查询某个学生信息
+void Yanjiu_search_fail_Menu();//查询某班某科目不及格学生信息
 
 void Main_Menu(){
     //--------------测试用--------------
@@ -73,8 +77,8 @@ void Main_Menu(){
 //    }
 //    getPage_1();
 //    for(int i=0;i<20;i++){
-//        k=scanf_1();
-//        addNode_1(k);
+//        k=scanf_2();
+//        addNode_2(k);
 //    }
 //    getPage_2();
     //printf("-----输入本科生班级----\n");
@@ -576,9 +580,11 @@ void Benke_search_Menu(){
                     break;
                 case '3':
                     system("cls");
+                    Benke_search_name_Menu();
                     break;
                 case '4':
                     system("cls");
+                    Benke_search_fail_Menu();
                     break;
                 case '0':
                     system("cls");
@@ -612,9 +618,11 @@ void Yanjiu_search_Menu(){
                     break;
                 case '2':
                     system("cls");
+                    Yanjiu_search_class_Menu();
                     break;
                 case '3':
                     system("cls");
+                    Yanjiu_search_name_Menu();
                     break;
                 case '4':
                     system("cls");
@@ -642,7 +650,7 @@ void Benke_search_class_Menu(){
     while (1) {
         char choice[3];
         printf("********************本科生班级成绩查询********************\n");
-        printf("请输入班级名称(输入0返回上级)：");
+        printf("请输入班级(输入0返回上级)：");
         scanf("%s", choice);
         if(choice[0] == '0'){
             system("cls");
@@ -653,4 +661,92 @@ void Benke_search_class_Menu(){
             searchByClass_1(choice);
         }
     }
+}
+
+void Yanjiu_search_class_Menu(){
+    while (1) {
+        char major[3];
+        int choice;
+        printf("********************研究生班级成绩查询********************\n");
+        printf("请输入专业(输入0返回上级)：");
+        scanf("%s", major);
+        if(major[0] == '0'){
+            system("cls");
+            Yanjiu_search_Menu();
+        }else{
+            printf("请输入班级(输入0返回上级)：");
+            scanf("%d", &choice);
+            if(choice == 0){
+                system("cls");
+                Yanjiu_search_Menu();
+            }else{
+                system("cls");
+                infoPrint_2();
+                searchByClass_2(major, choice);
+            }
+        }
+    }
+}
+
+void Benke_search_name_Menu(){
+    while (1) {
+        char name[20];
+        printf("*********************本科生成绩查询*********************\n");
+        printf("请输入姓名(输入0返回上级)：");
+        scanf("%s", name);
+        if(name[0] == '0'){
+            system("cls");
+            Benke_search_Menu();
+        }else{
+            system("cls");
+            infoPrint_1();
+            searchByName(name);
+        }
+    }
+}
+
+void Yanjiu_search_name_Menu(){
+    while (1) {
+        char name[20];
+        printf("*********************研究生成绩查询*********************\n");
+        printf("请输入姓名(输入0返回上级)：");
+        scanf("%s", name);
+        if(name[0] == '0'){
+            system("cls");
+            Yanjiu_search_Menu();
+        }else{
+            system("cls");
+            infoPrint_2();
+            searchByName(name);
+        }
+    }
+}
+
+void Benke_search_fail_Menu(){
+    while (1) {
+        char banji[10];
+        int course;
+        printf("*********************本科生成绩查询*********************\n");
+        printf("请输入班级(输入0返回上级)：");
+        scanf("%s", banji);
+        if(banji[0] == '0'){
+            system("cls");
+            Benke_search_Menu();
+        }else{
+            printf("请输入课程(输入0返回上级)：");
+            scanf("%d", &course);
+            if(course == 0){
+                system("cls");
+                Benke_search_Menu();
+            }else{
+                system("cls");
+                infoPrint_1();
+                searnraiidyClassCourse_1(banji, course);
+            }
+        }
+    }
+}
+
+void Yanjiu_search_fail_Menu(){
+
 }
