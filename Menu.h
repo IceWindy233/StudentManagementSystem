@@ -6,10 +6,13 @@
 
 #endif
 #include "Function.h"
-void Main_Menu();//一级菜单
+//一级菜单
+void Main_Menu();
+//二级菜单
 void MenuPrint();
 void Benke_Menu();
-void Yanjiu_Menu();//二级菜单
+void Yanjiu_Menu();
+//三级菜单
 void baseDataMenuPrint();
 void Benke_baseDataManage_Menu();
 void Yanjiu_baseDataManage_Menu();//基本数据管理菜单
@@ -25,6 +28,9 @@ void Yanjiu_statistic_Menu();//数据统计菜单
 void searchMenuPrint();
 void Benke_search_Menu();
 void Yanjiu_search_Menu();//查询菜单
+//四级菜单
+void Benke_search_class_Menu();
+
 
 
 
@@ -62,8 +68,8 @@ void Main_Menu(){
     //modifyStudent();
 //    printf("-----输入----\n");
 //    for(int i=0;i<20;i++){
-//        k=scanf_2();
-//        addNode_2(k);
+//        k=scanf_1();
+//        addNode_1(k);
 //    }
 //    getPage_2();
     //printf("-----输入本科生班级----\n");
@@ -561,6 +567,7 @@ void Benke_search_Menu(){
                     break;
                 case '2':
                     system("cls");
+                    Benke_search_class_Menu();
                     break;
                 case '3':
                     system("cls");
@@ -621,6 +628,24 @@ void Yanjiu_search_Menu(){
             printf("输入错误，请重新输入\n");
             system("pause");
             system("cls");
+        }
+    }
+}
+
+
+void Benke_search_class_Menu(){
+    while (1) {
+        char choice[3];
+        printf("********************本科生班级成绩查询********************\n");
+        printf("请输入班级名称(输入0返回上级)：");
+        scanf("%s", choice);
+        if(choice[0] == '0'){
+            system("cls");
+            Benke_search_Menu();
+        } else {
+            system("cls");
+            infoPrint_1();
+            searchByClass_1(choice);
         }
     }
 }
