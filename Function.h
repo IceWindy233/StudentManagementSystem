@@ -728,7 +728,7 @@ void printften_2(int i)
 
 void getPage_1(){
     int totalstu = 0;   //人数
-    char ch[2];
+    char choice[2];
     int allpage;   //总页数
     int page = 1;  //当前页数
     UND * cnt;
@@ -743,81 +743,62 @@ void getPage_1(){
         allpage = totalstu / 10 + 1;
     }
     else allpage = totalstu / 10;
-    scanf("%c",&ch[1]);
-    infoPrint_1();
-    printften_1(page);
-    while (1)
-    {
-        printf("-------------------------------当前为第1页,共%d页--------------------------------\n", allpage);
+    while (1){
+        system("cls");
+        infoPrint_1();
+        printften_1(page);
+        printf("-------------------------------当前为第%d页,共%d页--------------------------------\n",page,allpage);
         printf("首页请按“a”键 上一页请按“w”键 下一页请按“s”键 尾页请按“d”键 退出请按“0”键\n");
-        scanf("%c",&ch[0]);
-        scanf("%c",&ch[1]);
-        if (ch[0] == 48) {
-            system("cls");
-            break;
-        }
-        switch (ch[0])
-        {
-            case 100:
-            {
-                page=allpage;
-                infoPrint_1();
-                printften_1(page);
-                printf("-------------------------------当前为第%d页,共%d页--------------------------------\n",page, allpage);
-                break;
-            }
-            case 115:
-            {
-                if(page==allpage)
-                {
-                    printf("已是尾页\n");
-                    break;
+        scanf("%c",&choice[0]);
+        scanf("%c",&choice[1]);
+        switch (choice[1]){
+            case 'a':
+                if(page == 1){
+                    printf("已经是首页!\n");
+                    system("pause");
+                }else {
+                    page = 1;
                 }
-                page++;
-                infoPrint_1();
-                printften_1(page);
-                printf("-------------------------------当前为第%d页,共%d页--------------------------------\n",page, allpage);
                 break;
-            }
-            case 119:
-            {
-                if(page==1)printf("已是首页\n");
-                else
-                {
+            case 'w':
+                if(page == 1){
+                    printf("已经是首页!\n");
+                    system("pause");
+                }else if(page > 1){
                     page--;
-                    infoPrint_1();
-                    printften_1(page);
-                    printf("-------------------------------当前为第1页,共%d页--------------------------------\n", allpage);
                 }
                 break;
-            }
-            case 97:
-            {
-                if(page==1)printf("已是首页\n");
-                else
-                {
-                    page=1;
-                    infoPrint_1();
-                    printften_1(page);
-                    printf("-------------------------------当前为第%d页,共%d页--------------------------------\n", page,allpage);
+            case 's':
+                if(page == allpage){
+                    printf("已经是尾页!\n");
+                    system("pause");
+                }else if(page < allpage){
+                    page++;
                 }
                 break;
-            }
+            case 'd':
+                if (page == allpage){
+                    printf("已经是尾页!\n");
+                    system("pause");
+                }else{
+                    page = allpage;
+                }
+                break;
+            case '0':
+                system("cls");
+                return;
             default:
-                printf("输入错误，请重新输入\n");
+                printf("输入错误，请重新输入！\n");
                 system("pause");
                 system("cls");
                 break;
         }
-        system("pause");
-        system("cls");
     }
 }
 
-
 void getPage_2(){
     int totalstu = 0;   //人数
-    char ch[2];
+    char choice[2];
     int allpage;   //总页数
     int page = 1;  //当前页数
     GRA * cnt;
@@ -832,68 +813,56 @@ void getPage_2(){
         allpage = totalstu / 10 + 1;
     }
     else allpage = totalstu / 10;
-    scanf("%c",&ch[1]);
-    infoPrint_2();
-    printften_2(page);
-    printf("-------------------------------当前为第%d页,共%d页--------------------------------\n",page,allpage);
-    while (1)
-    {
+    while (1){
+        system("cls");
+        infoPrint_2();
+        printften_2(page);
+        printf("-------------------------------当前为第%d页,共%d页--------------------------------\n",page,allpage);
         printf("首页请按“a”键 上一页请按“w”键 下一页请按“s”键 尾页请按“d”键 退出请按“0”键\n");
-        scanf("%c",&ch[0]);
-        scanf("%c",&ch[1]);
-        if (ch[0] == '0') break;
-        switch (ch[0])
-        {
-            case 'd':
-            {
-                page=allpage;
-                infoPrint_2();
-                printften_2(page);
-                printf("-------------------------------------当前为第%d页,共%d页--------------------------------------\n",page, allpage);
-                break;
-            }
-            case 's':
-            {
-                if(page==allpage)
-                {
-                    printf("已是尾页\n");
-                    break;
-                }
-                page++;
-                infoPrint_2();
-                printften_2(page);
-                printf("-------------------------------------当前为第%d页,共%d页--------------------------------------\n",page, allpage);
-                break;
-            }
-            case 'w':
-            {
-                if(page==1)printf("已是首页\n");
-                else
-                {
-                    page--;
-                    infoPrint_2();
-                    printften_2(page);
-                    printf("-------------------------------------当前为第%d页,共%d页--------------------------------------\n",page,allpage);
-                }
-                break;
-            }
+        scanf("%c",&choice[0]);
+        scanf("%c",&choice[1]);
+        switch (choice[1]){
             case 'a':
-            {
-                if(page==1)printf("已是首页\n");
-                else
-                {
-                    page=1;
-                    infoPrint_2();
-                    printften_2(page);
-                    printf("-------------------------------------当前为第%d页,共%d页--------------------------------------\n", page,allpage);
+                if(page == 1){
+                    printf("已经是首页!\n");
+                    system("pause");
+                }else {
+                    page = 1;
                 }
                 break;
-            }
+            case 'w':
+                if(page == 1){
+                    printf("已经是首页!\n");
+                    system("pause");
+                }else if(page > 1){
+                    page--;
+                }
+                break;
+            case 's':
+                if(page == allpage){
+                    printf("已经是尾页!\n");
+                    system("pause");
+                }else if(page < allpage){
+                    page++;
+                }
+                break;
+            case 'd':
+                if (page == allpage){
+                    printf("已经是尾页!\n");
+                    system("pause");
+                }else{
+                    page = allpage;
+                }
+                break;
+            case '0':
+                system("cls");
+                return;
             default:
-                //system("cls");
+                printf("输入错误，请重新输入！\n");
+                system("pause");
+                system("cls");
                 break;
         }
-        //system("cls");
     }
 }
 
@@ -904,7 +873,7 @@ void infoPrint_1(){
 
 
 void infoPrint_2(){
-    printf("学号  姓名 性别  专业  班级 研究方向    导师名字 综合成绩 论文成绩 总成绩 班级排名 校级排名\n");
+    printf("\n学号  姓名 性别  专业  班级 研究方向    导师名字 综合成绩 论文成绩 总成绩 班级排名 校级排名\n");
 }
 
 

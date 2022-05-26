@@ -60,12 +60,12 @@ void Main_Menu(){
         Head_1=Head_1->next;
     }*/
     //modifyStudent();
-    printf("-----输入----\n");
-    for(int i=0;i<20;i++){
-        k=scanf_2();
-        addNode_2(k);
-    }
-    getPage_2();
+//    printf("-----输入----\n");
+//    for(int i=0;i<20;i++){
+//        k=scanf_2();
+//        addNode_2(k);
+//    }
+//    getPage_2();
     //printf("-----输入本科生班级----\n");
     /*scanf("%s",banji);
     searchByClass_1(banji);*/
@@ -76,14 +76,14 @@ void Main_Menu(){
     scanf("%s%d",banji,&course);
     searnraiidyClassCourse_1( banji, course);*/
     //sortAllByld();
-    printf("--------1-------\n");
-    ReturnsModifications();
-    //printf("---------------");
-    //SwapNodes_1(Head_1->next,Head_1->next->next);
-    sortAll_1();
-    //sayeToFile();
-    printf("--------2-------\n");
-    ReturnsModifications();
+//    printf("--------1-------\n");
+//    ReturnsModifications();
+//    //printf("---------------");
+//    //SwapNodes_1(Head_1->next,Head_1->next->next);
+//    sortAll_1();
+//    //sayeToFile();
+//    printf("--------2-------\n");
+//    ReturnsModifications();
     //exit(0);
     //--------------------------------
 
