@@ -55,7 +55,7 @@ void getPage_2();   //可分页显示研究生,(内置菜单)
 void infoPrint_1();
 void infoPrint_2();
 void searchByClass_1(char* banji);   //按班级显示本科生数据
-void searchByClass_2(int class);   //按班级显示研究生数据
+void searchByClass_2(int class,char*reserch);   //按班级和研究方向显示研究生数据
 void searchByName(char* name);   //按名字显示本科生和研究生数据
 void searnraiidyClassCourse_1(char* banji,int course);   //按班级和课程查询不及格本科生,(course:课程号从零开始)
 void searnraiidyClassCourse_2(int class,int course);   //按班级和课程查询不及格研究生,(course:课程号从零开始)
@@ -899,7 +899,7 @@ void getPage_2(){
 
 
 void infoPrint_1(){
-    printf("\n学号 姓名 性别  专业  班级 高数 C语言 英语 总成绩 班级排名 校级排名\n");
+    printf("\n学号 姓名 性别  专业  班级   高数 C语言 英语 总成绩 班级排名 校级排名\n");
 }
 
 
@@ -922,11 +922,11 @@ void searchByClass_1(char* banji){
 }
 
 
-void searchByClass_2(int class){
+void searchByClass_2(int class,char*reserch){
     GRA *Head_2=Head2;
     int k=0;
     while(Head_2->next!=NULL){
-        if(Head_2->next->Class==class){
+        if(Head_2->next->Class==class&&strcmp(Head_2->next->reserch,reserch)==0){
             displayData_2(*Head_2->next);
             k=1;
         }
