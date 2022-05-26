@@ -58,7 +58,7 @@ void searchByClass_1(char* banji);   //按班级显示本科生数据
 void searchByClass_2(char*major, int class);   //按班级和研究方向显示研究生数据
 void searchByName(char* name);   //按名字显示本科生和研究生数据
 void searnraiidyClassCourse_1(char* banji,int course);   //按班级和课程查询不及格本科生,(course:课程号从零开始)
-void searnraiidyClassCourse_2(int class,int course);   //按班级和课程查询不及格研究生,(course:课程号从零开始)
+void searnraiidyClassCourse_2(int class,char *major,int course);   //按班级和课程查询不及格研究生,(course:课程号从零开始)
 void sortAllByld_1();   //按学号id从小到大排序本科生,将被删除学生放到最前面
 void sortAllByld_2();   //按学号id从小到大排序研究生,将被删除学生放到最前面
 void SwapNodes_1(UND* stu1,UND* stu2);   //交换本科生节点
@@ -947,11 +947,11 @@ void searnraiidyClassCourse_1(char* banji,int course){
 }
 
 
-void searnraiidyClassCourse_2(int class,int course){
+void searnraiidyClassCourse_2(int class,char*major,int course){
     GRA *Head_2=Head2;
     int k=0;
     while(Head_2->next!=NULL){
-        if(Head_2->next->Class==class){
+        if(Head_2->next->Class==class&& strcmp(Head_2->next->major,major)){
             if(Head_2->next->score[course]<60){
                 displayData_2(*Head_2->next);
                 k=1;
