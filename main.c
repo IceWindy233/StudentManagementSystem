@@ -1,7 +1,7 @@
 #include "Menu.h"
 int main()
 {
-//    system("chcp 65001");
+    system("chcp 65001");
     setbuf(stdout,NULL);
     readFromFile();
     Main_Menu();
