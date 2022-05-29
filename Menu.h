@@ -22,7 +22,9 @@ void Yanjiu_scoreManage_Menu();
 //成绩排序菜单
 void sortMenuPrint();//避免重复菜单打印代码
 void Benke_sort_Menu();//本科成绩排序菜单
+void Benke_sort_ByClass_Menu();//本科成绩按班级排序菜单
 void Yanjiu_sort_Menu();//研究生成绩排序菜单
+void Yanjiu_sort_ByClass_Menu();//研究生成绩按班级排序菜单
 //数据统计菜单
 void statisticsMenuPrint();//避免重复菜单打印代码
 void Benke_statistic_Menu();//本科生数据统计菜单
@@ -76,10 +78,10 @@ void Main_Menu(){
 //        addNode_1(a);
 //    }
 //    getPage_1();
-//    for(int i=0;i<20;i++){
-//        k=scanf_2();
-//        addNode_2(k);
-//    }
+    for(int i=0;i<20;i++){
+        k=scanf_2();
+        addNode_2(k);
+    }
 //    getPage_2();
     //printf("-----输入本科生班级----\n");
     /*scanf("%s",banji);
@@ -102,7 +104,7 @@ void Main_Menu(){
     //exit(0);
     //--------------------------------
 
-    system("cls");
+    system("clear");
     while(1){
         char choice;
         printf("*************************** 菜单 ***************************\n");
@@ -114,24 +116,24 @@ void Main_Menu(){
         if(isdigit(choice)){
             switch(choice){
                 case '1':
-                    system("cls");
+                    system("clear");
                     Benke_Menu();
                     break;
                 case '2':
-                    system("cls");
+                    system("clear");
                     Yanjiu_Menu();
                     break;
                 case '0':
                     sayeToFile();
                 default:
                     printf("输入错误，请重新输入\n");
-                    system("pause");
-                    system("cls");
+                    system("read");
+                    system("clear");
             }
         }else{
             printf("输入错误，请重新输入\n");
-            system("pause");
-            system("cls");
+            system("read");
+            system("clear");
         }
     }
 }
@@ -160,38 +162,36 @@ void Benke_Menu(){
         if (isdigit(choice)) {
             switch (choice) {
                 case '1':
-                    system("cls");
+                    system("clear");
                     Benke_baseDataManage_Menu();
                     break;
                 case '2':
-                    system("cls");
+                    system("clear");
                     Benke_scoreManage_Menu();
                     break;
                 case '3':
-                    system("cls");
+                    system("clear");
                     Benke_sort_Menu();
                     break;
                 case '4':
-                    system("cls");
+                    system("clear");
                     Benke_statistic_Menu();
                     break;
                 case '5':
-                    system("cls");
+                    system("clear");
                     Benke_search_Menu();
                     break;
                 case '0':
-                    Main_Menu();
-                    break;
+                    return;
                 default:
                     printf("输入错误，请重新输入\n");
-                    system("pause");
-                    system("cls");
-                    break;
+                    system("read");
+                    system("clear");
             }
         } else {
             printf("输入错误，请重新输入\n");
-            system("pause");
-            system("cls");
+            system("read");
+            system("clear");
         }
     }
 }
@@ -205,38 +205,36 @@ void Yanjiu_Menu(){
         if (isdigit(choice)) {
             switch (choice) {
                 case '1':
-                    system("cls");
+                    system("clear");
                     Yanjiu_baseDataManage_Menu();
                     break;
                 case '2':
-                    system("cls");
+                    system("clear");
                     Yanjiu_scoreManage_Menu();
                     break;
                 case '3':
-                    system("cls");
+                    system("clear");
                     Yanjiu_sort_Menu();
                     break;
                 case '4':
-                    system("cls");
+                    system("clear");
                     Yanjiu_statistic_Menu();
                     break;
                 case '5':
-                    system("cls");
+                    system("clear");
                     Yanjiu_search_Menu();
                     break;
                 case '0':
-                    Main_Menu();
-                    break;
+                    return;
                 default:
                     printf("输入错误，请重新输入\n");
-                    system("pause");
-                    system("cls");
-                    break;
+                    system("read");
+                    system("clear");
             }
         } else {
             printf("输入错误，请重新输入\n");
-            system("pause");
-            system("cls");
+            system("read");
+            system("clear");
         }
     }
 }
@@ -259,31 +257,30 @@ void Benke_baseDataManage_Menu(){
         if (isdigit(choice)) {
             switch (choice) {
                 case '1':
-                    system("cls");
+                    system("clear");
                     break;
                 case '2':
-                    system("cls");
+                    system("clear");
                     break;
                 case '3':
-                    system("cls");
+                    system("clear");
                     break;
                 case '4':
-                    system("cls");
+                    system("clear");
                     break;
                 case '0':
-                    system("cls");
-                    Benke_Menu();
-                    break;
+                    system("clear");
+                    return;
                 default:
                     printf("输入错误，请重新输入\n");
-                    system("pause");
-                    system("cls");
+                    system("read");
+                    system("clear");
                     break;
             }
         } else {
             printf("输入错误，请重新输入\n");
-            system("pause");
-            system("cls");
+            system("read");
+            system("clear");
         }
     }
 }
@@ -297,31 +294,30 @@ void Yanjiu_baseDataManage_Menu(){
         if (isdigit(choice)) {
             switch (choice) {
                 case '1':
-                    system("cls");
+                    system("clear");
                     break;
                 case '2':
-                    system("cls");
+                    system("clear");
                     break;
                 case '3':
-                    system("cls");
+                    system("clear");
                     break;
                 case '4':
-                    system("cls");
+                    system("clear");
                     break;
                 case '0':
-                    system("cls");
-                    Yanjiu_Menu();
-                    break;
+                    system("clear");
+                    return;
                 default:
                     printf("输入错误，请重新输入\n");
-                    system("pause");
-                    system("cls");
+                    system("read");
+                    system("clear");
                     break;
             }
         } else {
             printf("输入错误，请重新输入\n");
-            system("pause");
-            system("cls");
+            system("read");
+            system("clear");
         }
     }
 }
@@ -344,31 +340,30 @@ void Benke_scoreManage_Menu(){
         if (isdigit(choice)) {
             switch (choice) {
                 case '1':
-                    system("cls");
+                    system("clear");
                     break;
                 case '2':
-                    system("cls");
+                    system("clear");
                     break;
                 case '3':
-                    system("cls");
+                    system("clear");
                     break;
                 case '4':
-                    system("cls");
+                    system("clear");
                     break;
                 case '0':
-                    system("cls");
-                    Benke_Menu();
-                    break;
+                    system("clear");
+                    return;
                 default:
                     printf("输入错误，请重新输入\n");
-                    system("pause");
-                    system("cls");
+                    system("read");
+                    system("clear");
                     break;
             }
         } else {
             printf("输入错误，请重新输入\n");
-            system("pause");
-            system("cls");
+            system("read");
+            system("clear");
         }
     }
 }
@@ -382,31 +377,30 @@ void Yanjiu_scoreManage_Menu(){
         if (isdigit(choice)) {
             switch (choice) {
                 case '1':
-                    system("cls");
+                    system("clear");
                     break;
                 case '2':
-                    system("cls");
+                    system("clear");
                     break;
                 case '3':
-                    system("cls");
+                    system("clear");
                     break;
                 case '4':
-                    system("cls");
+                    system("clear");
                     break;
                 case '0':
-                    system("cls");
-                    Benke_Menu();
-                    break;
+                    system("clear");
+                    return;
                 default:
                     printf("输入错误，请重新输入\n");
-                    system("pause");
-                    system("cls");
+                    system("read");
+                    system("clear");
                     break;
             }
         } else {
             printf("输入错误，请重新输入\n");
-            system("pause");
-            system("cls");
+            system("read");
+            system("clear");
         }
     }
 }
@@ -427,25 +421,26 @@ void Benke_sort_Menu(){
         if (isdigit(choice)) {
             switch (choice) {
                 case '1':
-                    system("cls");
+                    system("clear");
+                    sortAllAndShow_1();
                     break;
                 case '2':
-                    system("cls");
+                    system("clear");
+                    Benke_sort_ByClass_Menu();
                     break;
                 case '0':
-                    system("cls");
-                    Benke_Menu();
-                    break;
+                    system("clear");
+                    return;
                 default:
                     printf("输入错误，请重新输入\n");
-                    system("pause");
-                    system("cls");
+                    system("read");
+                    system("clear");
                     break;
             }
         } else {
             printf("输入错误，请重新输入\n");
-            system("pause");
-            system("cls");
+            system("read");
+            system("clear");
         }
     }
 }
@@ -459,25 +454,25 @@ void Yanjiu_sort_Menu(){
         if (isdigit(choice)) {
             switch (choice) {
                 case '1':
-                    system("cls");
+                    system("clear");
+                    sortAllAndShow_2();
                     break;
                 case '2':
-                    system("cls");
+                    system("clear");
                     break;
                 case '0':
-                    system("cls");
-                    Benke_Menu();
-                    break;
+                    system("clear");
+                    return;
                 default:
                     printf("输入错误，请重新输入\n");
-                    system("pause");
-                    system("cls");
+                    system("read");
+                    system("clear");
                     break;
             }
         } else {
             printf("输入错误，请重新输入\n");
-            system("pause");
-            system("cls");
+            system("read");
+            system("clear");
         }
     }
 }
@@ -498,25 +493,24 @@ void Benke_statistic_Menu(){
         if (isdigit(choice)) {
             switch (choice) {
                 case '1':
-                    system("cls");
+                    system("clear");
                     break;
                 case '2':
-                    system("cls");
+                    system("clear");
                     break;
                 case '0':
-                    system("cls");
-                    Benke_Menu();
-                    break;
+                    system("clear");
+                    return;
                 default:
                     printf("输入错误，请重新输入\n");
-                    system("pause");
-                    system("cls");
+                    system("read");
+                    system("clear");
                     break;
             }
         } else {
             printf("输入错误，请重新输入\n");
-            system("pause");
-            system("cls");
+            system("read");
+            system("clear");
         }
     }
 }
@@ -530,25 +524,24 @@ void Yanjiu_statistic_Menu(){
         if (isdigit(choice)) {
             switch (choice) {
                 case '1':
-                    system("cls");
+                    system("clear");
                     break;
                 case '2':
-                    system("cls");
+                    system("clear");
                     break;
                 case '0':
-                    system("cls");
-                    Benke_Menu();
-                    break;
+                    system("clear");
+                    return;
                 default:
                     printf("输入错误，请重新输入\n");
-                    system("pause");
-                    system("cls");
+                    system("read");
+                    system("clear");
                     break;
             }
         } else {
             printf("输入错误，请重新输入\n");
-            system("pause");
-            system("cls");
+            system("read");
+            system("clear");
         }
     }
 }
@@ -571,35 +564,34 @@ void Benke_search_Menu(){
         if (isdigit(choice)) {
             switch (choice) {
                 case '1':
-                    system("cls");
+                    system("clear");
                     getPage_1();
                     break;
                 case '2':
-                    system("cls");
+                    system("clear");
                     Benke_search_class_Menu();
                     break;
                 case '3':
-                    system("cls");
+                    system("clear");
                     Benke_search_name_Menu();
                     break;
                 case '4':
-                    system("cls");
+                    system("clear");
                     Benke_search_fail_Menu();
                     break;
                 case '0':
-                    system("cls");
-                    Benke_Menu();
-                    break;
+                    system("clear");
+                    return;
                 default:
                     printf("输入错误，请重新输入\n");
-                    system("pause");
-                    system("cls");
+                    system("read");
+                    system("clear");
                     break;
             }
         } else {
             printf("输入错误，请重新输入\n");
-            system("pause");
-            system("cls");
+            system("read");
+            system("clear");
         }
     }
 }
@@ -613,34 +605,34 @@ void Yanjiu_search_Menu(){
         if (isdigit(choice)) {
             switch (choice) {
                 case '1':
-                    system("cls");
+                    system("clear");
                     getPage_2();
                     break;
                 case '2':
-                    system("cls");
+                    system("clear");
                     Yanjiu_search_class_Menu();
                     break;
                 case '3':
-                    system("cls");
+                    system("clear");
                     Yanjiu_search_name_Menu();
                     break;
                 case '4':
-                    system("cls");
+                    system("clear");
+                    Yanjiu_search_fail_Menu();
                     break;
                 case '0':
-                    system("cls");
-                    Benke_Menu();
-                    break;
+                    system("clear");
+                    return;
                 default:
                     printf("输入错误，请重新输入\n");
-                    system("pause");
-                    system("cls");
+                    system("read");
+                    system("clear");
                     break;
             }
         } else {
             printf("输入错误，请重新输入\n");
-            system("pause");
-            system("cls");
+            system("read");
+            system("clear");
         }
     }
 }
@@ -653,10 +645,10 @@ void Benke_search_class_Menu(){
         printf("请输入班级(输入0返回上级)：");
         scanf("%s", choice);
         if(choice[0] == '0'){
-            system("cls");
-            Benke_search_Menu();
+            system("clear");
+            return;
         } else {
-            system("cls");
+            system("clear");
             infoPrint_1();
             searchByClass_1(choice);
         }
@@ -671,16 +663,16 @@ void Yanjiu_search_class_Menu(){
         printf("请输入专业(输入0返回上级)：");
         scanf("%s", major);
         if(major[0] == '0'){
-            system("cls");
-            Yanjiu_search_Menu();
+            system("clear");
+            return;
         }else{
             printf("请输入班级(输入0返回上级)：");
             scanf("%d", &choice);
             if(choice == 0){
-                system("cls");
-                Yanjiu_search_Menu();
+                system("clear");
+                return;
             }else{
-                system("cls");
+                system("clear");
                 infoPrint_2();
                 searchByClass_2(major, choice);
             }
@@ -695,10 +687,10 @@ void Benke_search_name_Menu(){
         printf("请输入姓名(输入0返回上级)：");
         scanf("%s", name);
         if(name[0] == '0'){
-            system("cls");
-            Benke_search_Menu();
+            system("clear");
+            return;
         }else{
-            system("cls");
+            system("clear");
             infoPrint_1();
             searchByName(name);
         }
@@ -712,10 +704,10 @@ void Yanjiu_search_name_Menu(){
         printf("请输入姓名(输入0返回上级)：");
         scanf("%s", name);
         if(name[0] == '0'){
-            system("cls");
-            Yanjiu_search_Menu();
+            system("clear");
+            return;
         }else{
-            system("cls");
+            system("clear");
             infoPrint_2();
             searchByName(name);
         }
@@ -730,16 +722,16 @@ void Benke_search_fail_Menu(){
         printf("请输入班级(输入0返回上级)：");
         scanf("%s", banji);
         if(banji[0] == '0'){
-            system("cls");
-            Benke_search_Menu();
+            system("clear");
+            return;
         }else{
             printf("请输入课程(输入0返回上级)：");
             scanf("%d", &course);
             if(course == 0){
-                system("cls");
-                Benke_search_Menu();
+                system("clear");
+                return;
             }else{
-                system("cls");
+                system("clear");
                 infoPrint_1();
                 searnraiidyClassCourse_1(banji, course);
             }
@@ -748,5 +740,55 @@ void Benke_search_fail_Menu(){
 }
 
 void Yanjiu_search_fail_Menu(){
+    while (1) {
+        char major[3];
+        int course;
+        int class;
+        printf("*********************研究生成绩查询*********************\n");
+        printf("请输入专业(输入0返回上级)：");
+        scanf("%s", major);
+        if(major[0] == '0'){
+            system("clear");
+            return;
+        }else{
+            printf("请输入班级(输入0返回上级)：");
+            scanf("%d", &class);
+            if(class == 0){
+                system("clear");
+                return;
+            }else{
+                printf("请输入课程(输入0返回上级)：");
+                scanf("%d", &course);
+                if(course == 0){
+                    system("clear");
+                    return;
+                }else{
+                    system("clear");
+                    infoPrint_2();
+                    searnraiidyClassCourse_2(class, major, course);
+                }
+            }
+        }
+    }
+}
+
+void Benke_sort_ByClass_Menu(){
+    while (1) {
+        char banji[10];
+        printf("********************本科生成绩排序********************\n");
+        printf("请输入班级(输入0返回上级)：");
+        scanf("%s", banji);
+        if(banji[0] == '0'){
+            system("clear");
+            return;
+        }else{
+            system("clear");
+            infoPrint_1();
+            sortAllByClass_1(banji);
+        }
+    }
+}
+
+void Yanjiu_sort_ByClass_Menu(){
 
 }
