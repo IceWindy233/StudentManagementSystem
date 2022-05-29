@@ -13,7 +13,6 @@
 #include <string.h>
 #endif
 #include "Base.h"
-#include <conio.h>
 //-------全局变量定义
 
 UND* Head1={NULL};   //本科生链表头指针(不要修改,以 UND* Head_1=Head1 的形式调用)
@@ -68,9 +67,9 @@ void sortAll_2();   //按总成绩从高到低排序研究生
 void sortAllAndShow_1();   //按总成绩从高到低排序本科生,并显示
 void sortAllAndShow_2();   //按总成绩从高到低排序研究生,并显示
 UND* returnsClassHead_1(char *banji);   //返回同班级本科生链表头
-GRA* returnsClassHead_2(int class);   //返回同班级研究生链表头
+GRA* returnsClassHead_2(char*major, int class);   //返回同班级研究生链表头
 void sortAllByClass_1(char *banji);   //将某班本科生数据按总成绩从高到低排序并显示
-void sortAllByClass_2(int class);   //将某班研究生数据按总成绩从高到低排序并显示
+void sortAllByClass_2(char*major,int class);   //将某班研究生数据按总成绩从高到低排序并显示
 //-------
 
 
@@ -745,7 +744,7 @@ void getPage_1(){
     }
     else allpage = totalstu / 10;
     while (1){
-        system("cls");
+        system("clear");
         printf("********************************本科生成绩管理系统*********************************\n");
         infoPrint_1();
         printften_1(page);
@@ -757,7 +756,7 @@ void getPage_1(){
             case 'a':
                 if(page == 1){
                     printf("已经是首页!\n");
-                    system("pause");
+                    system("read");
                 }else {
                     page = 1;
                 }
@@ -765,7 +764,7 @@ void getPage_1(){
             case 'w':
                 if(page == 1){
                     printf("已经是首页!\n");
-                    system("pause");
+                    system("read");
                 }else if(page > 1){
                     page--;
                 }
@@ -773,7 +772,7 @@ void getPage_1(){
             case 's':
                 if(page == allpage){
                     printf("已经是尾页!\n");
-                    system("pause");
+                    system("read");
                 }else if(page < allpage){
                     page++;
                 }
@@ -781,18 +780,18 @@ void getPage_1(){
             case 'd':
                 if (page == allpage){
                     printf("已经是尾页!\n");
-                    system("pause");
+                    system("read");
                 }else{
                     page = allpage;
                 }
                 break;
             case '0':
-                system("cls");
+                system("clear");
                 return;
             default:
                 printf("输入错误，请重新输入！\n");
-                system("pause");
-                system("cls");
+                system("read");
+                system("clear");
                 break;
         }
     }
@@ -817,7 +816,7 @@ void getPage_2(){
     }
     else allpage = totalstu / 10;
     while (1){
-        system("cls");
+        system("clear");
         printf("********************************研究生成绩管理系统*********************************\n");
         infoPrint_2();
         printften_2(page);
@@ -829,7 +828,7 @@ void getPage_2(){
             case 'a':
                 if(page == 1){
                     printf("已经是首页!\n");
-                    system("pause");
+                    system("read");
                 }else {
                     page = 1;
                 }
@@ -837,7 +836,7 @@ void getPage_2(){
             case 'w':
                 if(page == 1){
                     printf("已经是首页!\n");
-                    system("pause");
+                    system("read");
                 }else if(page > 1){
                     page--;
                 }
@@ -845,7 +844,7 @@ void getPage_2(){
             case 's':
                 if(page == allpage){
                     printf("已经是尾页!\n");
-                    system("pause");
+                    system("read");
                 }else if(page < allpage){
                     page++;
                 }
@@ -853,18 +852,18 @@ void getPage_2(){
             case 'd':
                 if (page == allpage){
                     printf("已经是尾页!\n");
-                    system("pause");
+                    system("read");
                 }else{
                     page = allpage;
                 }
                 break;
             case '0':
-                system("cls");
+                system("clear");
                 return;
             default:
                 printf("输入错误，请重新输入！\n");
-                system("pause");
-                system("cls");
+                system("read");
+                system("clear");
                 break;
         }
     }
@@ -951,7 +950,7 @@ void searnraiidyClassCourse_2(int class,char*major,int course){
     GRA *Head_2=Head2;
     int k=0;
     while(Head_2->next!=NULL){
-        if(Head_2->next->Class==class&& strcmp(Head_2->next->major,major)){
+        if(Head_2->next->Class==class&& !strcmp(Head_2->next->major,major)){
             if(Head_2->next->score[course]<60){
                 displayData_2(*Head_2->next);
                 k=1;
@@ -1070,6 +1069,7 @@ void sortAll_2(){
 void sortAllAndShow_1(){
     sortAll_1();
     UND *Head_1=Head1;
+    infoPrint_1();
     while(Head_1->next!=NULL){
         if(Head_1->next->num!=-1){
             displayData_1(*Head_1->next);
@@ -1082,6 +1082,7 @@ void sortAllAndShow_1(){
 void sortAllAndShow_2(){
     sortAll_2();
     GRA *Head_2=Head2;
+    infoPrint_2();
     while(Head_2->next!=NULL){
         if(Head_2->next->num!=-1){
             displayData_2(*Head_2->next);
@@ -1108,12 +1109,12 @@ UND* returnsClassHead_1(char *banji){
 }
 
 
-GRA* returnsClassHead_2(int class){
+GRA* returnsClassHead_2(char*major, int class){
     GRA* Head_1=Head2;
     GRA* Head_2=(GRA *) malloc(sizeof (GRA));
     GRA* Head_3=Head_2;   //防止Head_2丢失
     while(Head_1->next!=NULL){
-        if(Head_1->next->Class==class){
+        if(Head_1->next->Class==class && !(strcmp(Head_2->next->major,major))){
             Head_2->next=(GRA *) malloc(sizeof (GRA));
             Head_2->next=Head_1->next;
             Head_2=Head_2->next;
@@ -1155,8 +1156,8 @@ void sortAllByClass_1(char *banji){
 }
 
 
-void sortAllByClass_2(int class){
-    GRA *Head_1=returnsClassHead_2(class),*Head__1,*Head___3=Head_1,*k;
+void sortAllByClass_2(char*major,int class){
+    GRA *Head_1=returnsClassHead_2(major, class),*Head__1,*Head___3=Head_1,*k;
     int count=numberPeople_2(Head_1),i=0,j;
     for(;i<count-1;i++)
     {

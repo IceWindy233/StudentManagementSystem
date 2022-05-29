@@ -78,10 +78,10 @@ void Main_Menu(){
 //        addNode_1(a);
 //    }
 //    getPage_1();
-    for(int i=0;i<20;i++){
-        k=scanf_2();
-        addNode_2(k);
-    }
+//    for(int i=0;i<20;i++){
+//        k=scanf_2();
+//        addNode_2(k);
+//    }
 //    getPage_2();
     //printf("-----输入本科生班级----\n");
     /*scanf("%s",banji);
@@ -459,6 +459,7 @@ void Yanjiu_sort_Menu(){
                     break;
                 case '2':
                     system("clear");
+                    Yanjiu_sort_ByClass_Menu();
                     break;
                 case '0':
                     system("clear");
@@ -790,5 +791,26 @@ void Benke_sort_ByClass_Menu(){
 }
 
 void Yanjiu_sort_ByClass_Menu(){
-
+    while(1){
+        char major[3];
+        int class;
+        printf("********************研究生成绩排序********************\n");
+        printf("请输入专业(输入0返回上级)：");
+        scanf("%s", major);
+        if(major[0] == '0'){
+            system("clear");
+            return;
+        }else{
+            printf("请输入班级(输入0返回上级)：");
+            scanf("%d", &class);
+            if(class == 0){
+                system("clear");
+                return;
+            }else{
+                system("clear");
+                infoPrint_2();
+                sortAllByClass_2(major, class);
+            }
+        }
+    }
 }
