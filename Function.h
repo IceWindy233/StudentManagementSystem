@@ -51,8 +51,8 @@ void printften_1(int i);   //显示第i页的本科生,(实参: 页数)
 void printften_2(int i);   //显示第i页的研究生,(实参: 页数)
 void getPage_1();   //可分页显示本科生,(内置菜单)
 void getPage_2();   //可分页显示研究生,(内置菜单)
-void infoPrint_1();
-void infoPrint_2();
+void infoPrint_1();   //打印本科生表头
+void infoPrint_2();   //打印研究生表头
 void searchByClass_1(char* banji);   //按班级显示本科生数据
 void searchByClass_2(char*major, int class);   //按班级和研究方向显示研究生数据
 void searchByName(char* name);   //按名字显示本科生和研究生数据
@@ -219,7 +219,7 @@ void gradesCompute_1(UND* stu){
 }
 
 
-void gradesCompute_2(GRA * stu){
+void gradesCompute_2(GRA* stu){
     stu->score[2]=stu->score[0]+stu->score[1];
 }
 
@@ -871,7 +871,7 @@ void getPage_2(){
 
 
 void infoPrint_1(){
-    printf("\n学号 姓名 性别  专业  班级       高数 C语言 英语 总成绩 班级排名 校级排名\n");
+    printf("\n学号  姓名 性别  专业  班级      高数  C语言  英语 总成绩  班级排名 校级排名\n");
 }
 
 
@@ -1083,6 +1083,7 @@ void sortAllAndShow_2(){
     sortAll_2();
     GRA *Head_2=Head2;
     infoPrint_2();
+    getstu_2(Head_2);
     while(Head_2->next!=NULL){
         if(Head_2->next->num!=-1){
             displayData_2(*Head_2->next);
@@ -1099,7 +1100,7 @@ UND* returnsClassHead_1(char *banji){
     while(Head_1->next!=NULL){
         if(strcmp(Head_1->next->banji,banji)==0){
          Head_2->next=(UND*) malloc(sizeof (UND));
-         Head_2->next=Head_1->next;
+         *Head_2->next=*Head_1->next;
          Head_2=Head_2->next;
         }
         Head_1=Head_1->next;
@@ -1114,9 +1115,9 @@ GRA* returnsClassHead_2(char*major, int class){
     GRA* Head_2=(GRA *) malloc(sizeof (GRA));
     GRA* Head_3=Head_2;   //防止Head_2丢失
     while(Head_1->next!=NULL){
-        if(Head_1->next->Class==class && !(strcmp(Head_2->next->major,major))){
+        if(Head_1->next->Class==class && (strcmp(Head_1->next->major,major)==0)){
             Head_2->next=(GRA *) malloc(sizeof (GRA));
-            Head_2->next=Head_1->next;
+            *Head_2->next=*Head_1->next;
             Head_2=Head_2->next;
         }
         Head_1=Head_1->next;
@@ -1147,12 +1148,13 @@ void sortAllByClass_1(char *banji){
         }
         Head_1=Head_1->next;
     }
-    while(Head___3->next!=NULL){
-        if(Head___3->next->num!=-1){
-            displayData_1(*Head___3->next);
-            Head___3=Head___3->next;
-        }
-    }
+    getstu_1(Head___3);
+//    while(Head___3->next!=NULL){
+//        if(Head___3->next->num!=-1){
+//            displayData_1(*Head___3->next);
+//            Head___3=Head___3->next;
+//        }
+//    }
 }
 
 
@@ -1177,12 +1179,13 @@ void sortAllByClass_2(char*major,int class){
         }
         Head_1=Head_1->next;
     }
-    while(Head___3->next!=NULL){
-        if(Head___3->next->num!=-1){
-            displayData_2(*Head___3->next);
-            Head___3=Head___3->next;
-        }
-    }
+    getstu_2(Head___3);
+//    while(Head___3->next!=NULL){
+//        if(Head___3->next->num!=-1){
+//            displayData_2(*Head___3->next);
+//            Head___3=Head___3->next;
+//        }
+//    }
 }
 
 
