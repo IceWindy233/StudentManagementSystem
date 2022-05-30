@@ -77,11 +77,11 @@ void Main_Menu(){
         Head_1=Head_1->next;
     }*/
     //modifyStudent();
-//    printf("----- ‰»Î----\n");
-//    for(int i=0;i<20;i++){
-//        a=scanf_1();
-//        addNode_1(a);
-//    }
+    printf("----- ‰»Î----\n");
+    for(int i=0;i<20;i++){
+        k=scanf_2();
+        addNode_2(k);
+    }
 //    sortAll_1();
 //    getPage_1();
 
