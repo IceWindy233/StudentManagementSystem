@@ -1027,7 +1027,7 @@ void sortAll_1(){
         Head__1=Head_1;
         for (j=i+1;j<count;j++)
         {
-            if(Head__1->next->score[3]<Head__1->next->next->score[3])
+            if(Head__1->next->score[3] < Head__1->next->next->score[3])
             {
                 k=Head__1->next->next;
             }

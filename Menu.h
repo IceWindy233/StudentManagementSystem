@@ -13,10 +13,15 @@ void Benke_Menu();
 void Yanjiu_Menu();
 //基本数据管理菜单
 void baseDataMenuPrint();
-void Benke_baseDataManage_Menu();
-void Yanjiu_baseDataManage_Menu();
+void deleteDate_Menu();//删除基本数据
+void searchData_Menu();//查询基本数据
+void Benke_baseDataManage_Menu();//本科生基本数据管理菜单
+void Benke_addData_Menu();//本科生信息数据录入
+void Yanjiu_baseDataManage_Menu();//研究生基本数据管理菜单
+void Yanjiu_addData_Menu();//研究生信息数据录入
 //成绩管理菜单
 void scoreMenuPrint();
+void deleteScore_Menu();//删除成绩
 void Benke_scoreManage_Menu();
 void Yanjiu_scoreManage_Menu();
 //成绩排序菜单
@@ -77,6 +82,7 @@ void Main_Menu(){
 //        a=scanf_1();
 //        addNode_1(a);
 //    }
+//    sortAll_1();
 //    getPage_1();
 
 //
@@ -237,10 +243,10 @@ void Yanjiu_Menu(){
 }
 
 void baseDataMenuPrint(){
-    printf("_1_增加学生基本资料\n");
-    printf("_2_删除学生基本资料\n");
+    printf("_1_增加学生资料\n");
+    printf("_2_删除学生资料\n");
     printf("_3_修改学生基本资料\n");
-    printf("_4_查询基本资料\n");
+    printf("_4_查询学生资料\n");
     printf("_0_返回上级\n");
     printf("输入序号：");
 }
@@ -255,15 +261,19 @@ void Benke_baseDataManage_Menu(){
             switch (choice) {
                 case '1':
                     system("clear");
+                    Benke_addData_Menu();
                     break;
                 case '2':
                     system("clear");
+                    deleteDate_Menu();
                     break;
                 case '3':
                     system("clear");
+                    modifyStudent();
                     break;
                 case '4':
                     system("clear");
+                    searchData_Menu();
                     break;
                 case '0':
                     system("clear");
@@ -292,15 +302,19 @@ void Yanjiu_baseDataManage_Menu(){
             switch (choice) {
                 case '1':
                     system("clear");
+                    Yanjiu_addData_Menu();
                     break;
                 case '2':
                     system("clear");
+                    deleteDate_Menu();
                     break;
                 case '3':
                     system("clear");
+                    modifyStudent();
                     break;
                 case '4':
                     system("clear");
+                    searchData_Menu();
                     break;
                 case '0':
                     system("clear");
@@ -338,15 +352,19 @@ void Benke_scoreManage_Menu(){
             switch (choice) {
                 case '1':
                     system("clear");
+                    Benke_addData_Menu();
                     break;
                 case '2':
                     system("clear");
+                    deleteScore_Menu();
                     break;
                 case '3':
                     system("clear");
+                    modifyScore();
                     break;
                 case '4':
                     system("clear");
+                    searchData_Menu();
                     break;
                 case '0':
                     system("clear");
@@ -375,15 +393,19 @@ void Yanjiu_scoreManage_Menu(){
             switch (choice) {
                 case '1':
                     system("clear");
+                    Yanjiu_addData_Menu();
                     break;
                 case '2':
                     system("clear");
+                    deleteScore_Menu();
                     break;
                 case '3':
                     system("clear");
+                    modifyScore();
                     break;
                 case '4':
                     system("clear");
+                    searchData_Menu();
                     break;
                 case '0':
                     system("clear");
@@ -808,6 +830,166 @@ void Yanjiu_sort_ByClass_Menu(){
                 infoPrint_2();
                 sortAllByClass_2(major, class);
             }
+        }
+    }
+}
+
+void Benke_addData_Menu(){
+    while(1){
+        UND* stu;
+        int i;
+        printf("********************本科生成绩录入********************\n");
+        printf("请输入需要录入的个数(输入0返回上级)：");
+        scanf("%d", &i);
+        if(i == 0){
+            system("clear");
+            return;
+        }else{
+            printf("请输入姓名 性别(0代表男，1代表女) 专业 班级 高数成绩 C语言成绩 英语成绩:\n");
+            for (int j = 0; j < i; j++) {
+                stu = scanf_1();
+                addNode_1(stu);
+            }
+            printf("录入成功！\n");
+            printf("请输入任意键返回上级菜单");
+            system("read");
+            system("clear");
+            return;
+        }
+    }
+}
+
+void Yanjiu_addData_Menu(){
+    while(1){
+        GRA * stu;
+        int i;
+        printf("********************研究生成绩录入********************\n");
+        printf("请输入需要录入的个数(输入0返回上级)：");
+        scanf("%d", &i);
+        if(i == 0){
+            system("clear");
+            return;
+        }else{
+            printf("请输入请输入姓名 性别(0代表男，1代表女) 专业 班级 研究方向 综合成绩 论文成绩:\n");
+            for (int j = 0; j < i; j++) {
+                stu = scanf_2();
+                addNode_2(stu);
+            }
+            printf("录入成功！\n");
+            printf("请输入任意键返回上级菜单");
+            system("read");
+            system("clear");
+            return;
+        }
+    }
+}
+
+void deleteDate_Menu(){
+    while(1){
+        int num;
+        printf("********************学生数据删除********************\n");
+        printf("请输入需要删除的学生的学号(输入0返回上级)：");
+        scanf("%d", &num);
+        if(num == 0){
+            system("clear");
+            return;
+        }else{
+            printf("注意：你接下来的操作将会删除该学生的所有数据，请谨慎操作！\n");
+            printf("请输入任意键继续，输入0返回上级菜单：");
+            char i;
+            scanf("%s", &i);
+            if(i == '0'){
+                system("clear");
+                return;
+            }else{
+                deleteStudentByild(num);
+                printf("请输入任意键返回上级菜单");
+                system("read");
+                system("clear");
+                return;
+            }
+        }
+
+    }
+}
+
+void deleteScore_Menu(){
+    int num = 0, k = 0;
+    UND* Head_1=Head1;
+    UND* Head__1=Head1;
+    GRA* Head_2=Head2;
+    GRA* Head__2=Head2;
+    while(1){
+        printf("********************学生成绩删除********************\n");
+        printf("请输入需要删除成绩的学生的学号(输入0返回上级)：");
+        scanf("%d", &num);
+        if(num == 0){
+            system("clear");
+            return;
+        }else{
+            while ( Head_1->next!= NULL){
+                if (Head_1->next->num == num){
+                    printf("已删除学号为%d的学生的所有成绩!\n", num);
+                    k=1;
+                    break;
+                }
+                Head_1=Head_1->next;
+            }
+            if(k==0){
+                while ( Head_2->next!= NULL){
+                    if (Head_2->next->num == num){
+                        printf("已删除学号为%d的学生的所有成绩!\n", num);
+                        k=1;
+                        break;
+                    }
+                    Head_2=Head_2->next;
+                }
+            }
+            while ( Head__1->next!= NULL){
+                if (Head__1->next->num == num){
+                    Head__1->next->score[0] = 0;
+                    Head__1->next->score[1] = 0;
+                    Head__1->next->score[2] = 0;
+                    k=1;
+                    break;
+                }
+                Head__1=Head__1->next;
+            }
+            gradesCompute_1(Head__1->next);
+            if(k==0){
+                while ( Head__2->next!= NULL){
+                    if (Head__2->next->num == num){
+                        Head__2->next->score[0] = 0;
+                        Head__2->next->score[1] = 0;
+                        Head__2->next->score[2] = 0;
+                        k=1;
+                        break;
+                    }
+                    Head__2=Head__2->next;
+                }
+                gradesCompute_2(Head__2->next);
+            }
+            if (k == 0){
+                printf("查无此学生!\n");
+            }
+        }
+    }
+}
+
+void searchData_Menu(){
+    while(1){
+        char num_Name[20];
+        printf("********************学生数据查询********************\n");
+        printf("请输入需要查询的学生的学号或名字(输入0返回上级)：");
+        scanf("%s", num_Name);
+        if(num_Name[0] == '0'){
+            system("clear");
+            return;
+        }else{
+            searchstu(num_Name);
+            printf("请输入任意键返回查询菜单");
+            system("read");
+            system("clear");
         }
     }
 }
