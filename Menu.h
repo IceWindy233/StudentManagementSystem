@@ -12,7 +12,7 @@ void MenuPrint();
 void Benke_Menu();
 void Yanjiu_Menu();
 //基本数据管理菜单
-void baseDataMenuPrint();
+void baseDataMenuPrint();//避免重复菜单打印代码
 void deleteDate_Menu();//删除基本数据
 void searchData_Menu();//查询基本数据
 void Benke_baseDataManage_Menu();//本科生基本数据管理菜单
@@ -20,10 +20,10 @@ void Benke_addData_Menu();//本科生信息数据录入
 void Yanjiu_baseDataManage_Menu();//研究生基本数据管理菜单
 void Yanjiu_addData_Menu();//研究生信息数据录入
 //成绩管理菜单
-void scoreMenuPrint();
+void scoreMenuPrint();//避免重复菜单打印代码
 void deleteScore_Menu();//删除成绩
-void Benke_scoreManage_Menu();
-void Yanjiu_scoreManage_Menu();
+void Benke_scoreManage_Menu();//本科生成绩管理菜单
+void Yanjiu_scoreManage_Menu();//研究生成绩管理菜单
 //成绩排序菜单
 void sortMenuPrint();//避免重复菜单打印代码
 void Benke_sort_Menu();//本科成绩排序菜单
