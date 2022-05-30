@@ -56,8 +56,8 @@ void infoPrint_2();   //打印研究生表头
 void searchByClass_1(char* banji);   //按班级显示本科生数据
 void searchByClass_2(char*major, int class);   //按班级和研究方向显示研究生数据
 void searchByName(char* name);   //按名字显示本科生和研究生数据
-void searnraiidyClassCourse_1(char* banji,int course);   //按班级和课程查询不及格本科生,(course:课程号从零开始)
-void searnraiidyClassCourse_2(int class,char *major,int course);   //按班级和课程查询不及格研究生,(course:课程号从零开始)
+void searnraiidyClassCourse_1(char* banji,char* course);   //按班级和课程查询不及格本科生,(course:课程号从零开始)
+void searnraiidyClassCourse_2(int class,char *major,char* course);   //按班级和课程查询不及格研究生,(course:课程号从零开始)
 void sortAllByld_1();   //按学号id从小到大排序本科生,将被删除学生放到最前面
 void sortAllByld_2();   //按学号id从小到大排序研究生,将被删除学生放到最前面
 void SwapNodes_1(UND* stu1,UND* stu2);   //交换本科生节点
@@ -930,35 +930,64 @@ void searchByName(char* name){
 }
 
 
-void searnraiidyClassCourse_1(char* banji,int course){
+void searnraiidyClassCourse_1(char* banji,char* course){
     UND*Head_1=Head1;
-    int k=0;
+    int k = 0, i = -1;
+    char gaoshu[10] = "高数";
+    char c[10] = "C语言";
+    char yingyu[10] = "英语";
+    if(strcmp(course,gaoshu) == 0){
+        i = 0;
+    }else if(strcmp(course,c) == 0){
+        i = 1;
+    }else if(strcmp(course,yingyu) == 0){
+        i = 2;
+    }else{
+        printf("输入错误，请重新输入！\n");
+        printf("输入任意键继续\n");
+        system("read");
+        system("clear");
+        return;
+    }
     while(Head_1->next!=NULL){
         if(strcmp(Head_1->next->banji,banji) == 0){
-            if(Head_1->next->score[course]<60){
+            if(Head_1->next->score[i]<60){
                 displayData_1(*Head_1->next);
                 k=1;
             }
         }
         Head_1=Head_1->next;
     }
-    if(k==0)printf("该班级中的该课程无学生不及格");
+    if(k==0)printf("该班级中的该课程无学生不及格\n");
+    printf("查询完毕，按任意键继续\n");
+    system("read");
+    system("clear");
 }
 
 
-void searnraiidyClassCourse_2(int class,char*major,int course){
+void searnraiidyClassCourse_2(int class,char*major,char* course){
     GRA *Head_2=Head2;
-    int k=0;
+    int k=0, i = -1;
+    char zonghe[20] = "综合成绩";
+    char lunwen[20] = "论文成绩";
+    if(strcmp(course,zonghe) == 0){
+        i = 0;
+    }else if(strcmp(course,lunwen) == 0){
+        i = 1;
+    }
     while(Head_2->next!=NULL){
         if(Head_2->next->Class==class&& !strcmp(Head_2->next->major,major)){
-            if(Head_2->next->score[course]<60){
+            if(Head_2->next->score[i]<60){
                 displayData_2(*Head_2->next);
                 k=1;
             }
         }
         Head_2=Head_2->next;
     }
-    if(k==0)printf("该班级中的该课程无学生不及格");
+    if(k==0)printf("该班级中的该课程无学生不及格\n");
+    printf("查询完毕，按任意键继续\n");
+    system("read");
+    system("clear");
 }
 
 

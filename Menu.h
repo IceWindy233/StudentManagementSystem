@@ -737,7 +737,7 @@ void Yanjiu_search_name_Menu(){
 void Benke_search_fail_Menu(){
     while (1) {
         char banji[10];
-        int course;
+        char course[10];
         printf("*********************本科生成绩查询*********************\n");
         printf("请输入班级(输入0返回上级)：");
         scanf("%s", banji);
@@ -746,8 +746,8 @@ void Benke_search_fail_Menu(){
             return;
         }else{
             printf("请输入课程(输入0返回上级)：");
-            scanf("%d", &course);
-            if(course == 0){
+            scanf("%s", course);
+            if(course[0] == '0'){
                 system("clear");
                 return;
             }else{
@@ -762,7 +762,7 @@ void Benke_search_fail_Menu(){
 void Yanjiu_search_fail_Menu(){
     while (1) {
         char major[3];
-        int course;
+        char course[20];
         int class;
         printf("*********************研究生成绩查询*********************\n");
         printf("请输入专业(输入0返回上级)：");
@@ -778,8 +778,8 @@ void Yanjiu_search_fail_Menu(){
                 return;
             }else{
                 printf("请输入课程(输入0返回上级)：");
-                scanf("%d", &course);
-                if(course == 0){
+                scanf("%s", course);
+                if(course[0] == '0'){
                     system("clear");
                     return;
                 }else{
