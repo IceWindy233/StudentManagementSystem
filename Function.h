@@ -744,7 +744,7 @@ void getPage_1(){
     }
     else allpage = totalstu / 10;
     while (1){
-        system("clear");
+        system("cls");
         printf("********************************本科生成绩管理系统*********************************\n");
         infoPrint_1();
         printften_1(page);
@@ -756,7 +756,7 @@ void getPage_1(){
             case 'a':
                 if(page == 1){
                     printf("已经是首页!\n");
-                    system("read");
+                    system("pause");
                 }else {
                     page = 1;
                 }
@@ -764,7 +764,7 @@ void getPage_1(){
             case 'w':
                 if(page == 1){
                     printf("已经是首页!\n");
-                    system("read");
+                    system("pause");
                 }else if(page > 1){
                     page--;
                 }
@@ -772,7 +772,7 @@ void getPage_1(){
             case 's':
                 if(page == allpage){
                     printf("已经是尾页!\n");
-                    system("read");
+                    system("pause");
                 }else if(page < allpage){
                     page++;
                 }
@@ -780,18 +780,18 @@ void getPage_1(){
             case 'd':
                 if (page == allpage){
                     printf("已经是尾页!\n");
-                    system("read");
+                    system("pause");
                 }else{
                     page = allpage;
                 }
                 break;
             case '0':
-                system("clear");
+                system("cls");
                 return;
             default:
                 printf("输入错误，请重新输入！\n");
-                system("read");
-                system("clear");
+                system("pause");
+                system("cls");
                 break;
         }
     }
@@ -816,7 +816,7 @@ void getPage_2(){
     }
     else allpage = totalstu / 10;
     while (1){
-        system("clear");
+        system("cls");
         printf("********************************研究生成绩管理系统*********************************\n");
         infoPrint_2();
         printften_2(page);
@@ -828,7 +828,7 @@ void getPage_2(){
             case 'a':
                 if(page == 1){
                     printf("已经是首页!\n");
-                    system("read");
+                    system("pause");
                 }else {
                     page = 1;
                 }
@@ -836,7 +836,7 @@ void getPage_2(){
             case 'w':
                 if(page == 1){
                     printf("已经是首页!\n");
-                    system("read");
+                    system("pause");
                 }else if(page > 1){
                     page--;
                 }
@@ -844,7 +844,7 @@ void getPage_2(){
             case 's':
                 if(page == allpage){
                     printf("已经是尾页!\n");
-                    system("read");
+                    system("pause");
                 }else if(page < allpage){
                     page++;
                 }
@@ -852,18 +852,18 @@ void getPage_2(){
             case 'd':
                 if (page == allpage){
                     printf("已经是尾页!\n");
-                    system("read");
+                    system("pause");
                 }else{
                     page = allpage;
                 }
                 break;
             case '0':
-                system("clear");
+                system("cls");
                 return;
             default:
                 printf("输入错误，请重新输入！\n");
-                system("read");
-                system("clear");
+                system("pause");
+                system("cls");
                 break;
         }
     }
@@ -945,8 +945,8 @@ void searnraiidyClassCourse_1(char* banji,char* course){
     }else{
         printf("输入错误，请重新输入！\n");
         printf("输入任意键继续\n");
-        system("read");
-        system("clear");
+        system("pause");
+        system("cls");
         return;
     }
     while(Head_1->next!=NULL){
@@ -960,8 +960,8 @@ void searnraiidyClassCourse_1(char* banji,char* course){
     }
     if(k==0)printf("该班级中的该课程无学生不及格\n");
     printf("查询完毕，按任意键继续\n");
-    system("read");
-    system("clear");
+    system("pause");
+    system("cls");
 }
 
 
@@ -986,8 +986,8 @@ void searnraiidyClassCourse_2(int class,char*major,char* course){
     }
     if(k==0)printf("该班级中的该课程无学生不及格\n");
     printf("查询完毕，按任意键继续\n");
-    system("read");
-    system("clear");
+    system("pause");
+    system("cls");
 }
 
 
