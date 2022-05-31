@@ -60,10 +60,8 @@ void searnraiidyClassCourse_1(char* banji,char* course);   //°´°à¼¶ºÍ¿Î³Ì²éÑ¯²»¼
 void searnraiidyClassCourse_2(int class,char *major,char* course);   //°´°à¼¶ºÍ¿Î³Ì²éÑ¯²»¼°¸ñÑÐ¾¿Éú,(course:¿Î³ÌºÅ´ÓÁã¿ªÊ¼)
 void sortAllByld_1();   //°´Ñ§ºÅid´ÓÐ¡µ½´óÅÅÐò±¾¿ÆÉú,½«±»É¾³ýÑ§Éú·Åµ½×îÇ°Ãæ
 void sortAllByld_2();   //°´Ñ§ºÅid´ÓÐ¡µ½´óÅÅÐòÑÐ¾¿Éú,½«±»É¾³ýÑ§Éú·Åµ½×îÇ°Ãæ
-void SwapNodes_1(UND* stu1,UND* stu2);   //½»»»±¾¿ÆÉú½Úµã
-void SwapNodes_2(GRA* stu1,GRA* stu2);   //½»»»ÑÐ¾¿Éú½Úµã
-void sortAll_1();   //°´×Ü³É¼¨´Ó¸ßµ½µÍÅÅÐò±¾¿ÆÉú
-void sortAll_2();   //°´×Ü³É¼¨´Ó¸ßµ½µÍÅÅÐòÑÐ¾¿Éú
+void sortAll_1();   //°´×Ü³É¼¨´Ó¸ßµ½µÍÅÅÐò±¾¿ÆÉú(²»¿Éµ¥¶ÀÊ¹ÓÃ,¿ÉÓÃsortAllAndShow_1())
+void sortAll_2();   //°´×Ü³É¼¨´Ó¸ßµ½µÍÅÅÐòÑÐ¾¿Éú(²»¿Éµ¥¶ÀÊ¹ÓÃ,¿ÉÓÃsortAllAndShow_2())
 void sortAllAndShow_1();   //°´×Ü³É¼¨´Ó¸ßµ½µÍÅÅÐò±¾¿ÆÉú,²¢ÏÔÊ¾
 void sortAllAndShow_2();   //°´×Ü³É¼¨´Ó¸ßµ½µÍÅÅÐòÑÐ¾¿Éú,²¢ÏÔÊ¾
 UND* returnsClassHead_1(char *banji);   //·µ»ØÍ¬°à¼¶±¾¿ÆÉúÁ´±íÍ·
@@ -670,7 +668,9 @@ void deleteStudentByild(int num1){
 void getstu_1(UND* Head){
     while ( Head->next!= NULL){
         if(Head->next->num!=-1){
-            displayData_1(*Head->next);
+            if(Head->next!=NULL&&Head->next->num!=0){
+                displayData_1(*Head->next);
+            }
             Head = Head->next;
         }
     }
@@ -678,7 +678,9 @@ void getstu_1(UND* Head){
 void getstu_2(GRA* Head){
     while ( Head->next!= NULL){
         if(Head->next->num!=-1){
-            displayData_2(*Head->next);
+            if(Head->next!=NULL&&Head->next->num!=0){
+                displayData_2(*Head->next);
+            }
             Head = Head->next;
         }
     }
@@ -997,7 +999,39 @@ void sortAllByld_1(){
     for(;i<count-1;i++){
         for(;j<k-1;j++){
             if(Head_1->next->num>Head_1->next->next->num) {
-                SwapNodes_1(Head_1->next, Head_1->next->next);
+                UND*cur=Head_1->next;
+                int temp[12];
+                for (int l = 0; l < 12; ++l) {
+                    temp[i]=cur->score[l];
+                }
+                for (int l = 0; l < 12; ++l) {
+                    cur->score[l]=cur->next->score[l];
+                }
+                for (int l = 0; l < 12; ++l) {
+                    cur->next->score[l]=temp[l];
+                }
+                int temp1=cur->num;
+                cur->num=cur->next->num;
+                cur->next->num=temp1;
+
+                char temp2[15];
+                strcpy(temp2,cur->name);
+                strcpy(cur->name,cur->next->name);
+                strcpy(cur->next->name,temp2);
+
+                enum Sex temp3=cur->sex;
+                cur->sex=cur->next->sex;
+                cur->next->sex=temp3;
+
+                char temp4[30];
+                strcpy(temp4,cur->major);
+                strcpy(cur->major,cur->next->major);
+                strcpy(cur->next->major,temp4);
+
+                char temp5[10];
+                strcpy(temp5,cur->banji);
+                strcpy(cur->banji,cur->next->banji);
+                strcpy(cur->next->banji,temp5);
                 Head_1=Head_1->next;
             }
         }
@@ -1012,7 +1046,48 @@ void sortAllByld_2(){
     for(;i<count-1;i++){
         for(;j<k-1;j++){
             if(Head_2->next->num>Head_2->next->next->num) {
-                SwapNodes_2(Head_2->next, Head_2->next->next);
+                GRA *cur=Head_2->next;
+                int temp[3];
+                for (int l = 0; l < 3; ++l) {
+                    temp[l]=cur->score[l];
+                }
+                for (int l = 0; l < 3; ++l) {
+                    cur->score[l]=cur->next->score[l];
+                }
+                for (int l = 0; l < 3; ++l) {
+                    cur->next->score[l]=temp[l];
+                }
+                int temp1=cur->num;
+                cur->num=cur->next->num;
+                cur->next->num=temp1;
+                char temp2[10];
+                strcpy(temp2,cur->name);
+                strcpy(cur->name,cur->next->name);
+                strcpy(cur->next->name,temp2);
+                enum Sex temp3=cur->sex;
+                cur->sex=cur->next->sex;
+                cur->next->sex=temp3;
+                char temp4[20];
+                strcpy(temp4,cur->major);
+                strcpy(cur->major,cur->next->major);
+                strcpy(cur->next->major,temp4);
+                int temp5=cur->Class;
+                cur->Class=cur->next->Class;
+                cur->next->Class=temp5;
+                char temp6[20];
+                strcpy(temp6,cur->reserch);
+                strcpy(cur->reserch,cur->next->reserch);
+                strcpy(cur->next->reserch,temp6);
+                char temp7[10];
+                strcpy(temp7,cur->tname);
+                strcpy(cur->tname,cur->next->tname);
+                strcpy(cur->next->tname,temp7);
+                int temp8=cur->classrank;
+                cur->classrank=cur->next->classrank;
+                cur->next->classrank=temp8;
+                int temp9=cur->allrank;
+                cur->allrank=cur->next->allrank;
+                cur->next->allrank=temp9;
                 Head_2=Head_2->next;
             }
         }
@@ -1022,41 +1097,45 @@ void sortAllByld_2(){
 
 
 void SwapNodes_1(UND* stu1,UND* stu2){
-    UND temp;
+    UND temp1;
+    UND temp2;
     UND*next1,*next2;
     next1=stu1->next;
     next2=stu2->next;
-    temp=*stu1;
-    *stu1=*stu2;
-    *stu2=temp;
-    stu1->next=next1;
-    stu2->next=next2;
+    temp1=* stu1;
+    temp1.next=next1;
+    temp2=* stu2;
+    temp2.next=next2;
+    *stu1=temp1;
+    *stu2=temp2;
 }
 
 
 void SwapNodes_2(GRA* stu1,GRA* stu2){
-    GRA temp;
+    GRA temp1;
+    GRA temp2;
     GRA*next1,*next2;
     next1=stu1->next;
     next2=stu2->next;
-    temp=*stu1;
-    *stu1=*stu2;
-    *stu2=temp;
-    stu1->next=next1;
-    stu2->next=next2;
+    temp1=* stu1;
+    temp1.next=next1;
+    temp2=* stu2;
+    temp2.next=next2;
+    *stu1=temp1;
+    *stu2=temp2;
 }
 
 
 void sortAll_1(){
     UND *Head_1=Head1,*Head__1,*k;
     int count=numberPeople_1(Head_1),i=0,j;
-    for(;i<count-1;i++)
+    for(;i<count;i++)
     {
         k=Head_1->next;
         Head__1=Head_1;
         for (j=i+1;j<count;j++)
         {
-            if(Head__1->next->score[3] < Head__1->next->next->score[3])
+            if(Head__1->next->score[3] <= Head__1->next->next->score[3])
             {
                 k=Head__1->next->next;
             }
@@ -1074,13 +1153,13 @@ void sortAll_1(){
 void sortAll_2(){
     GRA *Head_2=Head2,*Head__2,*k;
     int count=numberPeople_2(Head_2),i=0,j;
-    for(;i<count-1;i++)
+    for(;i<count;i++)
     {
         k=Head_2->next;
         Head__2=Head_2;
         for (j=i+1;j<count;j++)
         {
-            if(Head__2->next->score[2]<Head__2->next->next->score[2])
+            if(Head__2->next->score[2] <= Head__2->next->next->score[2])
             {
                 k=Head__2->next->next;
             }
@@ -1096,29 +1175,117 @@ void sortAll_2(){
 
 
 void sortAllAndShow_1(){
-    sortAll_1();
+    UND *cur,*tail;
     UND *Head_1=Head1;
+    UND *Head_2=Head_1;
     infoPrint_1();
-    while(Head_1->next!=NULL){
-        if(Head_1->next->num!=-1){
-            displayData_1(*Head_1->next);
-            Head_1=Head_1->next;
+    cur=Head_2;
+    tail=NULL;
+    while(cur!=tail){
+        while(cur->next!=tail){
+            if(cur->score[3]<cur->next->score[3]){
+                int temp[12];
+                for (int i = 0; i < 12; ++i) {
+                    temp[i]=cur->score[i];
+                }
+                for (int i = 0; i < 12; ++i) {
+                    cur->score[i]=cur->next->score[i];
+                }
+                for (int i = 0; i < 12; ++i) {
+                    cur->next->score[i]=temp[i];
+                }
+                int temp1=cur->num;
+                cur->num=cur->next->num;
+                cur->next->num=temp1;
+
+                char temp2[15];
+                strcpy(temp2,cur->name);
+                strcpy(cur->name,cur->next->name);
+                strcpy(cur->next->name,temp2);
+
+                enum Sex temp3=cur->sex;
+                cur->sex=cur->next->sex;
+                cur->next->sex=temp3;
+
+                char temp4[30];
+                strcpy(temp4,cur->major);
+                strcpy(cur->major,cur->next->major);
+                strcpy(cur->next->major,temp4);
+
+                char temp5[10];
+                strcpy(temp5,cur->banji);
+                strcpy(cur->banji,cur->next->banji);
+                strcpy(cur->next->banji,temp5);
+            }
+            cur=cur->next;
         }
+        tail=cur;
+        cur=Head_2;
     }
+    getstu_1(Head_1);
+    sortAllByld_1();
 }
 
 
 void sortAllAndShow_2(){
-    sortAll_2();
+    GRA *cur,*tail;
     GRA *Head_2=Head2;
+    GRA *Head_1=Head_2;
     infoPrint_2();
-    getstu_2(Head_2);
-    while(Head_2->next!=NULL){
-        if(Head_2->next->num!=-1){
-            displayData_2(*Head_2->next);
-            Head_2=Head_2->next;
+    cur=Head_1;
+    tail=NULL;
+    while(cur!=tail){
+        while(cur->next!=tail){
+            if(cur->score[2]<cur->next->score[2]){
+                int temp[3];
+                for (int i = 0; i < 3; ++i) {
+                    temp[i]=cur->score[i];
+                }
+                for (int i = 0; i < 3; ++i) {
+                    cur->score[i]=cur->next->score[i];
+                }
+                for (int i = 0; i < 3; ++i) {
+                    cur->next->score[i]=temp[i];
+                }
+                int temp1=cur->num;
+                cur->num=cur->next->num;
+                cur->next->num=temp1;
+                char temp2[10];
+                strcpy(temp2,cur->name);
+                strcpy(cur->name,cur->next->name);
+                strcpy(cur->next->name,temp2);
+                enum Sex temp3=cur->sex;
+                cur->sex=cur->next->sex;
+                cur->next->sex=temp3;
+                char temp4[20];
+                strcpy(temp4,cur->major);
+                strcpy(cur->major,cur->next->major);
+                strcpy(cur->next->major,temp4);
+                int temp5=cur->Class;
+                cur->Class=cur->next->Class;
+                cur->next->Class=temp5;
+                char temp6[20];
+                strcpy(temp6,cur->reserch);
+                strcpy(cur->reserch,cur->next->reserch);
+                strcpy(cur->next->reserch,temp6);
+                char temp7[10];
+                strcpy(temp7,cur->tname);
+                strcpy(cur->tname,cur->next->tname);
+                strcpy(cur->next->tname,temp7);
+                int temp8=cur->classrank;
+                cur->classrank=cur->next->classrank;
+                cur->next->classrank=temp8;
+                int temp9=cur->allrank;
+                cur->allrank=cur->next->allrank;
+                cur->next->allrank=temp9;
+            }
+            cur=cur->next;
         }
+        tail=cur;
+        cur=Head_1;
     }
+    getstu_2(Head_2);
+    sortAllByld_2();
 }
 
 
@@ -1130,6 +1297,7 @@ UND* returnsClassHead_1(char *banji){
         if(strcmp(Head_1->next->banji,banji)==0){
          Head_2->next=(UND*) malloc(sizeof (UND));
          *Head_2->next=*Head_1->next;
+         Head_2->next->next=NULL;
          Head_2=Head_2->next;
         }
         Head_1=Head_1->next;
@@ -1144,10 +1312,13 @@ GRA* returnsClassHead_2(char*major, int class){
     GRA* Head_2=(GRA *) malloc(sizeof (GRA));
     GRA* Head_3=Head_2;   //·ÀÖ¹Head_2¶ªÊ§
     while(Head_1->next!=NULL){
-        if(Head_1->next->Class==class && (strcmp(Head_1->next->major,major)==0)){
-            Head_2->next=(GRA *) malloc(sizeof (GRA));
-            *Head_2->next=*Head_1->next;
-            Head_2=Head_2->next;
+        if(Head_1->next->Class==class){
+            if(strcmp(Head_1->next->major,major)==0) {
+                Head_2->next = (GRA *) malloc(sizeof(GRA));
+                *Head_2->next = *Head_1->next;
+                Head_2->next->next = NULL;
+                Head_2 = Head_2->next;
+            }
         }
         Head_1=Head_1->next;
     }
@@ -1158,63 +1329,110 @@ GRA* returnsClassHead_2(char*major, int class){
 
 void sortAllByClass_1(char *banji){
     UND *Head_1=returnsClassHead_1(banji),*Head__1,*Head___3=Head_1,*k;
-    int count=numberPeople_1(Head_1),i=0,j;
-    for(;i<count-1;i++)
-    {
-        k=Head_1->next;
-        Head__1=Head_1;
-        for (j=i+1;j<count;j++)
-        {
-            if(Head__1->next->score[3]<Head__1->next->next->score[3])
-            {
-                k=Head__1->next->next;
+    UND *cur,*tail;
+    cur=Head_1;
+    tail=NULL;
+    while(cur!=tail){
+        while(cur->next!=tail){
+            if(cur->score[3]<cur->next->score[3]){
+                int temp[12];
+                for (int i = 0; i < 12; ++i) {
+                    temp[i]=cur->score[i];
+                }
+                for (int i = 0; i < 12; ++i) {
+                    cur->score[i]=cur->next->score[i];
+                }
+                for (int i = 0; i < 12; ++i) {
+                    cur->next->score[i]=temp[i];
+                }
+                int temp1=cur->num;
+                cur->num=cur->next->num;
+                cur->next->num=temp1;
+
+                char temp2[15];
+                strcpy(temp2,cur->name);
+                strcpy(cur->name,cur->next->name);
+                strcpy(cur->next->name,temp2);
+
+                enum Sex temp3=cur->sex;
+                cur->sex=cur->next->sex;
+                cur->next->sex=temp3;
+
+                char temp4[30];
+                strcpy(temp4,cur->major);
+                strcpy(cur->major,cur->next->major);
+                strcpy(cur->next->major,temp4);
+
+                char temp5[10];
+                strcpy(temp5,cur->banji);
+                strcpy(cur->banji,cur->next->banji);
+                strcpy(cur->next->banji,temp5);
             }
-            Head__1=Head__1->next;
+            cur=cur->next;
         }
-        if(k!=Head_1->next)
-        {
-            SwapNodes_1(Head_1->next,k);
-        }
-        Head_1=Head_1->next;
+        tail=cur;
+        cur=Head_1;
     }
     getstu_1(Head___3);
-//    while(Head___3->next!=NULL){
-//        if(Head___3->next->num!=-1){
-//            displayData_1(*Head___3->next);
-//            Head___3=Head___3->next;
-//        }
-//    }
 }
 
 
 void sortAllByClass_2(char*major,int class){
     GRA *Head_1=returnsClassHead_2(major, class),*Head__1,*Head___3=Head_1,*k;
-    int count=numberPeople_2(Head_1),i=0,j;
-    for(;i<count-1;i++)
-    {
-        k=Head_1->next;
-        Head__1=Head_1;
-        for (j=i+1;j<count;j++)
-        {
-            if(Head__1->next->score[2]<Head__1->next->next->score[2])
-            {
-                k=Head__1->next->next;
+    GRA *cur,*tail;
+    cur=Head_1;
+    tail=NULL;
+    while(cur!=tail){
+        while(cur->next!=tail){
+            if(cur->score[2]<cur->next->score[2]){
+                int temp[3];
+                for (int i = 0; i < 3; ++i) {
+                    temp[i]=cur->score[i];
+                }
+                for (int i = 0; i < 3; ++i) {
+                    cur->score[i]=cur->next->score[i];
+                }
+                for (int i = 0; i < 3; ++i) {
+                    cur->next->score[i]=temp[i];
+                }
+                int temp1=cur->num;
+                cur->num=cur->next->num;
+                cur->next->num=temp1;
+                char temp2[10];
+                strcpy(temp2,cur->name);
+                strcpy(cur->name,cur->next->name);
+                strcpy(cur->next->name,temp2);
+                enum Sex temp3=cur->sex;
+                cur->sex=cur->next->sex;
+                cur->next->sex=temp3;
+                char temp4[20];
+                strcpy(temp4,cur->major);
+                strcpy(cur->major,cur->next->major);
+                strcpy(cur->next->major,temp4);
+                int temp5=cur->Class;
+                cur->Class=cur->next->Class;
+                cur->next->Class=temp5;
+                char temp6[20];
+                strcpy(temp6,cur->reserch);
+                strcpy(cur->reserch,cur->next->reserch);
+                strcpy(cur->next->reserch,temp6);
+                char temp7[10];
+                strcpy(temp7,cur->tname);
+                strcpy(cur->tname,cur->next->tname);
+                strcpy(cur->next->tname,temp7);
+                int temp8=cur->classrank;
+                cur->classrank=cur->next->classrank;
+                cur->next->classrank=temp8;
+                int temp9=cur->allrank;
+                cur->allrank=cur->next->allrank;
+                cur->next->allrank=temp9;
             }
-            Head__1=Head__1->next;
+            cur=cur->next;
         }
-        if(k!=Head_1->next)
-        {
-            SwapNodes_2(Head_1->next,k);
-        }
-        Head_1=Head_1->next;
+        tail=cur;
+        cur=Head_1;
     }
     getstu_2(Head___3);
-//    while(Head___3->next!=NULL){
-//        if(Head___3->next->num!=-1){
-//            displayData_2(*Head___3->next);
-//            Head___3=Head___3->next;
-//        }
-//    }
 }
 
 

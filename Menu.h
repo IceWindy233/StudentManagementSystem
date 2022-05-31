@@ -84,7 +84,11 @@ void Main_Menu(){
 //    }
 //    sortAll_1();
 //    getPage_1();
-
+//    printf("-----输入----\n");
+//    for(int i=0;i<20;i++){
+//        k=scanf_2();
+//        addNode_2(k);
+//    }
 //
     //printf("-----输入本科生班级----\n");
     /*scanf("%s",banji);
