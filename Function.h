@@ -345,12 +345,12 @@ void displayData_1(UND stu) {
     if(stu.num!=-1){
         switch (stu.sex) {
             case male:
-                printf("%-4d %-4s   ÄÐ  %-3s  %-9s  %-3d  %-4d  %-4d %-3d    %-5d    %-3d\n", stu.num, stu.name, stu.major,
+                printf("%-4d %-4s   ÄÐ   %-3s  %-9s  %-4d  %-5d  %-4d  %-3d    %-5d    %-3d\n", stu.num, stu.name, stu.major,
                        stu.banji, stu.score[0],
                        stu.score[1], stu.score[2], stu.score[3], stu.score[4], stu.score[5]);
                 break;
             case female:
-                printf("%-4d %-4s   Å®  %-3s  %-9s  %-3d  %-4d  %-4d %-3d    %-5d    %-3d\n", stu.num, stu.name, stu.major,
+                printf("%-4d %-4s   Å®   %-3s  %-9s  %-5d  %-4d  %-4d  %-3d    %-5d    %-3d\n", stu.num, stu.name, stu.major,
                        stu.banji, stu.score[0],
                        stu.score[1], stu.score[2], stu.score[3], stu.score[4], stu.score[5]);
                 break;

@@ -79,8 +79,8 @@ void Main_Menu(){
     //modifyStudent();
 //    printf("----- ‰»Î----\n");
 //    for(int i=0;i<20;i++){
-//        k=scanf_2();
-//        addNode_2(k);
+//        a=scanf_1();
+//        addNode_1(a);
 //    }
 //    sortAll_1();
 //    getPage_1();
@@ -107,7 +107,7 @@ void Main_Menu(){
     //exit(0);
     //--------------------------------
 
-    system("cls");
+//    system("cls");
     while(1){
         system("cls");
         char choice[10];
