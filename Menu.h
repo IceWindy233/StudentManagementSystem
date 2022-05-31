@@ -1021,9 +1021,6 @@ void Benke_countByClass_Menu(){
                 return;
             }else{
                 countByClassScore_1(banji, course);
-                printf("请输入任意键返回上级菜单");
-                system("pause");
-                system("cls");
             }
         }
     }
@@ -1054,9 +1051,6 @@ void Yanjiu_countByClass_Menu(){
                     return;
                 }else{
                     countByClassScore_2(major, course, class);
-                    printf("请输入任意键返回上级菜单");
-                    system("pause");
-                    system("cls");
                 }
             }
         }
