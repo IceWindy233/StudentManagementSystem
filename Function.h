@@ -1379,13 +1379,15 @@ void countAverScore(){
     struct Class{
         char banji[10];
         char major[10];
-        int totalScore;
-        int averScore;
-        int numStudent;
+        int totalScore;   //总分
+        int averScore;    //平均分
+        int numStudent;   //人数
     };
     UND *Head_1 = Head1;
     GRA *Head_2 = Head2;
-    struct Class class[100];
+    int Number1=numberPeople_1(Head_1);
+    int Number2=numberPeople_2(Head_2);
+    struct Class class[Number1];
     char gaoshu[] = "高数";
     char c[] = "C语言";
     char yingyu[] = "英语";
@@ -1393,7 +1395,7 @@ void countAverScore(){
     char lunwen[] = "论文成绩";
     char course[10];
     int i = -1;//课程代码
-    int j = 1;//CLass数组使用计数器
+    int j = 0;//CLass数组使用计数器
     printf("请输入课程查询(输入0返回上一级菜单):");
     scanf("%s", course);
     if(course[0] == '0'){
@@ -1422,22 +1424,31 @@ void countAverScore(){
 //                }
 //            }
 //            Head_1=Head_1->next;
-//        }
-        for(int x = 0; x < j;){
-            while(Head_1->next!=NULL){
-                if(strcmp(Head_1->next->banji, class[x].banji) != 0){
-                    strcpy(class[x].banji , Head_1->next->banji);
-                    class[x].totalScore = Head_1->next->score[i];
-                    class[x].numStudent = 1;
-                    j++;
-                }else if(strcmp(Head_1->next->banji, class[x].banji) == 0){
-                    class[x].totalScore += Head_1->next->score[i];
-                    class[x].numStudent++;
-                    x++;
+
+        printf("----------------------------------------");
+        while(Head_1->next!=NULL){
+            for ( int l = 0; l <=j ; ) {
+                if (strcmp(Head_1->next->banji, class[l].banji) == 0) {
+                    class[l].totalScore += Head_1->next->score[i];
+                    class[l].numStudent++;
+                    Head_1 = Head_1->next;
+                    break;
+                } else{
+                    if(l==j){
+                        strcpy(class[j].banji, Head_1->next->banji);
+                        class[j].totalScore = Head_1->next->score[i];
+                        class[j].numStudent = 1;
+                        j++;
+                        Head_1 = Head_1->next;
+                        break;
+                    } else{
+                        l++;
+                    }
                 }
-                Head_1 = Head_1->next;
             }
         }
+        printf("----------------------------------------");
+
         for(int x = 0; x < j; x++){
             class[x].averScore = class[x].totalScore / class[x].numStudent;
         }
