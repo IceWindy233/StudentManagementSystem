@@ -521,6 +521,7 @@ void Benke_statistic_Menu(){
             switch (choice[0]) {
                 case '1':
                     system("cls");
+                    countAverScore();
                     break;
                 case '2':
                     system("cls");
@@ -1038,15 +1039,15 @@ void Yanjiu_countByClass_Menu(){
             system("cls");
             return;
         }else{
-            printf("请输入需要统计的课程(输入0返回上级)：");
-            scanf("%s", course);
+            printf("请输入需要统计的班级(输入0返回上级)：");
+            scanf("%d", &class);
             if(course[0] == '0'){
                 system("cls");
                 return;
             }else{
-                printf("请输入需要统计的班级(输入0返回上级)：");
-                scanf("%d", &class);
-                if(class == 0){
+                printf("请输入需要统计的课程(输入0返回上级)：");
+                scanf("%s", course);
+                if(course[0] == '0'){
                     system("cls");
                     return;
                 }else{
