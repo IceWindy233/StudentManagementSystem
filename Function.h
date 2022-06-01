@@ -1376,9 +1376,15 @@ void sortAllByClass_2(char*major,int class){
 }
 
 void countAverScore(){
-    struct Class{
+    struct Class_1{
         char banji[10];
+        int totalScore;   //总分
+        int averScore;    //平均分
+        int numStudent;   //人数
+    };
+    struct Class_2{
         char major[10];
+        int Class;
         int totalScore;   //总分
         int averScore;    //平均分
         int numStudent;   //人数
@@ -1387,7 +1393,8 @@ void countAverScore(){
     GRA *Head_2 = Head2;
     int Number1=numberPeople_1(Head_1);
     int Number2=numberPeople_2(Head_2);
-    struct Class class[Number1];
+    struct Class_1 class_1[Number1];
+    struct Class_2 class_2[Number2];
     char gaoshu[] = "高数";
     char c[] = "C语言";
     char yingyu[] = "英语";
@@ -1410,34 +1417,18 @@ void countAverScore(){
         }else{
             i = 2;
         }
-//        while(Head_1->next!=NULL){
-//            for(int x = 0; x < j;){
-//                if(strcmp(Head_1->next->banji, class[x].banji) != 0){
-//                    strcpy(class[x].banji , Head_1->next->banji);
-//                    class[x].totalScore = Head_1->next->score[i];
-//                    class[x].numStudent = 1;
-//                    j++;
-//                }else if(strcmp(Head_1->next->banji, class[x].banji) == 0){
-//                    class[x].totalScore += Head_1->next->score[i];
-//                    class[x].numStudent++;
-//                    x++;
-//                }
-//            }
-//            Head_1=Head_1->next;
-
-        printf("----------------------------------------");
         while(Head_1->next!=NULL){
             for ( int l = 0; l <=j ; ) {
-                if (strcmp(Head_1->next->banji, class[l].banji) == 0) {
-                    class[l].totalScore += Head_1->next->score[i];
-                    class[l].numStudent++;
+                if (strcmp(Head_1->next->banji, class_1[l].banji) == 0) {
+                    class_1[l].totalScore += Head_1->next->score[i];
+                    class_1[l].numStudent++;
                     Head_1 = Head_1->next;
                     break;
                 } else{
                     if(l==j){
-                        strcpy(class[j].banji, Head_1->next->banji);
-                        class[j].totalScore = Head_1->next->score[i];
-                        class[j].numStudent = 1;
+                        strcpy(class_1[j].banji, Head_1->next->banji);
+                        class_1[j].totalScore = Head_1->next->score[i];
+                        class_1[j].numStudent = 1;
                         j++;
                         Head_1 = Head_1->next;
                         break;
@@ -1447,28 +1438,26 @@ void countAverScore(){
                 }
             }
         }
-        printf("----------------------------------------");
-
         for(int x = 0; x < j; x++){
-            class[x].averScore = class[x].totalScore / class[x].numStudent;
+            class_1[x].averScore = class_1[x].totalScore / class_1[x].numStudent;
         }
         switch (i) {
             case 0:
                 printf("高数各班平均成绩如下：\n");
                 for(int x = 0; x < j; x++){
-                    printf("%s\t：%d\n", class[x].banji, class[x].averScore);
+                    printf("%s\t：%d\n", class_1[x].banji, class_1[x].averScore);
                 }
                 break;
             case 1:
                 printf("C语言各班平均成绩如下：\n");
                 for(int x = 0; x < j; x++){
-                    printf("%s\t：%d\n", class[x].banji, class[x].averScore);
+                    printf("%s\t：%d\n", class_1[x].banji, class_1[x].averScore);
                 }
                 break;
             case 2:
                 printf("英语各班平均成绩如下：\n");
                 for(int x = 0; x < j; x++){
-                    printf("%s\t：%d\n", class[x].banji, class[x].averScore);
+                    printf("%s\t：%d\n", class_1[x].banji, class_1[x].averScore);
                 }
                 break;
         }
@@ -1478,12 +1467,55 @@ void countAverScore(){
         }else{
             i = 1;
         }
+        while(Head_2->next!=NULL){
+            for ( int l = 0; l <=j ; ) {
+                if (strcmp(Head_2->next->major, class_2[l].major) == 0 && Head_2->next->Class == class_2[l].Class) {
+                    class_2[l].totalScore += Head_2->next->score[i];
+                    class_2[l].numStudent++;
+                    Head_2 = Head_2->next;
+                    break;
+                } else{
+                    if(l==j){
+                        class_2[j].Class = Head_2->next->Class;
+                        strcpy(class_2[j].major, Head_2->next->major);
+                        class_2[j].totalScore = Head_2->next->score[i];
+                        class_2[j].numStudent = 1;
+                        j++;
+                        Head_2 = Head_2->next;
+                        break;
+                    } else{
+                        l++;
+                    }
+                }
+            }
+        }
+        for(int x = 0; x < j; x++){
+            class_2[x].averScore = class_2[x].totalScore / class_2[x].numStudent;
+        }
+        switch (i) {
+            case 0:
+                printf("综合成绩各班平均成绩如下：\n");
+                for(int x = 0; x < j; x++){
+                    printf("%s专业%d班：%d\n", class_2[x].major, class_2[x].Class, class_2[x].averScore);
+                }
+                break;
+            case 1:
+                printf("论文成绩各班平均成绩如下：\n");
+                for(int x = 0; x < j; x++){
+                    printf("%s专业%d班：%d\n", class_2[x].major, class_2[x].Class, class_2[x].averScore);
+                }
+                break;
+        }
     }else{
         printf("输入有误，请重新输入！\n");
         system("pause");
         system("cls");
         return;
     }
+    printf("-----------------------------------------------------\n");
+    printf("查询完毕，按任意键返回上级菜单！\n");
+    system("pause");
+    system("cls");
 }
 
 void countByClassScore_1(char* banji, char* course){

@@ -554,6 +554,7 @@ void Yanjiu_statistic_Menu(){
             switch (choice[0]) {
                 case '1':
                     system("cls");
+                    countAverScore();
                     break;
                 case '2':
                     system("cls");
