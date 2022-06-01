@@ -33,7 +33,9 @@ void Yanjiu_sort_ByClass_Menu();//研究生成绩按班级排序菜单
 //数据统计菜单
 void statisticsMenuPrint();//避免重复菜单打印代码
 void Benke_statistic_Menu();//本科生数据统计菜单
+void Benke_countByClass_Menu();//本科生按班级统计菜单
 void Yanjiu_statistic_Menu();//研究生数据统计菜单
+void Yanjiu_countByClass_Menu();//研究生按班级统计菜单
 //查询菜单
 void searchMenuPrint();//避免重复菜单打印代码
 void Benke_search_Menu();//本科生查询菜单
@@ -522,6 +524,7 @@ void Benke_statistic_Menu(){
                     break;
                 case '2':
                     system("cls");
+                    Benke_countByClass_Menu();
                     break;
                 case '0':
                     system("cls");
@@ -553,6 +556,7 @@ void Yanjiu_statistic_Menu(){
                     break;
                 case '2':
                     system("cls");
+                    Yanjiu_countByClass_Menu();
                     break;
                 case '0':
                     system("cls");
@@ -995,6 +999,60 @@ void searchData_Menu(){
             printf("请输入任意键返回查询菜单");
             system("pause");
             system("cls");
+        }
+    }
+}
+
+void Benke_countByClass_Menu(){
+    while(1){
+        char banji[10];
+        char course[10];
+        printf("********************班级成绩统计********************\n");
+        printf("请输入需要统计的班级(输入0返回上级)：");
+        scanf("%s", banji);
+        if(banji[0] == '0'){
+            system("cls");
+            return;
+        }else{
+            printf("请输入需要统计的课程(输入0返回上级)：");
+            scanf("%s", course);
+            if(course[0] == '0'){
+                system("cls");
+                return;
+            }else{
+                countByClassScore_1(banji, course);
+            }
+        }
+    }
+}
+
+void Yanjiu_countByClass_Menu(){
+    while (1){
+        char major[10];
+        char course[10];
+        int class;
+        printf("********************班级成绩统计********************\n");
+        printf("请输入需要统计的专业(输入0返回上级)：");
+        scanf("%s", major);
+        if(major[0] == '0'){
+            system("cls");
+            return;
+        }else{
+            printf("请输入需要统计的课程(输入0返回上级)：");
+            scanf("%s", course);
+            if(course[0] == '0'){
+                system("cls");
+                return;
+            }else{
+                printf("请输入需要统计的班级(输入0返回上级)：");
+                scanf("%d", &class);
+                if(class == 0){
+                    system("cls");
+                    return;
+                }else{
+                    countByClassScore_2(major, course, class);
+                }
+            }
         }
     }
 }

@@ -66,6 +66,9 @@ UND* returnsClassHead_1(char *banji);   //返回同班级本科生链表头
 GRA* returnsClassHead_2(char*major, int class);   //返回同班级研究生链表头
 void sortAllByClass_1(char *banji);   //将某班本科生数据按总成绩从高到低排序并显示
 void sortAllByClass_2(char*major,int class);   //将某班研究生数据按总成绩从高到低排序并显示
+void countAverScore(char* course); //统计某门课每个班的平均成绩
+void countByClassScore_1(char* banji, char* course);//本科生统计某个班内某门课程不同等级学生的人数
+void countByClassScore_2(char* major, char* course, int class);//研究生统计某个班内某门课程不同等级学生的人数
 //-------
 
 
@@ -963,7 +966,7 @@ void searnraiidyClassCourse_1(char* banji,char* course){
         Head_1=Head_1->next;
     }
     if(k==0)printf("该班级中的该课程无学生不及格\n");
-    printf("查询完毕，按任意键继续\n");
+    printf("查询完毕\n");
     system("pause");
     system("cls");
 }
@@ -989,7 +992,7 @@ void searnraiidyClassCourse_2(int class,char*major,char* course){
         Head_2=Head_2->next;
     }
     if(k==0)printf("该班级中的该课程无学生不及格\n");
-    printf("查询完毕，按任意键继续\n");
+    printf("查询完毕\n");
     system("pause");
     system("cls");
 }
@@ -1372,4 +1375,231 @@ void sortAllByClass_2(char*major,int class){
     getstu_2(Head___3);
 }
 
+void countAverScore(char* course){
+    UND *Head_1 = Head1;
+    GRA *Head_2 = Head2;
+    char gaoshu[] = "高数";
+    char c[] = "C语言";
+    char yingyu[] = "英语";
+    char zonghe[] = "综合成绩";
+    char lunwen[] = "论文成绩";
+    char banji[10][20];
+    int i, aver[20];
+    int x = 0;//二维数组计数器
+    if(strcmp(course, gaoshu) == 0 || strcmp(course, c) == 0 || strcmp(course, yingyu) == 0){
+        if(strcmp(course, gaoshu) == 0){
+            i = 0;
+        }else if(strcmp(course, c) == 0){
+            i = 1;
+        }else{
+            i = 2;
+        }
+        while(Head_1->next != NULL){
+            for(int y = 0; y < 20; y++){
 
+            }
+        }
+    }else if(strcmp(course, zonghe) == 0 || strcmp(course, lunwen) == 0){
+        if(strcmp(course, zonghe) == 0){
+            i = 0;
+        }else{
+            i = 1;
+        }
+    }else{
+        printf("输入有误，请重新输入！\n");
+        system("pause");
+        system("cls");
+        return;
+    }
+}
+
+void countByClassScore_1(char* banji, char* course){
+    UND*Head_1=Head1;
+    int i , k = 0;
+    char gaoshu[10] = "高数";
+    char c[10] = "C语言";
+    char yingyu[10] = "英语";
+    if(strcmp(course,gaoshu) == 0){
+        i = 0;
+    }else if(strcmp(course,c) == 0){
+        i = 1;
+    }else if(strcmp(course,yingyu) == 0){
+        i = 2;
+    }else{
+        printf("输入错误，请重新输入！\n");
+        printf("输入任意键继续\n");
+        system("pause");
+        system("cls");
+        return;
+    }
+    printf("%s班级%s成绩分布如下：\n",banji,course);
+    printf("不及格：\n");
+    while(Head_1->next!=NULL){
+        if(strcmp(Head_1->next->banji,banji) == 0){
+            if(Head_1->next->score[i]<60){
+                displayData_1(*Head_1->next);
+                k++;
+            }
+        }
+        Head_1=Head_1->next;
+    }
+    if(k == 0){
+        printf("无\n");
+    }else{
+        k = 0;
+    }
+    printf("及格：\n");
+    Head_1=Head1;
+    while(Head_1->next!=NULL){
+        if(strcmp(Head_1->next->banji,banji) == 0){
+            if(Head_1->next->score[i]>=60 && Head_1->next->score[i]<70){
+                displayData_1(*Head_1->next);
+                k++;
+            }
+        }
+        Head_1=Head_1->next;
+    }
+    if(k == 0){
+        printf("无\n");
+    }else{
+        k = 0;
+    }
+    printf("中等：\n");
+    Head_1=Head1;
+    while(Head_1->next!=NULL){
+        if(strcmp(Head_1->next->banji,banji) == 0){
+            if(Head_1->next->score[i]>=70 && Head_1->next->score[i]<80){
+                displayData_1(*Head_1->next);
+                k++;
+            }
+        }
+        Head_1=Head_1->next;
+    }
+    if(k == 0){
+        printf("无\n");
+    }else{
+        k = 0;
+    }
+    printf("良好：\n");
+    Head_1=Head1;
+    while(Head_1->next!=NULL){
+        if(strcmp(Head_1->next->banji,banji) == 0){
+            if(Head_1->next->score[i]>=80 && Head_1->next->score[i]<90){
+                displayData_1(*Head_1->next);
+            }
+        }
+        Head_1=Head_1->next;
+    }
+    if(k == 0){
+        printf("无\n");
+    }else{
+        k = 0;
+    }
+    printf("优秀：\n");
+    Head_1=Head1;
+    while(Head_1->next!=NULL){
+        if(strcmp(Head_1->next->banji,banji) == 0){
+            if(Head_1->next->score[i]>=90){
+                displayData_1(*Head_1->next);
+            }
+        }
+        Head_1=Head_1->next;
+    }
+    if(k == 0){
+        printf("无\n");
+    }
+    printf("查询完毕\n");
+    system("pause");
+    system("cls");
+}
+
+void countByClassScore_2(char* major, char* course, int class){
+    GRA *Head_2 = Head2;
+    int k = 0, i = -1;
+    char zonghe[20] = "综合成绩";
+    char lunwen[20] = "论文成绩";
+    if(strcmp(course,zonghe) == 0){
+        i = 0;
+    }else if(strcmp(course,lunwen) == 0){
+        i = 1;
+    }
+    printf("%s专业%s班%s成绩分布如下：\n",major,course,class);
+    printf("不及格：\n");
+    while(Head_2->next!=NULL){
+        if(Head_2->next->Class==class&& !strcmp(Head_2->next->major,major)){
+            if(Head_2->next->score[i]<60){
+                displayData_2(*Head_2->next);
+                k=1;
+            }
+        }
+        Head_2=Head_2->next;
+    }
+    if(k == 0){
+        printf("无\n");
+    }else{
+        k = 0;
+    }
+    printf("及格：\n");
+    Head_2=Head2;
+    while(Head_2->next!=NULL){
+        if(Head_2->next->Class==class&& !strcmp(Head_2->next->major,major)){
+            if(Head_2->next->score[i]>=60 && Head_2->next->score[i]<70){
+                displayData_2(*Head_2->next);
+                k=1;
+            }
+        }
+        Head_2=Head_2->next;
+    }
+    if(k == 0){
+        printf("无\n");
+    }else{
+        k = 0;
+    }
+    printf("中等：\n");
+    Head_2=Head2;
+    while(Head_2->next!=NULL){
+        if(Head_2->next->Class==class&& !strcmp(Head_2->next->major,major)){
+            if(Head_2->next->score[i]>=70 && Head_2->next->score[i]<80){
+                displayData_2(*Head_2->next);
+                k=1;
+            }
+        }
+        Head_2=Head_2->next;
+    }
+    if(k == 0){
+        printf("无\n");
+    }else{
+        k = 0;
+    }
+    printf("良好：\n");
+    Head_2=Head2;
+    while(Head_2->next!=NULL){
+        if(Head_2->next->Class==class&& !strcmp(Head_2->next->major,major)){
+            if(Head_2->next->score[i]>=80 && Head_2->next->score[i]<90){
+                displayData_2(*Head_2->next);
+            }
+        }
+        Head_2=Head_2->next;
+    }
+    if(k == 0){
+        printf("无\n");
+    }else{
+        k = 0;
+    }
+    printf("优秀：\n");
+    Head_2=Head2;
+    while(Head_2->next!=NULL){
+        if(Head_2->next->Class==class&& !strcmp(Head_2->next->major,major)){
+            if(Head_2->next->score[i]>=90){
+                displayData_2(*Head_2->next);
+            }
+        }
+        Head_2=Head_2->next;
+    }
+    if(k == 0){
+        printf("无\n");
+    }
+    printf("查询完毕\n");
+    system("pause");
+    system("cls");
+}
