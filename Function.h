@@ -35,8 +35,6 @@ void gradesCompute_1(UND* stu);   //计算一个本科生总成绩
 void gradesCompute_2(GRA* stu);   //计算一个研究生总成绩
 void addNode_1(UND* stu);   //将一个本科生节点添加到链表尾,且自动计算学号,(实参: 学生节点指针)
 void addNode_2(GRA* stu);   //将一个研究生节点添加到链表尾,且自动计算学号,(实参: 学生节点指针)
-void exchangeData_1(UND* stu_1,UND* stu_2);   //交换两名本科生,(实参: 需交换的两个学生节点)
-void exchangeData_2(GRA* stu_1,GRA* stu_2);   //交换两名研究生,(实参: 需交换的两个学生节点)
 int  numberPeople_1(UND* Head_1);   //计算本科生人数,(实参: 本科生链表头指针)
 int  numberPeople_2(GRA* Head_2);   //计算研究生人数,(实参: 研究生链表头指针)
 void displayData_1(UND stu);   //显示本科生数据,(实参: 学生节点)
@@ -387,8 +385,9 @@ void searchstu(char* num_Name){
         }
         while ( Head_1->next!= NULL){
             if (Head_1->next->num == num1){
-                printf("已查找到学号为%d的学生信息!\n", num1);
+                printf("已查找到学号为%d的学生信息!\n\n", num1);
                 displayData_1(*Head_1->next);
+                printf("\n");
                 k=1;
                 break;
             }
@@ -397,8 +396,9 @@ void searchstu(char* num_Name){
         if(k==0){
             while ( Head_2->next!= NULL){
                 if (Head_2->next->num == num1){
-                    printf("已查找到学号为%d的学生信息!\n", num1);
+                    printf("已查找到学号为%d的学生信息!\n\n", num1);
                     displayData_2(*Head_2->next);
+                    printf("\n");
                     k=1;
                     break;
                 }
@@ -409,8 +409,9 @@ void searchstu(char* num_Name){
     else{
         while (Head_1->next!= NULL){
             if (strcmp(num_Name, Head_1->next->name) == 0){
-                printf("已查找到姓名为%s的学生信息!\n", num_Name);
+                printf("已查找到姓名为%s的学生信息!\n\n", num_Name);
                 displayData_1(*Head_1->next);
+                printf("\n");
                 k=1;
                 h++;
             }
@@ -418,8 +419,9 @@ void searchstu(char* num_Name){
         }
         while (Head_2->next!= NULL){
             if (strcmp(num_Name, Head_2->next->name) == 0){
-                printf("已查找到姓名为%s的学生信息!\n", num_Name);
+                printf("已查找到姓名为%s的学生信息!\n\n", num_Name);
                 displayData_2(*Head_2->next);
+                printf("\n");
                 k=1;
                 h++;
             }
@@ -1047,6 +1049,7 @@ void sortAllByld_2(){
         for(;j<k-1;j++){
             if(Head_2->next->num>Head_2->next->next->num) {
                 GRA *cur=Head_2->next;
+
                 int temp[3];
                 for (int l = 0; l < 3; ++l) {
                     temp[l]=cur->score[l];
@@ -1088,6 +1091,7 @@ void sortAllByld_2(){
                 int temp9=cur->allrank;
                 cur->allrank=cur->next->allrank;
                 cur->next->allrank=temp9;
+
                 Head_2=Head_2->next;
             }
         }
@@ -1096,85 +1100,8 @@ void sortAllByld_2(){
 }
 
 
-void SwapNodes_1(UND* stu1,UND* stu2){
-    UND temp1;
-    UND temp2;
-    UND*next1,*next2;
-    next1=stu1->next;
-    next2=stu2->next;
-    temp1=* stu1;
-    temp1.next=next1;
-    temp2=* stu2;
-    temp2.next=next2;
-    *stu1=temp1;
-    *stu2=temp2;
-}
-
-
-void SwapNodes_2(GRA* stu1,GRA* stu2){
-    GRA temp1;
-    GRA temp2;
-    GRA*next1,*next2;
-    next1=stu1->next;
-    next2=stu2->next;
-    temp1=* stu1;
-    temp1.next=next1;
-    temp2=* stu2;
-    temp2.next=next2;
-    *stu1=temp1;
-    *stu2=temp2;
-}
-
 
 void sortAll_1(){
-    UND *Head_1=Head1,*Head__1,*k;
-    int count=numberPeople_1(Head_1),i=0,j;
-    for(;i<count;i++)
-    {
-        k=Head_1->next;
-        Head__1=Head_1;
-        for (j=i+1;j<count;j++)
-        {
-            if(Head__1->next->score[3] <= Head__1->next->next->score[3])
-            {
-                k=Head__1->next->next;
-            }
-            Head__1=Head__1->next;
-        }
-        if(k!=Head_1->next)
-        {
-            SwapNodes_1(Head_1->next,k);
-        }
-        Head_1=Head_1->next;
-    }
-}
-
-
-void sortAll_2(){
-    GRA *Head_2=Head2,*Head__2,*k;
-    int count=numberPeople_2(Head_2),i=0,j;
-    for(;i<count;i++)
-    {
-        k=Head_2->next;
-        Head__2=Head_2;
-        for (j=i+1;j<count;j++)
-        {
-            if(Head__2->next->score[2] <= Head__2->next->next->score[2])
-            {
-                k=Head__2->next->next;
-            }
-            Head__2=Head__2->next;
-        }
-        if(k!=Head_2->next)
-        {
-            SwapNodes_2(Head_2->next,k);
-        }
-        Head_2=Head_2->next;
-    }
-}
-
-
-void sortAllAndShow_1(){
     UND *cur,*tail;
     UND *Head_1=Head1;
     UND *Head_2=Head_1;
@@ -1222,12 +1149,10 @@ void sortAllAndShow_1(){
         tail=cur;
         cur=Head_2;
     }
-    getstu_1(Head_1);
-    sortAllByld_1();
 }
 
 
-void sortAllAndShow_2(){
+void sortAll_2(){
     GRA *cur,*tail;
     GRA *Head_2=Head2;
     GRA *Head_1=Head_2;
@@ -1284,7 +1209,19 @@ void sortAllAndShow_2(){
         tail=cur;
         cur=Head_1;
     }
-    getstu_2(Head_2);
+}
+
+
+void sortAllAndShow_1(){
+    sortAll_1();
+    getstu_1(Head1);
+    sortAllByld_1();
+}
+
+
+void sortAllAndShow_2(){
+    sortAll_2();
+    getstu_2(Head2);
     sortAllByld_2();
 }
 
