@@ -1247,6 +1247,9 @@ void sortAllAndShow_1(){
     sortAll_1();
     getstu_1(Head1);
     sortAllByld_1();
+    printf("查询完毕！按任意键返回主菜单！\n");
+    system("pause");
+    system("cls");
 }
 
 
@@ -1254,6 +1257,9 @@ void sortAllAndShow_2(){
     sortAll_2();
     getstu_2(Head2);
     sortAllByld_2();
+    printf("查询完毕！按任意键返回主菜单！\n");
+    system("pause");
+    system("cls");
 }
 
 
@@ -1342,6 +1348,30 @@ void sortAllByClass_1(char *banji){
         cur=Head_1;
     }
     getstu_1(Head___3);
+    //----------------计算排名----------------
+//    int ranking=1;  //排名
+//    int const1=1;   //计数器
+//    cur->next->score[5]=ranking;
+//    while(cur->next->next!=NULL){
+//        if(cur->next->score[3]!=cur->next->next->score[3]){
+//            cur->next->next->score[5]=cur->next->score[5]+const1;
+//            const1=1;
+//        }else{
+//            const1++;
+//            cur->next->next->score[5]=cur->next->score[5];
+//        }
+//        cur=cur->next;
+//    }
+//    while(cur->next!=NULL){
+//        while(Head_1->next->next!=NULL){
+//           if(Head_1->next->num==cur->next->num){
+//               Head_1->next->score[5]=cur->next->score[5];
+//               break;
+//           }
+//           Head_1=Head_1->next;
+//        }
+//        cur=cur->next;
+//    }
 }
 
 
