@@ -448,7 +448,7 @@ void modifyStudent(){
     int num1=0;
     int k=0;
     int i=0;
-    printf("请输入需修改学生的学号:\n");
+    printf("请输入需修改学生的学号:");
     scanf("%d",&num1);
     while ( Head__1->next!= NULL){
         if (Head__1->next->num == num1){
@@ -472,23 +472,23 @@ void modifyStudent(){
     }
     while ( Head_1->next!= NULL){
         if (Head_1->next->num == num1){
-            printf("请输入需修改的数据的编号(-1-姓名 -2-性别 -3-专业 -4-班级 -0-退出):\n");
+            printf("请输入需修改的数据的编号(-1-姓名 -2-性别 -3-专业 -4-班级 -0-退出):");
             scanf("%d",&i);
             switch(i){
                 case 1:
-                    printf("输入修改数据(姓名):\n");
+                    printf("输入修改数据(姓名):");
                     scanf("%s",Head_1->next->name);
                     break;
                 case 2:
-                    printf("输入修改数据(性别 -0-男 -1-女):\n");
+                    printf("输入修改数据(性别 -0-男 -1-女):");
                     scanf("%u",&Head_1->next->sex);
                     break;
                 case 3:
-                    printf("输入修改数据(专业):\n");
+                    printf("输入修改数据(专业):");
                     scanf("%s",Head_1->next->major);
                     break;
                 case 4:
-                    printf("输入修改数据(班级 xxx班):\n");
+                    printf("输入修改数据(班级 xxx班):");
                     scanf("%s",Head_1->next->banji);
                     break;
                 case 0:
@@ -503,31 +503,31 @@ void modifyStudent(){
     if(k==0){
         while ( Head_2->next!= NULL){
             if (Head_2->next->num == num1){
-                printf("请输入需修改的数据的编号(-1-姓名 -2-性别 -3-专业 -4-班级 -5-研究方向 -6-导师名字 -0-退出):\n");
+                printf("请输入需修改的数据的编号(-1-姓名 -2-性别 -3-专业 -4-班级 -5-研究方向 -6-导师名字 -0-退出):");
                 scanf("%d",&i);
                 switch(i) {
                     case 1:
-                        printf("输入修改数据(姓名):\n");
+                        printf("输入修改数据(姓名):");
                         scanf("%s",Head_2->next->name);
                         break;
                     case 2:
-                        printf("输入修改数据(性别 -0-男 -1-女):\n");
+                        printf("输入修改数据(性别 -0-男 -1-女):");
                         scanf("%u",&Head_2->next->sex);
                         break;
                     case 3:
-                        printf("输入修改数据(专业):\n");
+                        printf("输入修改数据(专业):");
                         scanf("%s",Head_2->next->major);
                         break;
                     case 4:
-                        printf("输入修改数据(班级 为纯数字):\n");
+                        printf("输入修改数据(班级 为纯数字):");
                         scanf("%d",&Head_2->next->Class);
                         break;
                     case 5:
-                        printf("输入修改数据(研究方向):\n");
+                        printf("输入修改数据(研究方向):");
                         scanf("%s",Head_2->next->reserch);
                         break;
                     case 6:
-                        printf("输入修改数据(导师名字):\n");
+                        printf("输入修改数据(导师名字):");
                         scanf("%s",Head_2->next->tname);
                         break;
                     case 0:
@@ -543,6 +543,9 @@ void modifyStudent(){
     if (k == 0){
         printf("查无此学生!\n");
     }
+    printf("修改完毕！按任意键继续...\n");
+    system("pause");
+    system("cls");
 }
 
 
@@ -554,7 +557,7 @@ void modifyScore(){
     int num1=0;
     int k=0;
     int i=0;
-    printf("请输入需修改学生的学号:\n");
+    printf("请输入需修改学生的学号:");
     scanf("%d",&num1);
     while ( Head_1->next!= NULL){
         if (Head_1->next->num == num1){
@@ -578,23 +581,23 @@ void modifyScore(){
     }
     while ( Head__1->next!= NULL){
         if (Head__1->next->num == num1){
-            printf("请输入需修改的数据的编号(-1-高数成绩 -2-c语言成绩 -3-英语成绩 -4-高数成绩和c语言成绩和英语成绩 -0-退出):\n");
+            printf("请输入需修改的数据的编号(-1-高数成绩 -2-c语言成绩 -3-英语成绩 -4-高数成绩和c语言成绩和英语成绩 -0-退出):");
             scanf("%d",&i);
             switch(i){
                 case 1:
-                    printf("输入修改数据(高数成绩):\n");
+                    printf("输入修改数据(高数成绩):");
                     scanf("%d",&Head__1->next->score[0]);
                     break;
                 case 2:
-                    printf("输入修改数据(c语言成绩):\n");
+                    printf("输入修改数据(c语言成绩):");
                     scanf("%d",&Head__1->next->score[1]);
                     break;
                 case 3:
-                    printf("输入修改数据(英语成绩):\n");
+                    printf("输入修改数据(英语成绩):");
                     scanf("%d",&Head__1->next->score[2]);
                     break;
                 case 4:
-                    printf("输入修改数据(英语成绩):\n");
+                    printf("输入修改数据(英语成绩):");
                     scanf("%d%d%d",&Head__1->next->score[0],&Head__1->next->score[1],&Head__1->next->score[2]);
                     break;
                 case 0:
@@ -610,19 +613,19 @@ void modifyScore(){
     if(k==0){
         while ( Head__2->next!= NULL){
             if (Head__2->next->num == num1){
-                printf("请输入需修改的数据的编号(-1-综合成绩 -2-论文成绩 -3-综合成绩和论文成绩 -0-退出):\n");
+                printf("请输入需修改的数据的编号(-1-综合成绩 -2-论文成绩 -3-综合成绩和论文成绩 -0-退出):");
                 scanf("%d",&i);
                 switch(i) {
                     case 1:
-                        printf("输入修改数据(综合成绩):\n");
+                        printf("输入修改数据(综合成绩):");
                         scanf("%d",&Head__2->next->score[0]);
                         break;
                     case 2:
-                        printf("输入修改数据(论文成绩):\n");
+                        printf("输入修改数据(论文成绩):");
                         scanf("%d",&Head__2->next->score[1]);
                         break;
                     case 3:
-                        printf("输入修改数据(综合成绩和论文成绩):\n");
+                        printf("输入修改数据(综合成绩和论文成绩):");
                         scanf("%d%d",&Head__2->next->score[0],&Head__2->next->score[1]);
                         break;
                     case 0:
@@ -639,6 +642,9 @@ void modifyScore(){
     if (k == 0){
         printf("查无此学生!\n");
     }
+    printf("修改完毕！按任意键继续...\n");
+    system("pause");
+    system("cls");
 }
 
 
