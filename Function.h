@@ -1406,15 +1406,15 @@ void sortAllByClass_2(char*major,int class){
 void countAverScore(){
     struct Class_1{
         char banji[10];
-        int totalScore;   //总分
-        int averScore;    //平均分
+        double totalScore;   //总分
+        double averScore;    //平均分
         int numStudent;   //人数
     };
     struct Class_2{
         char major[10];
         int Class;
-        int totalScore;   //总分
-        int averScore;    //平均分
+        double totalScore;   //总分
+        double averScore;    //平均分
         int numStudent;   //人数
     };
     UND *Head_1 = Head1;
@@ -1473,19 +1473,19 @@ void countAverScore(){
             case 0:
                 printf("高数各班平均成绩如下：\n");
                 for(int x = 0; x < j; x++){
-                    printf("%s\t：%d\n", class_1[x].banji, class_1[x].averScore);
+                    printf("%s\t：%.2lf\n", class_1[x].banji, class_1[x].averScore);
                 }
                 break;
             case 1:
                 printf("C语言各班平均成绩如下：\n");
                 for(int x = 0; x < j; x++){
-                    printf("%s\t：%d\n", class_1[x].banji, class_1[x].averScore);
+                    printf("%s\t：%.2lf\n", class_1[x].banji, class_1[x].averScore);
                 }
                 break;
             case 2:
                 printf("英语各班平均成绩如下：\n");
                 for(int x = 0; x < j; x++){
-                    printf("%s\t：%d\n", class_1[x].banji, class_1[x].averScore);
+                    printf("%s\t：%.2lf\n", class_1[x].banji, class_1[x].averScore);
                 }
                 break;
         }
@@ -1524,13 +1524,13 @@ void countAverScore(){
             case 0:
                 printf("综合成绩各班平均成绩如下：\n");
                 for(int x = 0; x < j; x++){
-                    printf("%s专业%d班：%d\n", class_2[x].major, class_2[x].Class, class_2[x].averScore);
+                    printf("%s专业%d班：%.2lf\n", class_2[x].major, class_2[x].Class, class_2[x].averScore);
                 }
                 break;
             case 1:
                 printf("论文成绩各班平均成绩如下：\n");
                 for(int x = 0; x < j; x++){
-                    printf("%s专业%d班：%d\n", class_2[x].major, class_2[x].Class, class_2[x].averScore);
+                    printf("%s专业%d班：%.2lf\n", class_2[x].major, class_2[x].Class, class_2[x].averScore);
                 }
                 break;
         }
