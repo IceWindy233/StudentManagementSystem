@@ -58,8 +58,8 @@ void searnraiidyClassCourse_1(char* banji,char* course);   //°´°à¼¶ºÍ¿Î³Ì²éÑ¯²»¼
 void searnraiidyClassCourse_2(int class,char *major,char* course);   //°´°à¼¶ºÍ¿Î³Ì²éÑ¯²»¼°¸ñÑÐ¾¿Éú,(course:¿Î³ÌºÅ´ÓÁã¿ªÊ¼)
 void sortAllByld_1();   //°´Ñ§ºÅid´ÓÐ¡µ½´óÅÅÐò±¾¿ÆÉú,½«±»É¾³ýÑ§Éú·Åµ½×îÇ°Ãæ
 void sortAllByld_2();   //°´Ñ§ºÅid´ÓÐ¡µ½´óÅÅÐòÑÐ¾¿Éú,½«±»É¾³ýÑ§Éú·Åµ½×îÇ°Ãæ
-void sortAll_1();   //°´×Ü³É¼¨´Ó¸ßµ½µÍÅÅÐò±¾¿ÆÉú(²»¿Éµ¥¶ÀÊ¹ÓÃ,¿ÉÓÃsortAllAndShow_1())
-void sortAll_2();   //°´×Ü³É¼¨´Ó¸ßµ½µÍÅÅÐòÑÐ¾¿Éú(²»¿Éµ¥¶ÀÊ¹ÓÃ,¿ÉÓÃsortAllAndShow_2())
+void sortAll_1();   //°´×Ü³É¼¨´Ó¸ßµ½µÍÅÅÐò±¾¿ÆÉú,²¢¼ÆËãÐ£ÅÅÃû(²»¿Éµ¥¶ÀÊ¹ÓÃ,¿ÉÓÃsortAllAndShow_1())
+void sortAll_2();   //°´×Ü³É¼¨´Ó¸ßµ½µÍÅÅÐòÑÐ¾¿Éú,²¢¼ÆËãÐ£ÅÅÃû(²»¿Éµ¥¶ÀÊ¹ÓÃ,¿ÉÓÃsortAllAndShow_2())
 void sortAllAndShow_1();   //°´×Ü³É¼¨´Ó¸ßµ½µÍÅÅÐò±¾¿ÆÉú,²¢ÏÔÊ¾
 void sortAllAndShow_2();   //°´×Ü³É¼¨´Ó¸ßµ½µÍÅÅÐòÑÐ¾¿Éú,²¢ÏÔÊ¾
 UND* returnsClassHead_1(char *banji);   //·µ»ØÍ¬°à¼¶±¾¿ÆÉúÁ´±íÍ·
@@ -1152,15 +1152,29 @@ void sortAll_1(){
         tail=cur;
         cur=Head_2;
     }
+    //----------------¼ÆËãÅÅÃû----------------
+    int ranking=1;  //ÅÅÃû
+    int const1=1;   //¼ÆÊýÆ÷
+    Head_1->next->score[5]=ranking;
+    while(Head_1->next->next!=NULL){
+        if(Head_1->next->score[3]!=Head_1->next->next->score[3]){
+            Head_1->next->next->score[5]=Head_1->next->score[5]+const1;
+            const1=1;
+        }else{
+            const1++;
+            Head_1->next->next->score[5]=Head_1->next->score[5];
+        }
+        Head_1=Head_1->next;
+    }
 }
 
 
 void sortAll_2(){
     GRA *cur,*tail;
     GRA *Head_2=Head2;
-    GRA *Head_1=Head_2;
+    GRA *Head_3=Head_2;
     infoPrint_2();
-    cur=Head_1;
+    cur=Head_3;
     tail=NULL;
     while(cur!=tail){
         while(cur->next!=tail){
@@ -1210,7 +1224,21 @@ void sortAll_2(){
             cur=cur->next;
         }
         tail=cur;
-        cur=Head_1;
+        cur=Head_3;
+    }
+    //----------------¼ÆËãÅÅÃû----------------
+    int ranking=1;  //ÅÅÃû
+    int const1=1;   //¼ÆÊýÆ÷
+    Head_2->next->allrank=ranking;
+    while(Head_2->next->next!=NULL){
+        if(Head_2->next->score[2]!=Head_2->next->next->score[2]){
+            Head_2->next->next->allrank=Head_2->next->allrank+const1;
+            const1=1;
+        }else{
+            const1++;
+            Head_2->next->next->allrank=Head_2->next->allrank;
+        }
+        Head_2=Head_2->next;
     }
 }
 
