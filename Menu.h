@@ -896,8 +896,8 @@ void Yanjiu_addData_Menu(){
 }
 
 void deleteDate_Menu(){
+    int num=0;
     while(1){
-        int num;
         printf("********************学生数据删除********************\n");
         printf("请输入需要删除的学生的学号(输入0返回上级)：");
         scanf("%d", &num);
@@ -907,9 +907,9 @@ void deleteDate_Menu(){
         }else{
             printf("注意：你接下来的操作将会删除该学生的所有数据，请谨慎操作！\n");
             printf("请输入任意键继续，输入0返回上级菜单：");
-            char i;
-            scanf("%s", &i);
-            if(i == '0'){
+            char i[10];
+            scanf("%s", i);
+            if(strcmp(i, "0") == 0){
                 system("cls");
                 return;
             }else{
