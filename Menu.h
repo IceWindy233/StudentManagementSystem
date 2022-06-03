@@ -796,7 +796,6 @@ void Benke_addData_Menu(){
                 addNode_1(stu);
             }
             printf("录入成功！\n");
-            printf("请输入任意键返回上级菜单");
             system("pause");
             system("cls");
             return;
@@ -821,7 +820,6 @@ void Yanjiu_addData_Menu(){
                 addNode_2(stu);
             }
             printf("录入成功！\n");
-            printf("请输入任意键返回上级菜单");
             system("pause");
             system("cls");
             return;
@@ -840,7 +838,7 @@ void deleteDate_Menu(){
             return;
         }else{
             printf("注意：你接下来的操作将会删除该学生的所有数据，请谨慎操作！\n");
-            printf("请输入任意键继续，输入0返回上级菜单：");
+            printf("请输入1继续，输入0返回上级菜单：");
             char i[10];
             scanf("%s", i);
             if(strcmp(i, "0") == 0){
@@ -848,7 +846,6 @@ void deleteDate_Menu(){
                 return;
             }else{
                 deleteStudentByild(num);
-                printf("请输入任意键返回上级菜单");
                 system("pause");
                 system("cls");
                 return;
@@ -918,6 +915,8 @@ void deleteScore_Menu(){
                 printf("查无此学生!\n");
             }
         }
+        system("pause");
+        system("cls");
     }
 }
 
@@ -932,7 +931,7 @@ void searchData_Menu(){
             return;
         }else{
             searchstu(num_Name);
-            printf("请输入任意键返回查询菜单");
+            printf("查询已完成！\n");
             system("pause");
             system("cls");
         }
