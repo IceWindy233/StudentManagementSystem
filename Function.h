@@ -69,11 +69,6 @@ void sortAllByClass_2(char*major,int class);   //½«Ä³°àÑÐ¾¿ÉúÊý¾Ý°´×Ü³É¼¨´Ó¸ßµ½µ
 void countAverScore(); //Í³¼ÆÄ³ÃÅ¿ÎÃ¿¸ö°àµÄÆ½¾ù³É¼¨
 void countByClassScore_1(char* banji, char* course);//±¾¿ÆÉúÍ³¼ÆÄ³¸ö°àÄÚÄ³ÃÅ¿Î³Ì²»Í¬µÈ¼¶Ñ§ÉúµÄÈËÊý
 void countByClassScore_2(char* major, char* course, int class);//ÑÐ¾¿ÉúÍ³¼ÆÄ³¸ö°àÄÚÄ³ÃÅ¿Î³Ì²»Í¬µÈ¼¶Ñ§ÉúµÄÈËÊý
-//void sortAll__1(UND*Head_1);   //°´×Ü³É¼¨´Ó¸ßµ½µÍÅÅÐòHead_1Á´±í,²¢¼ÆËã°àÅÅÃû
-//void sortAll__2(GRA*Head_2);   //°´×Ü³É¼¨´Ó¸ßµ½µÍÅÅÐòHead_2Á´±í,²¢¼ÆËã°àÅÅÃû
-//void CalculateClassRankings();    //¼ÆËã¸÷°à¼¶ÅÅÃû
-void release_1(UND*Head_1);   //ÊÍ·ÅÒÔHead_1ÎªÍ·µÄÁ´±í¿Õ¼ä
-void release_2(GRA*Head_2);   //ÊÍ·ÅÒÔHead_2ÎªÍ·µÄÁ´±í¿Õ¼ä
 //-------
 
 
@@ -1114,7 +1109,7 @@ void sortAll_1(){
     UND *Head_1=Head1;
     UND *Head_2=Head_1;
     infoPrint_1();
-    cur=Head_2->next;
+    cur=Head_2;
     tail=NULL;
     while(cur!=tail){
         while(cur->next!=tail){
@@ -1155,7 +1150,7 @@ void sortAll_1(){
             cur=cur->next;
         }
         tail=cur;
-        cur=Head_2->next;
+        cur=Head_2;
     }
     //----------------¼ÆËãÅÅÃû----------------
     int ranking=1;  //ÅÅÃû
@@ -1179,7 +1174,7 @@ void sortAll_2(){
     GRA *Head_2=Head2;
     GRA *Head_3=Head_2;
     infoPrint_2();
-    cur=Head_3->next;
+    cur=Head_3;
     tail=NULL;
     while(cur!=tail){
         while(cur->next!=tail){
@@ -1229,7 +1224,7 @@ void sortAll_2(){
             cur=cur->next;
         }
         tail=cur;
-        cur=Head_3->next;
+        cur=Head_3;
     }
     //----------------¼ÆËãÅÅÃû----------------
     int ranking=1;  //ÅÅÃû
@@ -1309,7 +1304,7 @@ GRA* returnsClassHead_2(char*major, int class){
 void sortAllByClass_1(char *banji){
     UND *Head_1=returnsClassHead_1(banji),*Head__1,*Head___3=Head_1,*k;
     UND *cur,*tail;
-    cur=Head_1->next;
+    cur=Head_1;
     tail=NULL;
     while(cur!=tail){
         while(cur->next!=tail){
@@ -1350,17 +1345,40 @@ void sortAllByClass_1(char *banji){
             cur=cur->next;
         }
         tail=cur;
-        cur=Head_1->next;
-        if(tail==Head_1->next->next) break;
+        cur=Head_1;
     }
     getstu_1(Head___3);
+    //----------------¼ÆËãÅÅÃû----------------
+//    int ranking=1;  //ÅÅÃû
+//    int const1=1;   //¼ÆÊýÆ÷
+//    cur->next->score[5]=ranking;
+//    while(cur->next->next!=NULL){
+//        if(cur->next->score[3]!=cur->next->next->score[3]){
+//            cur->next->next->score[5]=cur->next->score[5]+const1;
+//            const1=1;
+//        }else{
+//            const1++;
+//            cur->next->next->score[5]=cur->next->score[5];
+//        }
+//        cur=cur->next;
+//    }
+//    while(cur->next!=NULL){
+//        while(Head_1->next->next!=NULL){
+//           if(Head_1->next->num==cur->next->num){
+//               Head_1->next->score[5]=cur->next->score[5];
+//               break;
+//           }
+//           Head_1=Head_1->next;
+//        }
+//        cur=cur->next;
+//    }
 }
 
 
 void sortAllByClass_2(char*major,int class){
     GRA *Head_1=returnsClassHead_2(major, class),*Head__1,*Head___3=Head_1,*k;
     GRA *cur,*tail;
-    cur=Head_1->next;
+    cur=Head_1;
     tail=NULL;
     while(cur!=tail){
         while(cur->next!=tail){
@@ -1410,7 +1428,7 @@ void sortAllByClass_2(char*major,int class){
             cur=cur->next;
         }
         tail=cur;
-        cur=Head_1->next;
+        cur=Head_1;
     }
     getstu_2(Head___3);
 }
@@ -1776,245 +1794,4 @@ void countByClassScore_2(char* major, char* course, int class){
     printf("²éÑ¯Íê±Ï\n");
     system("pause");
     system("cls");
-}
-
-
-//void sortAll__1(UND*Head_1){
-//    UND *p,*q,*r;
-//    p=Head_1->next;
-//    while(p->next!=NULL) {
-//        q = p->next;
-//        while (q->next != NULL) {
-//            if (p->score[3]<=q->score[3]) {
-//                UND*cur=p;
-//                cur->next=q;
-//                int temp[12];
-//                for (int l = 0; l < 12; ++l) {
-//                    temp[l]=cur->score[l];
-//                }
-//                for (int l = 0; l < 12; ++l) {
-//                    cur->score[l]=cur->next->score[l];
-//                }
-//                for (int l = 0; l < 12; ++l) {
-//                    cur->next->score[l]=temp[l];
-//                }
-//                int temp1=cur->num;
-//                cur->num=cur->next->num;
-//                cur->next->num=temp1;
-//
-//                char temp2[15];
-//                strcpy(temp2,cur->name);
-//                strcpy(cur->name,cur->next->name);
-//                strcpy(cur->next->name,temp2);
-//
-//                enum Sex temp3=cur->sex;
-//                cur->sex=cur->next->sex;
-//                cur->next->sex=temp3;
-//
-//                char temp4[30];
-//                strcpy(temp4,cur->major);
-//                strcpy(cur->major,cur->next->major);
-//                strcpy(cur->next->major,temp4);
-//
-//                char temp5[10];
-//                strcpy(temp5,cur->banji);
-//                strcpy(cur->banji,cur->next->banji);
-//                strcpy(cur->next->banji,temp5);
-//            }
-//            p = q;
-//            q = q->next;
-//        }
-//        p=p->next;
-//    }
-//}
-//
-//
-//void sortAll__2(GRA*Head_2){
-//    GRA *p,*q,*r;
-//    p=Head_2->next;
-//    while(p->next!=NULL) {
-//        q = p->next;
-//        while (q->next != NULL) {
-//            if (p->score[2]<q->score[2]) {
-//                GRA *cur=p;
-//                cur->next=q;
-//                int temp[3];
-//                for (int l = 0; l < 3; ++l) {
-//                    temp[l]=cur->score[l];
-//                }
-//                for (int l = 0; l < 3; ++l) {
-//                    cur->score[l]=cur->next->score[l];
-//                }
-//                for (int l = 0; l < 3; ++l) {
-//                    cur->next->score[l]=temp[l];
-//                }
-//                int temp1=cur->num;
-//                cur->num=cur->next->num;
-//                cur->next->num=temp1;
-//                char temp2[10];
-//                strcpy(temp2,cur->name);
-//                strcpy(cur->name,cur->next->name);
-//                strcpy(cur->next->name,temp2);
-//                enum Sex temp3=cur->sex;
-//                cur->sex=cur->next->sex;
-//                cur->next->sex=temp3;
-//                char temp4[20];
-//                strcpy(temp4,cur->major);
-//                strcpy(cur->major,cur->next->major);
-//                strcpy(cur->next->major,temp4);
-//                int temp5=cur->Class;
-//                cur->Class=cur->next->Class;
-//                cur->next->Class=temp5;
-//                char temp6[20];
-//                strcpy(temp6,cur->reserch);
-//                strcpy(cur->reserch,cur->next->reserch);
-//                strcpy(cur->next->reserch,temp6);
-//                char temp7[10];
-//                strcpy(temp7,cur->tname);
-//                strcpy(cur->tname,cur->next->tname);
-//                strcpy(cur->next->tname,temp7);
-//                int temp8=cur->classrank;
-//                cur->classrank=cur->next->classrank;
-//                cur->next->classrank=temp8;
-//                int temp9=cur->allrank;
-//                cur->allrank=cur->next->allrank;
-//                cur->next->allrank=temp9;
-//            }
-//            p = q;
-//            q = q->next;
-//        }
-//        p=p->next;
-//    }
-//}
-//
-//
-//void CalculateClassRankings(){
-//    UND *Head_1 = Head1;
-//    GRA *Head_2 = Head2;
-//    UND *head_1[20]={NULL};
-//    GRA *head_2[20]={NULL};
-//    typedef struct {
-//        char major[20];    //×¨Òµ
-//        int Class;    //°à¼¶
-//    }class1;
-//
-//    char classzonglei_1[20][10]={NULL};   //°à¼¶ÖÖÀà
-//    int j=0;   //°à¼¶ÖÖÀàÊý
-//    class1  classzonglei_2[20]={NULL};   //°à¼¶ÖÖÀà
-//    int k=0;   //°à¼¶ÖÖÀàÊý
-//
-//    //(1)----»ñÈ¡°à¼¶ÖÖÀàÊýÁ¿
-//    while(Head_1->next!=NULL){
-//        for ( int l = 0; l <=j ; ) {
-//            if (strcmp(Head_1->next->banji, classzonglei_1[l]) == 0){
-//                Head_1 = Head_1->next;
-//                break;
-//            } else{
-//                if(l==j){
-//                    strcpy(classzonglei_1[l],Head_1->next->banji);
-//                    j++;
-//                    Head_1 = Head_1->next;
-//                    break;
-//                } else{
-//                    l++;
-//                }
-//            }
-//        }
-//    }
-//    while(Head_2->next!=NULL){
-//        for ( int l = 0; l <=k ; ) {
-//            if (Head_2->next->Class == classzonglei_2[l].Class && strcmp(Head_2->next->major,classzonglei_2[l].major) == 0) {
-//                Head_2 = Head_2->next;
-//                break;
-//            } else{
-//                if(l==k){
-//                    k++;
-//                    Head_2 = Head_2->next;
-//                    break;
-//                } else{
-//                    l++;
-//                }
-//            }
-//        }
-//    }
-//
-//    //(2)----»ñÈ¡¸÷°à¼¶Á´±íÍ·Ö¸Õë
-//    //(3)----¼ÆËã¸÷°à¼¶×Ü·Ö²¢ÅÅÐò
-//    for (int i = 0; i < j; i++) {
-//        head_1[i]=returnsClassHead_1(classzonglei_1[i]);
-//        sortAll__1(head_1[i]);
-//    }
-//    for (int i = 0; i < k; i++) {
-//        head_2[i]= returnsClassHead_2(classzonglei_2[i].major,classzonglei_2[i].Class);
-//        sortAll__2(head_2[i]);
-//    }
-//
-//    //(4)----»ñÈ¡¸÷°à¼¶×ÜÈËÊý
-//    //(5)----ÐÞ¸ÄÖ÷Á´±íÅÅÃû
-//    int p1;   //¼ÇÂ¼½Úµã¶ÔÓ¦µÄ°à¼¶ÖÖÀàÒýË÷
-//    int p2;   //¼ÇÂ¼½Úµã¶ÔÓ¦µÄ°à¼¶ÖÖÀàÒýË÷
-//    while(Head_1->next!=NULL) {
-//        for (int i = 0; i < j; i++) {
-//            if(strcmp(Head_1->next->banji,classzonglei_1[i])==0){
-//                p1=i;
-//                break;
-//            }
-//        }
-//        UND *head__1=head_1[p1];
-//        for (int i = 0; i < numberPeople_1(head__1) ; i++) {
-//            if(Head_1->next->num==head__1->next->num) {
-//                Head_1->next->score[4] = head__1->next->score[4];
-//                break;
-//            }else{
-//                head__1=head__1->next;
-//            }
-//        }
-//        Head_1=Head_1->next;
-//    }
-//    while(Head_2->next!=NULL) {
-//        for (int i = 0; i < j; i++) {
-//            if(Head_2->next->Class==classzonglei_2[i].Class && strcmp(Head_2->next->major,classzonglei_2[i].major)==0){
-//                p2=i;
-//                break;
-//            }
-//        }
-//        GRA *head__2=head_2[p1];
-//        for (int i = 0; i < numberPeople_2(head__2) ; i++) {
-//            if(Head_2->next->num==head__2->next->num) {
-//                Head_2->next->classrank = head__2->next->classrank;
-//                break;
-//            }else{
-//                head__2=head__2->next;
-//            }
-//        }
-//        Head_2=Head_2->next;
-//    }
-//
-//    //(6)----ÊÍ·Å×ÊÔ´
-//    for (int i = 0; i < j; i++) {
-//        release_1(head_1[i]);
-//    }
-//
-//
-//    for (int i = 0; i < k; i++) {
-//        release_2(head_2[i]);
-//    }
-//}
-
-
-void release_1(UND*Head_1){
-    while(Head_1!=NULL){
-        UND*tmp=Head_1->next;
-        Head_1=Head_1->next;
-        free(tmp);
-    }
-}
-
-
-void release_2(GRA*Head_2){
-    while(Head_2!=NULL){
-        GRA*tmp=Head_2->next;
-        Head_2=Head_2->next;
-        free(tmp);
-    }
 }

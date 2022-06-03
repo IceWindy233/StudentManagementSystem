@@ -48,7 +48,6 @@ void Yanjiu_search_name_Menu();//查询某个学生信息
 void Yanjiu_search_fail_Menu();//查询某班某科目不及格学生信息
 
 void Main_Menu(){
-    CalculateClassRankings();
     while(1){
         system("cls");
         char choice[10];
