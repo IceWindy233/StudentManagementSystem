@@ -48,72 +48,6 @@ void Yanjiu_search_name_Menu();//查询某个学生信息
 void Yanjiu_search_fail_Menu();//查询某班某科目不及格学生信息
 
 void Main_Menu(){
-    //--------------测试用--------------
-    char num_Name[12];
-    UND* Head_1=Head1;
-    UND* a,*b,*c,*d;
-    GRA* k;
-    GRA* Head_2=Head2;
-    char banji[10];
-    char name[10];
-    int course;
-//    printf("-----输入----\n");
-//    a=scanf_1();
-//    b=scanf_1();
-//    c=scanf_1();
-//    //d=scanf_1();
-//    //scanf("%s",num_Name);
-//    addNode_1(a);
-//    addNode_1(b);
-//    addNode_1(c);
-    //addNode_1(d);
-    //exchangeData_1(a,b);
-    //printf("------------\n");
-    //Head_1=Head_1->next;
-    //displayData_1(*Head_1->next);
-    //searchstu(num_Name);
-    /*printf("------------\n");
-    while (Head_1->next!=NULL){
-        displayData_1(*Head_1->next);
-        printf("------------\n");
-        Head_1=Head_1->next;
-    }*/
-    //modifyStudent();
-//    printf("-----输入----\n");
-//    for(int i=0;i<20;i++){
-//        a=scanf_1();
-//        addNode_1(a);
-//    }
-//    sortAll_1();
-//    getPage_1();
-//    printf("-----输入----\n");
-//    for(int i=0;i<20;i++){
-//        k=scanf_2();
-//        addNode_2(k);
-//    }
-//
-    //printf("-----输入本科生班级----\n");
-    /*scanf("%s",banji);
-    searchByClass_1(banji);*/
-    //printf("-----输入学生名字----\n");
-    /*scanf("%s",name);
-    searchByName(name);*/
-    /*printf("-----输入班级和课程号----\n");
-    scanf("%s%d",banji,&course);
-    searnraiidyClassCourse_1( banji, course);*/
-    //sortAllByld();
-//    printf("--------1-------\n");
-//    ReturnsModifications();
-//    //printf("---------------");
-//    //SwapNodes_1(Head_1->next,Head_1->next->next);
-//    sortAll_1();
-//    //sayeToFile();
-//    printf("--------2-------\n");
-//    ReturnsModifications();
-    //exit(0);
-    //--------------------------------
-
-//    system("cls");
     while(1){
         system("cls");
         char choice[10];
@@ -862,7 +796,6 @@ void Benke_addData_Menu(){
                 addNode_1(stu);
             }
             printf("录入成功！\n");
-            printf("请输入任意键返回上级菜单");
             system("pause");
             system("cls");
             return;
@@ -887,7 +820,6 @@ void Yanjiu_addData_Menu(){
                 addNode_2(stu);
             }
             printf("录入成功！\n");
-            printf("请输入任意键返回上级菜单");
             system("pause");
             system("cls");
             return;
@@ -906,7 +838,7 @@ void deleteDate_Menu(){
             return;
         }else{
             printf("注意：你接下来的操作将会删除该学生的所有数据，请谨慎操作！\n");
-            printf("请输入任意键继续，输入0返回上级菜单：");
+            printf("请输入1继续，输入0返回上级菜单：");
             char i[10];
             scanf("%s", i);
             if(strcmp(i, "0") == 0){
@@ -914,7 +846,6 @@ void deleteDate_Menu(){
                 return;
             }else{
                 deleteStudentByild(num);
-                printf("请输入任意键返回上级菜单");
                 system("pause");
                 system("cls");
                 return;
@@ -984,6 +915,8 @@ void deleteScore_Menu(){
                 printf("查无此学生!\n");
             }
         }
+        system("pause");
+        system("cls");
     }
 }
 
@@ -998,7 +931,7 @@ void searchData_Menu(){
             return;
         }else{
             searchstu(num_Name);
-            printf("请输入任意键返回查询菜单");
+            printf("查询已完成！\n");
             system("pause");
             system("cls");
         }

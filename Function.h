@@ -381,6 +381,7 @@ void searchstu(char* num_Name){
     GRA* Head_2=Head2;
     int num1=0;
     int i,j,k=0,h=0;
+    printf("********************学生数据查询********************\n");
     if ('0' <= num_Name[0] && num_Name[0] <= '9'){    //判断num_Name是否是学号
         for(i=0;i<strlen(num_Name);i++){     //得到int类型的学号
             j=num_Name[i]-'0';
@@ -448,8 +449,13 @@ void modifyStudent(){
     int num1=0;
     int k=0;
     int i=0;
-    printf("请输入需修改学生的学号:");
+    printf("********************学生成绩管理系统********************\n");
+    printf("请输入需修改学生的学号（输入0返回）:");
     scanf("%d",&num1);
+    if(num1 == 0){
+        system("cls");
+        return;
+    }
     while ( Head__1->next!= NULL){
         if (Head__1->next->num == num1){
             printf("已查找到学号为%d的学生信息!\n", num1);
@@ -543,7 +549,7 @@ void modifyStudent(){
     if (k == 0){
         printf("查无此学生!\n");
     }
-    printf("修改完毕！按任意键继续...\n");
+    printf("修改已完成！\n");
     system("pause");
     system("cls");
 }
@@ -557,8 +563,13 @@ void modifyScore(){
     int num1=0;
     int k=0;
     int i=0;
-    printf("请输入需修改学生的学号:");
+    printf("********************学生成绩管理系统********************\n");
+    printf("请输入需修改学生的学号（输入0返回）:");
     scanf("%d",&num1);
+    if(num1 == 0){
+        system("cls");
+        return;
+    }
     while ( Head_1->next!= NULL){
         if (Head_1->next->num == num1){
             printf("已查找到学号为%d的学生信息!\n", num1);
@@ -642,7 +653,7 @@ void modifyScore(){
     if (k == 0){
         printf("查无此学生!\n");
     }
-    printf("修改完毕！按任意键继续...\n");
+    printf("修改已完成！\n");
     system("pause");
     system("cls");
 }
