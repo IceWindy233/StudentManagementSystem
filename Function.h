@@ -6,9 +6,6 @@
 #define _MENU_
 #include <stdio.h>
 #include <stdlib.h>
-#endif
-#ifndef _MENU1_
-#define _MENU1_
 #include <math.h>
 #include <string.h>
 #endif
@@ -27,8 +24,6 @@ FILE* fp2=NULL;   //研究生文件指针(函数结尾建议rewind(fp2),使fp2回到文件开头)
 
 void readFromFile();   //程序开始加载文件中的全部学生数据到学生链表(分两类学生到两个链表),---放程序开始后一行(放在定义变量前)---
 void sayeToFile();   //程序结束将学生链表中的全部学生数据保存到文件并退出函数,---放退出程序前一行---
-void ReturnsModifications();   //显示修改后的学生链表
-void fileContent();   //显示文件内容,并使文件指针返回开头
 UND* scanf_1();   //从键盘获取一个本科生数据后,返回节点地址(自带初始化)
 GRA* scanf_2();   //从键盘获取一个研究生数据后,返回节点地址(自带初始化)
 void gradesCompute_1(UND* stu);   //计算一个本科生总成绩
@@ -115,8 +110,6 @@ void sayeToFile(){
     rewind(fp2);
     UND*Head_1=Head1;   //Head_1和Head_2暂存头指针,防止头指针丢失
     GRA*Head_2=Head2;
-    UND ustu;
-    GRA stu;
     while((fwrite(Head_1->next,sizeof(UND),1,fp1))==1){
         //stu=Head_1->next;
         //printf("%d %s %u %s %s %d %d %d %d %d %d\n",stu->num,stu->name,stu->sex,stu->major,stu->banji,stu->score[0],stu->score[1],stu->score[2],stu->score[3],stu->score[4],stu->score[5]);
@@ -128,54 +121,6 @@ void sayeToFile(){
     fclose(fp1);
     fclose(fp2);
     exit(0);
-}
-
-
-void ReturnsModifications(){
-    UND*Head_1=Head1;   //Head_1和Head_2暂存头指针,防止头指针丢失
-    GRA*Head_2=Head2;
-    printf("经本次修改后undergraduate链表内容为:\n");
-    while(Head_1->next!=NULL){
-        if(Head_1->next->num!=-1){
-            displayData_1(*Head_1->next);
-            Head_1=Head_1->next;
-        }
-    }
-    printf("经本次修改后graduate链表内容为:\n");
-    while(Head_2->next!=NULL){
-        if(Head_2->next->num!=-1){
-            displayData_2(*Head_2->next);
-            Head_2=Head_2->next;
-        }
-    }
-}
-
-
-void fileContent(){
-    rewind(fp1);    //使fp1和fp2回到文件开头
-    rewind(fp2);
-    UND ustu;
-    GRA stu;
-    printf("undergraduate.dat内容为:\n");
-    printf("--------------------------------------------------\n");
-    fread(&ustu, sizeof(ustu), 1, fp1);
-    while (!feof(fp1))
-    {
-        displayData_1(ustu);
-        printf("--------------------------------------------------\n");
-        fread(&ustu, sizeof(UND), 1, fp1);
-    }
-    printf("graduate.dat内容为:\n");
-    printf("--------------------------------------------------\n");
-    fread(&stu, sizeof(GRA), 1, fp2);
-    while (!feof(fp2))
-    {
-        displayData_2(stu);
-        printf("--------------------------------------------------\n");
-        fread(&stu, sizeof(GRA), 1, fp2);
-    }
-    rewind(fp1);    //使fp1和fp2回到文件开头
-    rewind(fp2);
 }
 
 
@@ -297,22 +242,6 @@ void addNode_2(GRA* stu){
     Head_2->next=stu;
     stu->next=NULL;
     gradesCompute_2(stu);
-}
-
-
-void exchangeData_1(UND* stu_1,UND* stu_2){
-    UND temp;
-    temp=*stu_1;
-    *stu_1=*stu_2;
-    *stu_2=temp;
-}
-
-
-void exchangeData_2(GRA* stu_1,GRA* stu_2){
-    GRA temp;
-    temp=*stu_1;
-    *stu_1=*stu_2;
-    *stu_2=temp;
 }
 
 
@@ -955,8 +884,8 @@ void searchByName(char* name){
 
 
 void searnraiidyClassCourse_1(char* banji,char* course){
-    UND*Head_1=Head1;
-    int k = 0, i = -1;
+    UND *Head_1 = Head1;
+    int k = 0, i;
     char gaoshu[10] = "高数";
     char c[10] = "C语言";
     char yingyu[10] = "英语";
@@ -1319,8 +1248,8 @@ GRA* returnsClassHead_2(char*major, int class){
 
 
 void sortAllByClass_1(char *banji){
-    UND *Head_1=returnsClassHead_1(banji),*Head__1,*Head___3=Head_1,*k;
-    UND *cur,*tail;
+    UND *Head_1 = returnsClassHead_1(banji), *Head___3 = Head_1;
+    UND *cur, *tail;
     cur=Head_1;
     tail=NULL;
     while(cur!=tail){
@@ -1393,8 +1322,8 @@ void sortAllByClass_1(char *banji){
 
 
 void sortAllByClass_2(char*major,int class){
-    GRA *Head_1=returnsClassHead_2(major, class),*Head__1,*Head___3=Head_1,*k;
-    GRA *cur,*tail;
+    GRA *Head_1 = returnsClassHead_2(major, class), *Head___3 = Head_1;
+    GRA *cur, *tail;
     cur=Head_1;
     tail=NULL;
     while(cur!=tail){
@@ -1466,8 +1395,8 @@ void countAverScore(){
     };
     UND *Head_1 = Head1;
     GRA *Head_2 = Head2;
-    int Number1=numberPeople_1(Head_1);
-    int Number2=numberPeople_2(Head_2);
+    int Number1 = numberPeople_1(Head_1);
+    int Number2 = numberPeople_2(Head_2);
     struct Class_1 class_1[Number1];
     struct Class_2 class_2[Number2];
     char gaoshu[] = "高数";
@@ -1476,16 +1405,16 @@ void countAverScore(){
     char zonghe[] = "综合成绩";
     char lunwen[] = "论文成绩";
     char course[10];
-    int i = -1;//课程代码
+    int i;//课程代码
     int j = 0;//CLass数组使用计数器
     printf("请输入课程查询(输入0返回上一级菜单):");
     scanf("%s", course);
-    if(course[0] == '0'){
+    if (course[0] == '0') {
         system("cls");
         return;
     }
-    if(strcmp(course, gaoshu) == 0 || strcmp(course, c) == 0 || strcmp(course, yingyu) == 0){
-        if(strcmp(course, gaoshu) == 0){
+    if (strcmp(course, gaoshu) == 0 || strcmp(course, c) == 0 || strcmp(course, yingyu) == 0) {
+        if (strcmp(course, gaoshu) == 0) {
             i = 0;
         }else if(strcmp(course, c) == 0){
             i = 1;
@@ -1707,7 +1636,7 @@ void countByClassScore_1(char* banji, char* course){
 
 void countByClassScore_2(char* major, char* course, int class){
     GRA *Head_2 = Head2;
-    int k = 0, i = -1;
+    int k = 0, i;
     char zonghe[20] = "综合成绩";
     char lunwen[20] = "论文成绩";
     if(strcmp(course,zonghe) == 0){
