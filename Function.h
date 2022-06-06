@@ -6,16 +6,22 @@
 #define _MENU_
 #include <stdio.h>
 #include <stdlib.h>
+#endif
+#ifndef _MENU1_
+#define _MENU1_
+
 #include <math.h>
 #include <string.h>
+
 #endif
+
 #include "Base.h"
 //-------全局变量定义
 
-UND* Head1={NULL};   //本科生链表头指针(不要修改,以 UND* Head_1=Head1 的形式调用)
-GRA* Head2={NULL};   //研究生链表头指针(不要修改,以 UND* Head_2=Head2 的形式调用)
-FILE* fp1=NULL;   //本科生文件指针(函数结尾建议rewind(fp1),使fp1回到文件开头)
-FILE* fp2=NULL;   //研究生文件指针(函数结尾建议rewind(fp2),使fp2回到文件开头)
+UND *Head1 = {NULL};   //本科生链表头指针(不要修改,以 UND* Head_1=Head1 的形式调用)
+GRA *Head2 = {NULL};   //研究生链表头指针(不要修改,以 UND* Head_2=Head2 的形式调用)
+FILE *fp1 = NULL;   //本科生文件指针(函数结尾建议rewind(fp1),使fp1回到文件开头)
+FILE *fp2 = NULL;   //研究生文件指针(函数结尾建议rewind(fp2),使fp2回到文件开头)
 
 //-------
 
@@ -1247,17 +1253,17 @@ GRA* returnsClassHead_2(char*major, int class){
 }
 
 
-void sortAllByClass_1(char *banji){
+void sortAllByClass_1(char *banji) {
     UND *Head_1 = returnsClassHead_1(banji), *Head___3 = Head_1;
     UND *cur, *tail;
-    cur=Head_1;
-    tail=NULL;
-    while(cur!=tail){
-        while(cur->next!=tail){
-            if(cur->score[3]<cur->next->score[3]){
+    cur = Head_1;
+    tail = NULL;
+    while (cur != tail) {
+        while (cur->next != tail) {
+            if (cur->score[3] < cur->next->score[3]) {
                 int temp[12];
                 for (int i = 0; i < 12; ++i) {
-                    temp[i]=cur->score[i];
+                    temp[i] = cur->score[i];
                 }
                 for (int i = 0; i < 12; ++i) {
                     cur->score[i]=cur->next->score[i];
@@ -1321,17 +1327,17 @@ void sortAllByClass_1(char *banji){
 }
 
 
-void sortAllByClass_2(char*major,int class){
+void sortAllByClass_2(char*major,int class) {
     GRA *Head_1 = returnsClassHead_2(major, class), *Head___3 = Head_1;
     GRA *cur, *tail;
-    cur=Head_1;
-    tail=NULL;
-    while(cur!=tail){
-        while(cur->next!=tail){
-            if(cur->score[2]<cur->next->score[2]){
+    cur = Head_1;
+    tail = NULL;
+    while (cur != tail) {
+        while (cur->next != tail) {
+            if (cur->score[2] < cur->next->score[2]) {
                 int temp[3];
                 for (int i = 0; i < 3; ++i) {
-                    temp[i]=cur->score[i];
+                    temp[i] = cur->score[i];
                 }
                 for (int i = 0; i < 3; ++i) {
                     cur->score[i]=cur->next->score[i];
@@ -1386,7 +1392,7 @@ void countAverScore(){
         double averScore;    //平均分
         int numStudent;   //人数
     };
-    struct Class_2{
+    struct Class_2 {
         char major[10];
         int Class;
         double totalScore;   //总分
@@ -1416,13 +1422,13 @@ void countAverScore(){
     if (strcmp(course, gaoshu) == 0 || strcmp(course, c) == 0 || strcmp(course, yingyu) == 0) {
         if (strcmp(course, gaoshu) == 0) {
             i = 0;
-        }else if(strcmp(course, c) == 0){
+        } else if (strcmp(course, c) == 0) {
             i = 1;
-        }else{
+        } else {
             i = 2;
         }
-        while(Head_1->next!=NULL){
-            for ( int l = 0; l <=j ; ) {
+        while (Head_1->next != NULL) {
+            for (int l = 0; l <= j;) {
                 if (strcmp(Head_1->next->banji, class_1[l].banji) == 0) {
                     class_1[l].totalScore += Head_1->next->score[i];
                     class_1[l].numStudent++;
