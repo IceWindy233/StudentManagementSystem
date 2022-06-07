@@ -43,7 +43,7 @@ void displayData_2(GRA stu);   //显示研究生数据,(实参: 学生节点)
 void searchstu(char* num_Name);   //通过名字或学号查询,(查找到后输出)某位学生的信息,(实参: 姓名字符串的首地址)
 void modifyStudent();   //根据学号修改一位学生的基本资料数据,(选项内置菜单)
 void modifyScore();   //根据学号修改一位学生的基本成绩数据,(选项内置菜单)
-void deleteStudentByild(int num1);   //根据学号删除一位学生的基本成绩数据
+void deleteStudentByild(int num1);   //根据学号删除一位学生的基本数据
 void getstu_1(UND* Head);   //显示以Head为头指针的链表的全部本科生
 void getstu_2(GRA* Head);   //显示以Head为头指针的链表的全部研究生
 void printften_1(int i);   //显示第i页的本科生,(实参: 页数)
@@ -61,6 +61,7 @@ void sortAllByld_1();   //按学号id从小到大排序本科生,将被删除学生放到最前面
 void sortAllByld_2();   //按学号id从小到大排序研究生,将被删除学生放到最前面
 void sortAll_1();   //按总成绩从高到低排序本科生,并计算校排名(不可单独使用,可用sortAllAndShow_1())
 void sortAll_2();   //按总成绩从高到低排序研究生,并计算校排名(不可单独使用,可用sortAllAndShow_2())
+
 void sortAllAndShow_1();   //按总成绩从高到低排序本科生,并显示
 void sortAllAndShow_2();   //按总成绩从高到低排序研究生,并显示
 UND* returnsClassHead_1(char *banji);   //返回同班级本科生链表头
@@ -324,7 +325,8 @@ void searchstu(char* num_Name){
         }
         while ( Head_1->next!= NULL){
             if (Head_1->next->num == num1){
-                printf("已查找到学号为%d的学生信息!\n\n", num1);
+                printf("已查找到学号为%d的学生信息!\n", num1);
+                infoPrint_1();
                 displayData_1(*Head_1->next);
                 printf("\n");
                 k=1;
@@ -335,7 +337,8 @@ void searchstu(char* num_Name){
         if(k==0){
             while ( Head_2->next!= NULL){
                 if (Head_2->next->num == num1){
-                    printf("已查找到学号为%d的学生信息!\n\n", num1);
+                    printf("已查找到学号为%d的学生信息!\n", num1);
+                    infoPrint_2();
                     displayData_2(*Head_2->next);
                     printf("\n");
                     k=1;
@@ -349,6 +352,7 @@ void searchstu(char* num_Name){
         while (Head_1->next!= NULL){
             if (strcmp(num_Name, Head_1->next->name) == 0){
                 printf("已查找到姓名为%s的学生信息!\n\n", num_Name);
+                infoPrint_1();
                 displayData_1(*Head_1->next);
                 printf("\n");
                 k=1;
@@ -358,7 +362,8 @@ void searchstu(char* num_Name){
         }
         while (Head_2->next!= NULL){
             if (strcmp(num_Name, Head_2->next->name) == 0){
-                printf("已查找到姓名为%s的学生信息!\n\n", num_Name);
+                printf("已查找到姓名为%s的学生信息!\n", num_Name);
+                infoPrint_2();
                 displayData_2(*Head_2->next);
                 printf("\n");
                 k=1;
@@ -383,6 +388,7 @@ void modifyStudent(){
     GRA* Head__2=Head2;
     int num1=0;
     int k=0;
+    int j=0;
     int i=0;
     printf("********************学生成绩管理系统********************\n");
     printf("请输入需修改学生的学号（输入0返回）:");
@@ -393,7 +399,8 @@ void modifyStudent(){
     }
     while ( Head__1->next!= NULL){
         if (Head__1->next->num == num1){
-            printf("已查找到学号为%d的学生信息!\n", num1);
+            printf("已查找到学号为%d的学生信息!", num1);
+            infoPrint_1();
             displayData_1(*Head__1->next);
             k=1;
             break;
@@ -403,7 +410,8 @@ void modifyStudent(){
     if(k==0){
         while ( Head__2->next!= NULL){
             if (Head__2->next->num == num1){
-                printf("已查找到学号为%d的学生信息!\n", num1);
+                printf("已查找到学号为%d的学生信息!", num1);
+                infoPrint_2();
                 displayData_2(*Head__2->next);
                 k=1;
                 break;
@@ -436,12 +444,12 @@ void modifyStudent(){
                 default:
                     break;
             }
-            k=1;
+            j=1;
             break;
         }
         Head_1=Head_1->next;
     }
-    if(k==0){
+    if(j==0){
         while ( Head_2->next!= NULL){
             if (Head_2->next->num == num1){
                 printf("请输入需修改的数据的编号(-1-姓名 -2-性别 -3-专业 -4-班级 -5-研究方向 -6-导师名字 -0-退出):");
@@ -475,13 +483,13 @@ void modifyStudent(){
                     default:
                         break;
                 }
-                k=1;
+                j=1;
                 break;
             }
             Head_2=Head_2->next;
         }
     }
-    if (k == 0){
+    if (j == 0){
         printf("查无此学生!\n");
     }
     printf("修改已完成！\n");
@@ -492,103 +500,96 @@ void modifyStudent(){
 
 void modifyScore(){
     UND* Head_1=Head1;
-    UND* Head__1=Head1;
     GRA* Head_2=Head2;
     GRA* Head__2=Head2;
-    int num1=0;
+    char num1[20];
     int k=0;
     int i=0;
+    int j=0,l=0;
     printf("********************学生成绩管理系统********************\n");
     printf("请输入需修改学生的学号（输入0返回）:");
-    scanf("%d",&num1);
-    if(num1 == 0){
+    scanf("%s",num1);
+    if(strcmp(num1,"0")==0){
         system("cls");
         return;
-    }
-    while ( Head_1->next!= NULL){
-        if (Head_1->next->num == num1){
-            printf("已查找到学号为%d的学生信息!\n", num1);
-            displayData_1(*Head_1->next);
-            k=1;
-            break;
+    } else {
+        int num=0;
+        for(j=0;j<strlen(num1);j++){     //得到int类型的学号
+            l=num1[j]-'0';
+            num=10*num+l;
         }
-        Head_1=Head_1->next;
-    }
-    if(k==0){
-        while ( Head_2->next!= NULL){
-            if (Head_2->next->num == num1){
-                printf("已查找到学号为%d的学生信息!\n", num1);
-                displayData_2(*Head_2->next);
-                k=1;
-                break;
-            }
-            Head_2=Head_2->next;
-        }
-    }
-    while ( Head__1->next!= NULL){
-        if (Head__1->next->num == num1){
-            printf("请输入需修改的数据的编号(-1-高数成绩 -2-c语言成绩 -3-英语成绩 -4-高数成绩和c语言成绩和英语成绩 -0-退出):");
-            scanf("%d",&i);
-            switch(i){
-                case 1:
-                    printf("输入修改数据(高数成绩):");
-                    scanf("%d",&Head__1->next->score[0]);
-                    break;
-                case 2:
-                    printf("输入修改数据(c语言成绩):");
-                    scanf("%d",&Head__1->next->score[1]);
-                    break;
-                case 3:
-                    printf("输入修改数据(英语成绩):");
-                    scanf("%d",&Head__1->next->score[2]);
-                    break;
-                case 4:
-                    printf("输入修改数据(英语成绩):");
-                    scanf("%d%d%d",&Head__1->next->score[0],&Head__1->next->score[1],&Head__1->next->score[2]);
-                    break;
-                case 0:
-                default:
-                    break;
-            }
-            k=1;
-            break;
-        }
-        Head__1=Head__1->next;
-    }
-    gradesCompute_1(Head__1->next);
-    if(k==0){
-        while ( Head__2->next!= NULL){
-            if (Head__2->next->num == num1){
-                printf("请输入需修改的数据的编号(-1-综合成绩 -2-论文成绩 -3-综合成绩和论文成绩 -0-退出):");
-                scanf("%d",&i);
-                switch(i) {
+        while (Head_1->next!= NULL) {
+            if (Head_1->next->num == num) {
+                printf("已查找到学号为%d的学生信息!\n", num);
+                infoPrint_1();
+                displayData_1(*Head_1->next);
+                printf("请输入需修改的数据的编号(-1-高数成绩 -2-c语言成绩 -3-英语成绩 -4-高数成绩和c语言成绩和英语成绩 -0-退出):");
+                scanf("%d", &i);
+                switch (i) {
                     case 1:
-                        printf("输入修改数据(综合成绩):");
-                        scanf("%d",&Head__2->next->score[0]);
+                        printf("输入修改数据(高数成绩):");
+                        scanf("%d", &Head_1->next->score[0]);
                         break;
                     case 2:
-                        printf("输入修改数据(论文成绩):");
-                        scanf("%d",&Head__2->next->score[1]);
+                        printf("输入修改数据(c语言成绩):");
+                        scanf("%d", &Head_1->next->score[1]);
                         break;
                     case 3:
-                        printf("输入修改数据(综合成绩和论文成绩):");
-                        scanf("%d%d",&Head__2->next->score[0],&Head__2->next->score[1]);
+                        printf("输入修改数据(英语成绩):");
+                        scanf("%d", &Head_1->next->score[2]);
+                        break;
+                    case 4:
+                        printf("输入修改数据(英语成绩):");
+                        scanf("%d%d%d", &Head_1->next->score[0], &Head_1->next->score[1], &Head_1->next->score[2]);
                         break;
                     case 0:
                     default:
                         break;
                 }
-                k=1;
+                gradesCompute_1(Head_1->next);
+                k = 1;
                 break;
             }
-            Head__2=Head__2->next;
+            Head_1 = Head_1->next;
         }
-        gradesCompute_2(Head__2->next);
+        if (k == 0) {
+            while (Head_2->next != NULL) {
+                if (Head_2->next->num == num) {
+                    printf("已查找到学号为%d的学生信息!\n", num);
+                    infoPrint_2();
+                    displayData_2(*Head_2->next);
+                    printf("请输入需修改的数据的编号(-1-综合成绩 -2-论文成绩 -3-综合成绩和论文成绩 -0-退出):");
+                    scanf("%d", &i);
+                    switch (i) {
+                        case 1:
+                            printf("输入修改数据(综合成绩):");
+                            scanf("%d", &Head_2->next->score[0]);
+                            break;
+                        case 2:
+                            printf("输入修改数据(论文成绩):");
+                            scanf("%d", &Head_2->next->score[1]);
+                            break;
+                        case 3:
+                            printf("输入修改数据(综合成绩和论文成绩):");
+                            scanf("%d%d", &Head_2->next->score[0], &Head_2->next->score[1]);
+                            break;
+                        case 0:
+                        default:
+                            break;
+                    }
+                    gradesCompute_2(Head__2->next);
+                    k = 1;
+                    break;
+                }
+                Head_2 = Head_2->next;
+            }
+        }
     }
     if (k == 0){
         printf("查无此学生!\n");
+    }else{
+        printf("修改已完成！\n");
     }
-    printf("修改已完成！\n");
     system("pause");
     system("cls");
 }
@@ -628,8 +629,8 @@ void getstu_1(UND* Head){
             if(Head->next!=NULL&&Head->next->num!=0){
                 displayData_1(*Head->next);
             }
-            Head = Head->next;
         }
+        Head = Head->next;
     }
 }
 void getstu_2(GRA* Head){
@@ -638,8 +639,8 @@ void getstu_2(GRA* Head){
             if(Head->next!=NULL&&Head->next->num!=0){
                 displayData_2(*Head->next);
             }
-            Head = Head->next;
         }
+        Head = Head->next;
     }
 }
 

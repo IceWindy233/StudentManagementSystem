@@ -855,11 +855,9 @@ void deleteDate_Menu(){
 }
 
 void deleteScore_Menu(){
-    int num = 0, k = 0;
+    int num=0 , k = 0;
     UND* Head_1=Head1;
-    UND* Head__1=Head1;
     GRA* Head_2=Head2;
-    GRA* Head__2=Head2;
     while(1){
         printf("********************学生成绩删除********************\n");
         printf("请输入需要删除成绩的学生的学号(输入0返回上级)：");
@@ -870,6 +868,9 @@ void deleteScore_Menu(){
         }else{
             while ( Head_1->next!= NULL){
                 if (Head_1->next->num == num){
+                    for(int i=0;i<12;i++){
+                        Head_1->next->score[i]=-1;
+                    }
                     printf("已删除学号为%d的学生的所有成绩!\n", num);
                     k=1;
                     break;
@@ -879,6 +880,9 @@ void deleteScore_Menu(){
             if(k==0){
                 while ( Head_2->next!= NULL){
                     if (Head_2->next->num == num){
+                        for(int i=0;i<3;i++){
+                            Head_2->next->score[i]=-1;
+                        }
                         printf("已删除学号为%d的学生的所有成绩!\n", num);
                         k=1;
                         break;
@@ -886,38 +890,19 @@ void deleteScore_Menu(){
                     Head_2=Head_2->next;
                 }
             }
-            while ( Head__1->next!= NULL){
-                if (Head__1->next->num == num){
-                    Head__1->next->score[0] = 0;
-                    Head__1->next->score[1] = 0;
-                    Head__1->next->score[2] = 0;
-                    k=1;
-                    break;
-                }
-                Head__1=Head__1->next;
-            }
-            gradesCompute_1(Head__1->next);
-            if(k==0){
-                while ( Head__2->next!= NULL){
-                    if (Head__2->next->num == num){
-                        Head__2->next->score[0] = 0;
-                        Head__2->next->score[1] = 0;
-                        Head__2->next->score[2] = 0;
-                        k=1;
-                        break;
-                    }
-                    Head__2=Head__2->next;
-                }
-                gradesCompute_2(Head__2->next);
-            }
-            if (k == 0){
-                printf("查无此学生!\n");
-            }
+
         }
+        if (k == 0){
+            printf("查无此学生!\n");
+            break;
+        } else{
+            break;
+        }
+    }
         system("pause");
         system("cls");
-    }
 }
+
 
 void searchData_Menu(){
     while(1){
