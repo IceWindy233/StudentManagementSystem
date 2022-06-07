@@ -61,11 +61,11 @@ void sortAllByld_1();   //按学号id从小到大排序本科生,将被删除学生放到最前面
 void sortAllByld_2();   //按学号id从小到大排序研究生,将被删除学生放到最前面
 void sortAll_1();   //按总成绩从高到低排序本科生,并计算校排名(不可单独使用,可用sortAllAndShow_1())
 void sortAll_2();   //按总成绩从高到低排序研究生,并计算校排名(不可单独使用,可用sortAllAndShow_2())
-
 void sortAllAndShow_1();   //按总成绩从高到低排序本科生,并显示
 void sortAllAndShow_2();   //按总成绩从高到低排序研究生,并显示
 UND* returnsClassHead_1(char *banji);   //返回同班级本科生链表头
 GRA* returnsClassHead_2(char*major, int class);   //返回同班级研究生链表头
+
 void sortAllByClass_1(char *banji);   //将某班本科生数据按总成绩从高到低排序并显示
 void sortAllByClass_2(char*major,int class);   //将某班研究生数据按总成绩从高到低排序并显示
 void countAverScore(); //统计某门课每个班的平均成绩
@@ -501,7 +501,6 @@ void modifyStudent(){
 void modifyScore(){
     UND* Head_1=Head1;
     GRA* Head_2=Head2;
-    GRA* Head__2=Head2;
     char num1[20];
     int k=0;
     int i=0;
@@ -577,7 +576,7 @@ void modifyScore(){
                         default:
                             break;
                     }
-                    gradesCompute_2(Head__2->next);
+                    gradesCompute_2(Head_2->next);
                     k = 1;
                     break;
                 }
