@@ -1,6 +1,26 @@
 # 学生成绩管理系统
 这是一份C语言程序设计实践课程的结课作业。
 
+## 文件结构说明
+
+Base.h：结构体和枚举类型定义
+
+Function.h：功能性函数
+
+Menu.h：菜单函数
+
+main.c：主函数
+
+graduate.dat：研究生数据存放文件
+
+undergraduate.dat：本科生数据存放文件
+
+StudentManagementSystem.exe：主程序
+
+CMakeLists.txt：CMake的链接表
+
+README.md：项目说明与测试数据
+
 ## 测试数据
 
 ### 本科生测试数据
